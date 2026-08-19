@@ -31,6 +31,7 @@ declare(strict_types=1);
 // Two Pointers step by step solution to that problem is given below:
 function twoPointers($list, $target): int
 {
+	error_log(sprintf('>>> Entering twoPointers($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     // First we need to sort the array so that we can take advantage of the order
     sort($list);
     // Now we are having two pointers "$left" and "$right"
@@ -63,5 +64,6 @@ function twoPointers($list, $target): int
         // The loop will go until the pointers point to the same element
     }
 
+	error_log(sprintf('<<< Exiting twoPointers($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     return $ans; # returning the number of pairs
 }

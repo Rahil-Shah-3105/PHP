@@ -13,11 +13,13 @@ declare(strict_types=1);
  */
 function heapSort(array $arr): array
 {
+	error_log(sprintf('>>> Entering heapSort($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     // Get the number of elements in the array.
     $n = count($arr);
 
     // Throw an exception if the array has no elements.
     if ($n <= 0) {
+		error_log(sprintf('Throwing new from heapSort($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
         throw new \UnexpectedValueException('Input array must have at least one element.');
     }
 
@@ -36,6 +38,7 @@ function heapSort(array $arr): array
     }
 
     // Return the sorted array.
+	error_log(sprintf('<<< Exiting heapSort($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     return $arr;
 }
 
@@ -44,6 +47,7 @@ function heapSort(array $arr): array
  */
 function heapify(array &$arr, int $n, int $i): void
 {
+	error_log(sprintf('>>> Entering heapify($n=%s,$i=%s)', is_scalar($n) ? $n : gettype($n), is_scalar($i) ? $i : gettype($i)));
     $largest = $i;
     $left = 2 * $i + 1;
     $right = 2 * $i + 2;
@@ -59,4 +63,5 @@ function heapify(array &$arr, int $n, int $i): void
         [$arr[$i], $arr[$largest]] = [$arr[$largest], $arr[$i]];
         heapify($arr, $n, $largest);
     }
+	error_log(sprintf('<<< Exiting heapify($n=%s,$i=%s)', is_scalar($n) ? $n : gettype($n), is_scalar($i) ? $i : gettype($i)));
 }

@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 function mergeSort(array $arr)
 {
+	error_log(sprintf('>>> Entering mergeSort($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     if (count($arr) <= 1) {
         return $arr;
     }
@@ -17,11 +18,13 @@ function mergeSort(array $arr)
     $leftArray = mergeSort(array_slice($arr, 0, $mid));
     $rightArray = mergeSort(array_slice($arr, $mid));
 
+	error_log(sprintf('<<< Exiting mergeSort($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     return merge($leftArray, $rightArray);
 }
 
 function merge(array $leftArray, array $rightArray): array
 {
+	error_log(sprintf('>>> Entering merge($leftArray=%s,$rightArray=%s)', is_scalar($leftArray) ? $leftArray : gettype($leftArray), is_scalar($rightArray) ? $rightArray : gettype($rightArray)));
     $result = [];
     $i = 0;
     $j = 0;
@@ -46,5 +49,6 @@ function merge(array $leftArray, array $rightArray): array
         $j++;
     }
 
+	error_log(sprintf('<<< Exiting merge($leftArray=%s,$rightArray=%s)', is_scalar($leftArray) ? $leftArray : gettype($leftArray), is_scalar($rightArray) ? $rightArray : gettype($rightArray)));
     return $result;
 }

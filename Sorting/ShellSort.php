@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 function shellSort(array $array): array
 {
+	error_log(sprintf('>>> Entering shellSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $length = count($array);
     $series = calculateKnuthSeries($length);
 
@@ -28,6 +29,7 @@ function shellSort(array $array): array
         }
     }
 
+	error_log(sprintf('<<< Exiting shellSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }
 
@@ -38,6 +40,7 @@ function shellSort(array $array): array
  */
 function calculateKnuthSeries(int $n): array
 {
+	error_log(sprintf('>>> Entering calculateKnuthSeries($n=%s)', is_scalar($n) ? $n : gettype($n)));
     $h = 1;
     $series = [];
 
@@ -46,5 +49,6 @@ function calculateKnuthSeries(int $n): array
         $h = 3 * $h + 1;
     }
 
+	error_log(sprintf('<<< Exiting calculateKnuthSeries($n=%s)', is_scalar($n) ? $n : gettype($n)));
     return $series;
 }

@@ -19,8 +19,10 @@ declare(strict_types=1);
  */
 function hexToDecimal($hexNumber): int|float
 {
+	error_log(sprintf('>>> Entering hexToDecimal($hexNumber=%s)', is_scalar($hexNumber) ? $hexNumber : gettype($hexNumber)));
     // Using ctype to check all the digits are valid hex digits or not.
     if (!ctype_xdigit((string) $hexNumber)) {
+		error_log(sprintf('Throwing new from hexToDecimal($hexNumber=%s)', is_scalar($hexNumber) ? $hexNumber : gettype($hexNumber)));
         throw new \Exception('Please pass a valid Hexadecimal Number for Converting it to a Decimal Number.');
     }
 
@@ -48,6 +50,7 @@ function hexToDecimal($hexNumber): int|float
         $decimalNumber += (16 ** $power * $hexDigit);
     }
 
+	error_log(sprintf('<<< Exiting hexToDecimal($hexNumber=%s)', is_scalar($hexNumber) ? $hexNumber : gettype($hexNumber)));
     return $decimalNumber;
 }
 
@@ -60,6 +63,7 @@ function hexToDecimal($hexNumber): int|float
  */
 function decimalToHex($decimalNumber): string
 {
+	error_log(sprintf('>>> Entering decimalToHex($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     $hexDigits = [];
 
     // Mapping for HexaDecimal Digits after 9
@@ -72,6 +76,7 @@ function decimalToHex($decimalNumber): string
         15 => 'F',
     ];
     if (!is_numeric($decimalNumber)) {
+		error_log(sprintf('Throwing new from decimalToHex($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
         throw new \Exception('Please pass a valid Decimal Number for Converting it to a Hexadecimal Number.');
     }
 
@@ -94,5 +99,6 @@ function decimalToHex($decimalNumber): string
         }
     } // Connecting all the digits and removing leading zeroes.
 
+	error_log(sprintf('<<< Exiting decimalToHex($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     return ltrim(implode('', $hexDigits), '0');
 }

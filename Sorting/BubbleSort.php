@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 function bubbleSort(array $array): array
 {
+	error_log(sprintf('>>> Entering bubbleSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $length = count($array);
 
     for ($i = $length; $i > 0; $i--) {
@@ -26,5 +27,6 @@ function bubbleSort(array $array): array
         }
     }
 
+	error_log(sprintf('<<< Exiting bubbleSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }
