@@ -30,9 +30,13 @@ class SplayTree extends SplayTreeRotations
      */
     public function __construct(array $initialData = [])
     {
+		error_log(sprintf('>>> Entering __construct($initialData=%s)', is_scalar($initialData) ? $initialData : gettype($initialData)));
         foreach ($initialData as $key => $value) {
             $this->insert($key, $value);
         }
+		error_log(sprintf('<<< Exiting __construct($initialData=%s)', is_scalar($initialData) ? $initialData : gettype($initialData)));
+		error_log(sprintf('>>> Entering insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('<<< Exiting insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -40,6 +44,8 @@ class SplayTree extends SplayTreeRotations
      */
     public function getRoot(): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering getRoot()'));
+		error_log(sprintf('<<< Exiting getRoot()'));
         return $this->root;
     }
 
@@ -48,7 +54,9 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('>>> Entering setRoot($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
+		error_log(sprintf('<<< Exiting setRoot($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -56,6 +64,8 @@ class SplayTree extends SplayTreeRotations
      */
     public function size(): int
     {
+		error_log(sprintf('>>> Entering size()'));
+		error_log(sprintf('<<< Exiting size()'));
         return $this->counter;
     }
 
@@ -64,6 +74,8 @@ class SplayTree extends SplayTreeRotations
      */
     public function isEmpty(): bool
     {
+		error_log(sprintf('>>> Entering isEmpty()'));
+		error_log(sprintf('<<< Exiting isEmpty()'));
         return !$this->root instanceof \DataStructures\SplayTree\SplayTreeNode;
     }
 
@@ -79,7 +91,9 @@ class SplayTree extends SplayTreeRotations
      */
     protected function splay(?SplayTreeNode $node, int $key): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering splay($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode || $node->key === $key) {
+		error_log(sprintf('<<< Exiting splay($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             return $node;
         }
 
@@ -100,6 +114,7 @@ class SplayTree extends SplayTreeRotations
     */
     private function splayLeft(?SplayTreeNode $node, int $key): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering splayLeft($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($node->left === null) {
             return $node;   // Key not found in the left subtree
         }
@@ -118,6 +133,7 @@ class SplayTree extends SplayTreeRotations
         }
 
         // Zig (Left case)
+		error_log(sprintf('<<< Exiting splayLeft($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         return $node->left === null
             ? $node
             : $this->zig($node);
@@ -135,6 +151,7 @@ class SplayTree extends SplayTreeRotations
     */
     private function splayRight(?SplayTreeNode $node, int $key): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering splayRight($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($node->right === null) {
             return $node;
         }
@@ -153,6 +170,7 @@ class SplayTree extends SplayTreeRotations
         }
 
         // Zag (Right case)
+		error_log(sprintf('<<< Exiting splayRight($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         return $node->right === null
             ? $node
             : $this->zag($node);
@@ -191,6 +209,7 @@ class SplayTree extends SplayTreeRotations
      */
     private function insertNode(?SplayTreeNode $node, int $key, mixed $value): SplayTreeNode
     {
+		error_log(sprintf('>>> Entering insertNode($node=%s,$key=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             return new SplayTreeNode($key, $value);
         }
@@ -202,6 +221,8 @@ class SplayTree extends SplayTreeRotations
             $node->right = $this->insertNode($node->right, $key, $value);
             $node->right->parent = $node;
         } else {
+			error_log(sprintf('Throwing LogicException from insertNode($node=%s,$key=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('<<< Exiting insertNode($node=%s,$key=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new LogicException("Duplicate key: " . $key);
         }
 
@@ -220,6 +241,7 @@ class SplayTree extends SplayTreeRotations
      */
     public function search(int $key): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering search($key=%s)', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
             return null;
         }
@@ -233,6 +255,7 @@ class SplayTree extends SplayTreeRotations
             ? $this->splay($this->root, $key)
             : $this->splay($this->root, $lastVisited->key);
 
+		error_log(sprintf('<<< Exiting search($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $this->root;
     }
 
@@ -248,6 +271,7 @@ class SplayTree extends SplayTreeRotations
      */
     private function searchNode(?SplayTreeNode $node, int $key, ?SplayTreeNode &$lastVisited): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             return null;
         }
@@ -260,6 +284,7 @@ class SplayTree extends SplayTreeRotations
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key, $lastVisited);
         } else {
+		error_log(sprintf('<<< Exiting searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             return $node;
         }
     }
@@ -275,7 +300,9 @@ class SplayTree extends SplayTreeRotations
      */
     public function isFound(int $key): bool
     {
+		error_log(sprintf('>>> Entering isFound($key=%s)', is_scalar($key) ? $key : gettype($key)));
         $foundNode = $this->search($key);
+		error_log(sprintf('<<< Exiting isFound($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $foundNode instanceof \DataStructures\SplayTree\SplayTreeNode && $foundNode->key === $key;
     }
 
@@ -292,10 +319,12 @@ class SplayTree extends SplayTreeRotations
      */
     public function update(int $key, mixed $value): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering update($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if ($this->isFound($key)) {
             $this->root->value = $value;
         }
 
+		error_log(sprintf('<<< Exiting update($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->root;
     }
 
@@ -312,7 +341,9 @@ class SplayTree extends SplayTreeRotations
      */
     public function delete(int $key): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering delete($key=%s)', is_scalar($key) ? $key : gettype($key)));
         if (!$this->isFound($key)) {
+			error_log(sprintf('Throwing LogicException from delete($key=%s)', is_scalar($key) ? $key : gettype($key)));
             throw new LogicException("Key: " . $key . " not found in tree. Splayed the last visited node.");
         }
 
@@ -321,6 +352,7 @@ class SplayTree extends SplayTreeRotations
 
         $this->isolateRoot();
         $this->counter--;
+		error_log(sprintf('<<< Exiting delete($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $this->restructureAfterDeletion($leftSubtree, $rightSubtree);
     }
 
@@ -329,6 +361,7 @@ class SplayTree extends SplayTreeRotations
      */
     private function isolateRoot(): void
     {
+		error_log(sprintf('>>> Entering isolateRoot()'));
         if ($this->root->left !== null) {
             $this->root->left->parent = null;
         }
@@ -339,6 +372,7 @@ class SplayTree extends SplayTreeRotations
 
         $this->root->left = null;
         $this->root->right = null;
+		error_log(sprintf('<<< Exiting isolateRoot()'));
     }
 
     /**
@@ -348,7 +382,9 @@ class SplayTree extends SplayTreeRotations
      */
     private function restructureAfterDeletion(?SplayTreeNode $leftSubtree, ?SplayTreeNode $rightSubtree): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering restructureAfterDeletion($leftSubtree=%s,$rightSubtree=%s)', is_scalar($leftSubtree) ? $leftSubtree : gettype($leftSubtree), is_scalar($rightSubtree) ? $rightSubtree : gettype($rightSubtree)));
         if (!$leftSubtree instanceof \DataStructures\SplayTree\SplayTreeNode) {
+		error_log(sprintf('<<< Exiting restructureAfterDeletion($leftSubtree=%s,$rightSubtree=%s)', is_scalar($leftSubtree) ? $leftSubtree : gettype($leftSubtree), is_scalar($rightSubtree) ? $rightSubtree : gettype($rightSubtree)));
             return $this->handleEmptyLeftSubtree($rightSubtree);
         }
 
@@ -363,11 +399,13 @@ class SplayTree extends SplayTreeRotations
      */
     private function handleEmptyLeftSubtree(?SplayTreeNode $rightSubtreeRoot): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering handleEmptyLeftSubtree($rightSubtreeRoot=%s)', is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
         $this->root = $rightSubtreeRoot;
         if ($this->root instanceof \DataStructures\SplayTree\SplayTreeNode) {
             $this->root->parent = null;
         }
 
+		error_log(sprintf('<<< Exiting handleEmptyLeftSubtree($rightSubtreeRoot=%s)', is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
         return $this->root;
     }
 
@@ -380,12 +418,14 @@ class SplayTree extends SplayTreeRotations
      */
     private function mergeSubtrees(SplayTreeNode $leftSubtreeRoot, ?SplayTreeNode $rightSubtreeRoot): SplayTreeNode
     {
+		error_log(sprintf('>>> Entering mergeSubtrees($leftSubtreeRoot=%s,$rightSubtreeRoot=%s)', is_scalar($leftSubtreeRoot) ? $leftSubtreeRoot : gettype($leftSubtreeRoot), is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
         $maxLeftNode = $this->maxNode($leftSubtreeRoot);
         $this->root = $maxLeftNode;
 
         $this->detachMaxNodeFromLeftSubtree($maxLeftNode, $leftSubtreeRoot);
         $this->attachRightSubtree($rightSubtreeRoot);
 
+		error_log(sprintf('<<< Exiting mergeSubtrees($leftSubtreeRoot=%s,$rightSubtreeRoot=%s)', is_scalar($leftSubtreeRoot) ? $leftSubtreeRoot : gettype($leftSubtreeRoot), is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
         return $this->root;
     }
 
@@ -397,6 +437,7 @@ class SplayTree extends SplayTreeRotations
      */
     private function detachMaxNodeFromLeftSubtree(SplayTreeNode $maxLeftNode, SplayTreeNode $leftSubtreeRoot): void
     {
+		error_log(sprintf('>>> Entering detachMaxNodeFromLeftSubtree($maxLeftNode=%s,$leftSubtreeRoot=%s)', is_scalar($maxLeftNode) ? $maxLeftNode : gettype($maxLeftNode), is_scalar($leftSubtreeRoot) ? $leftSubtreeRoot : gettype($leftSubtreeRoot)));
         $maxLeftNodeParent = $maxLeftNode->parent;
         if ($maxLeftNodeParent instanceof \DataStructures\SplayTree\SplayTreeNode) {
             $maxLeftNodeParent->right = null;
@@ -405,6 +446,7 @@ class SplayTree extends SplayTreeRotations
         }
 
         $maxLeftNode->parent = null;
+		error_log(sprintf('<<< Exiting detachMaxNodeFromLeftSubtree($maxLeftNode=%s,$leftSubtreeRoot=%s)', is_scalar($maxLeftNode) ? $maxLeftNode : gettype($maxLeftNode), is_scalar($leftSubtreeRoot) ? $leftSubtreeRoot : gettype($leftSubtreeRoot)));
     }
 
     /**
@@ -414,10 +456,12 @@ class SplayTree extends SplayTreeRotations
      */
     private function attachRightSubtree(?SplayTreeNode $rightSubtreeRoot): void
     {
+		error_log(sprintf('>>> Entering attachRightSubtree($rightSubtreeRoot=%s)', is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
         $this->root->right = $rightSubtreeRoot;
         if ($rightSubtreeRoot instanceof \DataStructures\SplayTree\SplayTreeNode) {
             $rightSubtreeRoot->parent = $this->root;
         }
+		error_log(sprintf('<<< Exiting attachRightSubtree($rightSubtreeRoot=%s)', is_scalar($rightSubtreeRoot) ? $rightSubtreeRoot : gettype($rightSubtreeRoot)));
     }
 
     /**
@@ -430,7 +474,9 @@ class SplayTree extends SplayTreeRotations
      */
     public function maxNode(?SplayTreeNode $node): ?SplayTreeNode
     {
+		error_log(sprintf('>>> Entering maxNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
+		error_log(sprintf('<<< Exiting maxNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return null;
         }
 
@@ -447,6 +493,7 @@ class SplayTree extends SplayTreeRotations
      */
     public function inOrderTraversal(?SplayTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering inOrderTraversal($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             $result = array_merge($result, $this->inOrderTraversal($node->left));
@@ -454,6 +501,7 @@ class SplayTree extends SplayTreeRotations
             $result = array_merge($result, $this->inOrderTraversal($node->right));
         }
 
+		error_log(sprintf('<<< Exiting inOrderTraversal($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 }

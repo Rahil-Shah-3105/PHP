@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 function fibonacciRecursive(int $num): array
 {
+	error_log(sprintf('>>> Entering fibonacciRecursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     /*
      * Fibonacci series using recursive approach
      */
@@ -18,6 +19,7 @@ function fibonacciRecursive(int $num): array
         $fibonacciRecursive[] = recursive($i);
     }
 
+	error_log(sprintf('<<< Exiting fibonacciRecursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     return $fibonacciRecursive;
 }
 
@@ -27,12 +29,15 @@ function fibonacciRecursive(int $num): array
  */
 function recursive(int $num): float|int
 {
+	error_log(sprintf('>>> Entering recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     if ($num < 0) {
+		error_log(sprintf('Throwing new from recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
         throw new \Exception("Number must be greater than 0.");
     }
     if ($num == 0 || $num == 1) {
         return $num;
     } else {
+		error_log(sprintf('<<< Exiting recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
         return recursive($num - 1) + recursive($num - 2);
     }
 }
@@ -43,6 +48,7 @@ function recursive(int $num): float|int
  */
 function fibonacciWithBinetFormula(int $num): array
 {
+	error_log(sprintf('>>> Entering fibonacciWithBinetFormula($num=%s)', is_scalar($num) ? $num : gettype($num)));
     /*
      * Fibonacci series using Binet's formula given below
      * binet's formula =  ((1 + sqrt(5) / 2 ) ^ n - (1 - sqrt(5) / 2 ) ^ n ) ) / sqrt(5)
@@ -52,6 +58,7 @@ function fibonacciWithBinetFormula(int $num): array
     $fib_series = [];
 
     if ($num < 0) {
+		error_log(sprintf('Throwing new from fibonacciWithBinetFormula($num=%s)', is_scalar($num) ? $num : gettype($num)));
         throw new \Exception("Number must be greater than 0.");
     }
     $sqrt = sqrt(5);
@@ -62,5 +69,6 @@ function fibonacciWithBinetFormula(int $num): array
         $fib_series[] = (int)$seriesNumber;
     }
 
+	error_log(sprintf('<<< Exiting fibonacciWithBinetFormula($num=%s)', is_scalar($num) ? $num : gettype($num)));
     return $fib_series;
 }

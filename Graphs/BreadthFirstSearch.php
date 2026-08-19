@@ -22,6 +22,7 @@ declare(strict_types=1);
 
 function bfs(array $adjList, $start, $end, $yes = false)
 {
+	error_log(sprintf('>>> Entering bfs($adjList=%s,$start=%s,$end=%s,$yes=%s)', is_scalar($adjList) ? $adjList : gettype($adjList), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($yes) ? $yes : gettype($yes)));
     $visited = [];
     $queue = [$start];
     while ($queue !== []) {
@@ -39,5 +40,6 @@ function bfs(array $adjList, $start, $end, $yes = false)
         return true;
     }
 
+	error_log(sprintf('<<< Exiting bfs($adjList=%s,$start=%s,$end=%s,$yes=%s)', is_scalar($adjList) ? $adjList : gettype($adjList), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($yes) ? $yes : gettype($yes)));
     return $yes;
 }

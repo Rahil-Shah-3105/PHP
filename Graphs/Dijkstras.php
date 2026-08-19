@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 function dijkstras(array $verticesNames, array $edges, string $start): array
 {
+	error_log(sprintf('>>> Entering dijkstras($verticesNames=%s,$edges=%s,$start=%s)', is_scalar($verticesNames) ? $verticesNames : gettype($verticesNames), is_scalar($edges) ? $edges : gettype($edges), is_scalar($start) ? $start : gettype($start)));
     $vertices = array_combine($verticesNames, array_fill(0, count($verticesNames), PHP_INT_MAX));
     $visitedNodes = [];
 
@@ -46,5 +47,6 @@ function dijkstras(array $verticesNames, array $edges, string $start): array
         $nextVertex = $minVertexName;
     }
 
+	error_log(sprintf('<<< Exiting dijkstras($verticesNames=%s,$edges=%s,$start=%s)', is_scalar($verticesNames) ? $verticesNames : gettype($verticesNames), is_scalar($edges) ? $edges : gettype($edges), is_scalar($start) ? $start : gettype($start)));
     return $vertices;
 }

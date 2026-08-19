@@ -14,7 +14,9 @@ declare(strict_types=1);
  */
 function absolute_min(...$numbers)
 {
+	error_log(sprintf('>>> Entering absolute_min($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
     if ($numbers === []) {
+		error_log(sprintf('Throwing new from absolute_min($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
         throw new \Exception('Please pass values to find absolute min value');
     }
 
@@ -26,5 +28,6 @@ function absolute_min(...$numbers)
         }
     }
 
+	error_log(sprintf('<<< Exiting absolute_min($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
     return $absoluteMin;
 }

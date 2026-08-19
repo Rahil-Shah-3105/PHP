@@ -19,7 +19,9 @@ declare(strict_types=1);
  */
 function binaryToDecimal($binaryNumber): int|float
 {
+	error_log(sprintf('>>> Entering binaryToDecimal($binaryNumber=%s)', is_scalar($binaryNumber) ? $binaryNumber : gettype($binaryNumber)));
     if (!is_numeric($binaryNumber)) {
+		error_log(sprintf('Throwing new from binaryToDecimal($binaryNumber=%s)', is_scalar($binaryNumber) ? $binaryNumber : gettype($binaryNumber)));
         throw new \Exception('Please pass a valid Binary Number for Converting it to a Decimal Number.');
     }
 
@@ -30,5 +32,6 @@ function binaryToDecimal($binaryNumber): int|float
         $decimalNumber += $digit * 2 ** $index;
     }
 
+	error_log(sprintf('<<< Exiting binaryToDecimal($binaryNumber=%s)', is_scalar($binaryNumber) ? $binaryNumber : gettype($binaryNumber)));
     return $decimalNumber;
 }

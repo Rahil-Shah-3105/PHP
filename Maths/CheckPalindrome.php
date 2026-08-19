@@ -8,8 +8,10 @@ declare(strict_types=1);
  */
 function isNumberPalindromic(int $input): bool
 {
+	error_log(sprintf('>>> Entering isNumberPalindromic($input=%s)', is_scalar($input) ? $input : gettype($input)));
     $arr = array_map('intval', str_split((string) $input));
     $arrRev = array_reverse($arr);
     $inputRev = (int)implode("", $arrRev);
+	error_log(sprintf('<<< Exiting isNumberPalindromic($input=%s)', is_scalar($input) ? $input : gettype($input)));
     return $input === $inputRev;
 }

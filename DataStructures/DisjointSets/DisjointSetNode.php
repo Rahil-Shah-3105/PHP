@@ -24,6 +24,8 @@ class DisjointSetNode
      */
     public function __construct(public $data = null)
     {
+		error_log(sprintf('>>> Entering __construct($data=%s)', is_scalar($data) ? $data : gettype($data)));
         $this->parent = $this;  // Initialize parent to itself
+		error_log(sprintf('<<< Exiting __construct($data=%s)', is_scalar($data) ? $data : gettype($data)));
     }
 }

@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 function problem10(): int
 {
+	error_log(sprintf('>>> Entering problem10()'));
     //Using Sieve of Erastothenes
     //@see https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 
@@ -29,5 +30,6 @@ function problem10(): int
         }
     }
 
+	error_log(sprintf('<<< Exiting problem10()'));
     return array_sum($isPrime);
 }

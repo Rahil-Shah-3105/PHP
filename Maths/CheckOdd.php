@@ -11,5 +11,7 @@ declare(strict_types=1);
  */
 function isOdd(int $number): bool
 {
+	error_log(sprintf('>>> Entering isOdd($number=%s)', is_scalar($number) ? $number : gettype($number)));
+	error_log(sprintf('<<< Exiting isOdd($number=%s)', is_scalar($number) ? $number : gettype($number)));
     return $number % 2 !== 0;
 }
