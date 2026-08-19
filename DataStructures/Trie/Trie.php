@@ -19,7 +19,9 @@ class Trie
 
     public function __construct()
     {
+		error_log(sprintf('>>> Entering __construct()'));
         $this->root = new TrieNode();
+		error_log(sprintf('<<< Exiting __construct()'));
     }
 
     /**
@@ -27,6 +29,8 @@ class Trie
      */
     public function getRoot(): TrieNode
     {
+		error_log(sprintf('>>> Entering getRoot()'));
+		error_log(sprintf('<<< Exiting getRoot()'));
         return $this->root;
     }
 
@@ -35,6 +39,7 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('>>> Entering insert($word=%s)', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -42,6 +47,7 @@ class Trie
         }
 
         $node->isEndOfWord = true;
+		error_log(sprintf('<<< Exiting insert($word=%s)', is_scalar($word) ? $word : gettype($word)));
     }
 
     /**
@@ -49,6 +55,7 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('>>> Entering search($word=%s)', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -59,6 +66,7 @@ class Trie
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('<<< Exiting search($word=%s)', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -67,6 +75,7 @@ class Trie
      */
     public function startsWith(string $prefix): array
     {
+		error_log(sprintf('>>> Entering startsWith($prefix=%s)', is_scalar($prefix) ? $prefix : gettype($prefix)));
         $prefix = strtolower($prefix);  // Normalize the prefix to lowercase
         $node = $this->root;
         for ($i = 0; $i < strlen($prefix); $i++) {
@@ -78,6 +87,7 @@ class Trie
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('<<< Exiting startsWith($prefix=%s)', is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $this->findWordsFromNode($node, $prefix);
     }
 
@@ -86,6 +96,7 @@ class Trie
      */
     private function findWordsFromNode(TrieNode $node, string $prefix): array
     {
+		error_log(sprintf('>>> Entering findWordsFromNode($node=%s,$prefix=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         $words = [];
         if ($node->isEndOfWord) {
             $words[] = $prefix;
@@ -95,6 +106,7 @@ class Trie
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
 
+		error_log(sprintf('<<< Exiting findWordsFromNode($node=%s,$prefix=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $words;
     }
 
@@ -107,6 +119,8 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('>>> Entering delete($word=%s)', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('<<< Exiting delete($word=%s)', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -121,6 +135,7 @@ class Trie
      */
     private function deleteHelper(TrieNode $node, string &$word, int $index): bool
     {
+		error_log(sprintf('>>> Entering deleteHelper($node=%s,$index=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         if ($index === strlen($word)) {
             if (!$node->isEndOfWord) {
                 return false;
@@ -141,6 +156,7 @@ class Trie
 
         if ($shouldDeleteCurrentNode) {
             unset($node->children[$char]);
+		error_log(sprintf('<<< Exiting deleteHelper($node=%s,$index=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
 
@@ -156,6 +172,7 @@ class Trie
      */
     public function traverseTrieNode(TrieNode $node, string $prefix = ''): array
     {
+		error_log(sprintf('>>> Entering traverseTrieNode($node=%s,$prefix=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         $words = [];
 
         if ($node->isEndOfWord) {
@@ -166,6 +183,7 @@ class Trie
             $words = array_merge($words, $this->traverseTrieNode($childNode, $prefix . $char));
         }
 
+		error_log(sprintf('<<< Exiting traverseTrieNode($node=%s,$prefix=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $words;
     }
 
@@ -176,6 +194,8 @@ class Trie
      */
     public function getWords(): array
     {
+		error_log(sprintf('>>> Entering getWords()'));
+		error_log(sprintf('<<< Exiting getWords()'));
         return $this->traverseTrieNode($this->root);
     }
 }

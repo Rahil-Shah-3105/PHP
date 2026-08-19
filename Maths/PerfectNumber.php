@@ -19,6 +19,7 @@ This function returns true
 */
 function perfect_number($number)
 {
+	error_log(sprintf('>>> Entering perfect_number($number=%s)', is_scalar($number) ? $number : gettype($number)));
     /*Input validation*/
     if (!is_int($number) || $number <= 1) {
         /*Return false for non-integer or non-positive numbers*/
@@ -37,5 +38,6 @@ function perfect_number($number)
         }
     }
 
+	error_log(sprintf('<<< Exiting perfect_number($number=%s)', is_scalar($number) ? $number : gettype($number)));
     return $divisorsSum == $number;
 }

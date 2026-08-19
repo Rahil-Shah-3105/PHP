@@ -8,6 +8,7 @@ declare(strict_types=1);
  */
 function reverseWords(string $text): string
 {
+	error_log(sprintf('>>> Entering reverseWords($text=%s)', is_scalar($text) ? $text : gettype($text)));
     $text          = trim($text);
     $words         = explode(' ', $text);
     $reversedWords = [];
@@ -16,5 +17,6 @@ function reverseWords(string $text): string
         $reversedWords[] = $words[$i];
     }
 
+	error_log(sprintf('<<< Exiting reverseWords($text=%s)', is_scalar($text) ? $text : gettype($text)));
     return implode(' ', $reversedWords);
 }

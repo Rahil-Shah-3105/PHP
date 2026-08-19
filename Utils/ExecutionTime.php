@@ -17,13 +17,17 @@ class ExecutionTime
 
     public function __construct()
     {
+		error_log(sprintf('>>> Entering __construct()'));
         $this->start_time = microtime(true);
+		error_log(sprintf('<<< Exiting __construct()'));
     }
 
     public function __destruct()
     {
+		error_log(sprintf('>>> Entering __destruct()'));
         $this->end_time = microtime(true);
         $this->execution_time = $this->end_time - $this->start_time;
         echo "Executed in $this->execution_time seconds\n";
+		error_log(sprintf('<<< Exiting __destruct()'));
     }
 }

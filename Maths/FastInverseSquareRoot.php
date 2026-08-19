@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 function fastInvSqrt($x): float
 {
+	error_log(sprintf('>>> Entering fastInvSqrt($x=%s)', is_scalar($x) ? $x : gettype($x)));
     // Convert the input float to an integer
     $i = unpack('l', pack('f', $x))[1];
     // Apply the bit manipulation magic number
@@ -20,5 +21,6 @@ function fastInvSqrt($x): float
     // Convert the integer back to a float
     $y = unpack('f', pack('l', $i))[1];
     // Perform the final calculation
+	error_log(sprintf('<<< Exiting fastInvSqrt($x=%s)', is_scalar($x) ? $x : gettype($x)));
     return $y * (1.5 - 0.5 * $x * $y * $y);
 }

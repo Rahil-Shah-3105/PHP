@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 function Railencode($plainMessage, $rails): string
 {
+	error_log(sprintf('>>> Entering Railencode($plainMessage=%s,$rails=%s)', is_scalar($plainMessage) ? $plainMessage : gettype($plainMessage), is_scalar($rails) ? $rails : gettype($rails)));
     $cipherMessage = [];
     $position = ($rails * 2) - 2;
     // Iterate through the characters of the plain message
@@ -33,6 +34,7 @@ function Railencode($plainMessage, $rails): string
     }
 
     // Combine and remove placeholders to form the cipher message
+	error_log(sprintf('<<< Exiting Railencode($plainMessage=%s,$rails=%s)', is_scalar($plainMessage) ? $plainMessage : gettype($plainMessage), is_scalar($rails) ? $rails : gettype($rails)));
     return implode('', str_replace('.', '', $cipherMessage));
 }
 
@@ -46,6 +48,7 @@ function Railencode($plainMessage, $rails): string
  */
 function Raildecode($cipherMessage, $rails): string
 {
+	error_log(sprintf('>>> Entering Raildecode($cipherMessage=%s,$rails=%s)', is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage), is_scalar($rails) ? $rails : gettype($rails)));
     $position = ($rails * 2) - 2;
     $textLength = strlen($cipherMessage);
     $minLength = intdiv($textLength, $position);
@@ -83,5 +86,6 @@ function Raildecode($cipherMessage, $rails): string
         }
     }
 
+	error_log(sprintf('<<< Exiting Raildecode($cipherMessage=%s,$rails=%s)', is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage), is_scalar($rails) ? $rails : gettype($rails)));
     return $plainText;
 }

@@ -37,6 +37,7 @@ declare(strict_types=1);
  */
 function problem6(int $maxNumber = 100): int
 {
+	error_log(sprintf('>>> Entering problem6($maxNumber=%s)', is_scalar($maxNumber) ? $maxNumber : gettype($maxNumber)));
     $sumOfSquares = 0;
     $sums = 0;
     for ($i = 1; $i <= $maxNumber; $i++) {
@@ -44,5 +45,6 @@ function problem6(int $maxNumber = 100): int
         $sums += $i; // add number to sum to square later
     }
 
+	error_log(sprintf('<<< Exiting problem6($maxNumber=%s)', is_scalar($maxNumber) ? $maxNumber : gettype($maxNumber)));
     return ($sums ** 2) - $sumOfSquares; // difference of square of the total sum and sum of squares
 }

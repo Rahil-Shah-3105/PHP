@@ -8,7 +8,9 @@ declare(strict_types=1);
  */
 function countSentences(string $sentence): int
 {
+	error_log(sprintf('>>> Entering countSentences($sentence=%s)', is_scalar($sentence) ? $sentence : gettype($sentence)));
     $sentence = trim($sentence);
 
+	error_log(sprintf('<<< Exiting countSentences($sentence=%s)', is_scalar($sentence) ? $sentence : gettype($sentence)));
     return preg_match_all('/[^\s|^\...](\.|\!|\?)(?!\w)/', $sentence);
 }

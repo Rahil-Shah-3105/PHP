@@ -28,6 +28,8 @@ class AVLTree
      */
     public function getRoot(): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering getRoot()'));
+		error_log(sprintf('<<< Exiting getRoot()'));
         return $this->root;
     }
 
@@ -39,6 +41,8 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering getNode($key=%s)', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('<<< Exiting getNode($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -47,6 +51,8 @@ class AVLTree
      */
     public function size(): int
     {
+		error_log(sprintf('>>> Entering size()'));
+		error_log(sprintf('<<< Exiting size()'));
         return $this->counter;
     }
 
@@ -58,8 +64,10 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('>>> Entering insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
+		error_log(sprintf('<<< Exiting insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -69,8 +77,10 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('>>> Entering delete($key=%s)', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
+		error_log(sprintf('<<< Exiting delete($key=%s)', is_scalar($key) ? $key : gettype($key)));
     }
 
     /**
@@ -81,7 +91,9 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('>>> Entering search($key=%s)', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
+		error_log(sprintf('<<< Exiting search($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
 
@@ -91,6 +103,8 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering inOrderTraversal()'));
+		error_log(sprintf('<<< Exiting inOrderTraversal()'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +114,8 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering preOrderTraversal()'));
+		error_log(sprintf('<<< Exiting preOrderTraversal()'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +125,8 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering postOrderTraversal()'));
+		error_log(sprintf('<<< Exiting postOrderTraversal()'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +135,8 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('>>> Entering breadthFirstTraversal()'));
+		error_log(sprintf('<<< Exiting breadthFirstTraversal()'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -126,6 +146,8 @@ class AVLTree
      */
     public function isBalanced(): bool
     {
+		error_log(sprintf('>>> Entering isBalanced()'));
+		error_log(sprintf('<<< Exiting isBalanced()'));
         return $this->isBalancedHelper($this->root);
     }
 
@@ -139,6 +161,7 @@ class AVLTree
      */
     private function insertNode(?AVLTreeNode $node, mixed $key, mixed $value): AVLTreeNode
     {
+		error_log(sprintf('>>> Entering insertNode($node=%s,$key=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return new AVLTreeNode($key, $value);
         }
@@ -152,6 +175,7 @@ class AVLTree
         }
 
         $node->updateHeight();
+		error_log(sprintf('<<< Exiting insertNode($node=%s,$key=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->balance($node);
     }
 
@@ -164,6 +188,7 @@ class AVLTree
      */
     private function deleteNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering deleteNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
@@ -188,6 +213,7 @@ class AVLTree
         }
 
         $node->updateHeight();
+		error_log(sprintf('<<< Exiting deleteNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         return $this->balance($node);
     }
 
@@ -200,6 +226,7 @@ class AVLTree
      */
     private function searchNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
@@ -210,6 +237,7 @@ class AVLTree
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
         } else {
+		error_log(sprintf('<<< Exiting searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             return $node;
         }
     }
@@ -222,6 +250,7 @@ class AVLTree
      */
     private function isBalancedHelper(?AVLTreeNode $node): bool
     {
+		error_log(sprintf('>>> Entering isBalancedHelper($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return true;
         }
@@ -231,6 +260,7 @@ class AVLTree
 
         $balanceFactor = abs($leftHeight - $rightHeight);
         if ($balanceFactor > 1) {
+		error_log(sprintf('<<< Exiting isBalancedHelper($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return false;
         }
 
@@ -245,6 +275,7 @@ class AVLTree
      */
     private function balance(?AVLTreeNode $node): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering balance($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node->balanceFactor() > 1) {
             if ($node->left && $node->left->balanceFactor() < 0) {
                 $node->left = $this->rotateLeft($node->left);
@@ -258,6 +289,7 @@ class AVLTree
                 $node->right = $this->rotateRight($node->right);
             }
 
+		error_log(sprintf('<<< Exiting balance($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return $this->rotateLeft($node);
         }
 
@@ -272,6 +304,7 @@ class AVLTree
      */
     private function rotateLeft(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('>>> Entering rotateLeft($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $newRoot = $node->right;
         $node->right = $newRoot->left;
         $newRoot->left = $node;
@@ -279,6 +312,7 @@ class AVLTree
         $node->updateHeight();
         $newRoot->updateHeight();
 
+		error_log(sprintf('<<< Exiting rotateLeft($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $newRoot;
     }
 
@@ -290,6 +324,7 @@ class AVLTree
      */
     private function rotateRight(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('>>> Entering rotateRight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $newRoot = $node->left;
         $node->left = $newRoot->right;
         $newRoot->right = $node;
@@ -297,6 +332,7 @@ class AVLTree
         $node->updateHeight();
         $newRoot->updateHeight();
 
+		error_log(sprintf('<<< Exiting rotateRight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $newRoot;
     }
 
@@ -308,10 +344,12 @@ class AVLTree
      */
     private function getMinNode(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('>>> Entering getMinNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
 
+		error_log(sprintf('<<< Exiting getMinNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $node;
     }
 
@@ -322,6 +360,8 @@ class AVLTree
      */
     public function serialize(): string
     {
+		error_log(sprintf('>>> Entering serialize()'));
+		error_log(sprintf('<<< Exiting serialize()'));
         return json_encode($this->serializeTree($this->root));
     }
 
@@ -330,7 +370,9 @@ class AVLTree
      */
     private function serializeTree(?AVLTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
+		error_log(sprintf('<<< Exiting serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return [];
         }
 
@@ -350,9 +392,11 @@ class AVLTree
      */
     public function deserialize(string $data): void
     {
+		error_log(sprintf('>>> Entering deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
         $this->updateNodeCount($this->root);
+		error_log(sprintf('<<< Exiting deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
     }
 
     /**
@@ -363,6 +407,7 @@ class AVLTree
      */
     private function deserializeTree(array $data): ?AVLTreeNode
     {
+		error_log(sprintf('>>> Entering deserializeTree($data=%s)', is_scalar($data) ? $data : gettype($data)));
         if ($data === []) {
             return null;
         }
@@ -373,6 +418,7 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('<<< Exiting deserializeTree($data=%s)', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -383,10 +429,12 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('>>> Entering updateNodeCount($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('<<< Exiting updateNodeCount($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 }

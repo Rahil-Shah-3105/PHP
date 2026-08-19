@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 function xorCipher(string $input_string, string $key): string
 {
+	error_log(sprintf('>>> Entering xorCipher($input_string=%s,$key=%s)', is_scalar($input_string) ? $input_string : gettype($input_string), is_scalar($key) ? $key : gettype($key)));
     $key_len = strlen($key);
     $result = [];
 
@@ -22,5 +23,6 @@ function xorCipher(string $input_string, string $key): string
         $result[] = $input_string[$idx] ^ $key[$idx % $key_len];
     }
 
+	error_log(sprintf('<<< Exiting xorCipher($input_string=%s,$key=%s)', is_scalar($input_string) ? $input_string : gettype($input_string), is_scalar($key) ? $key : gettype($key)));
     return implode("", $result);
 }

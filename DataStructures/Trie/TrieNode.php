@@ -25,11 +25,13 @@ class TrieNode
      */
     public function addChild(string $char): TrieNode
     {
+		error_log(sprintf('>>> Entering addChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
 
+		error_log(sprintf('<<< Exiting addChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char];
     }
 
@@ -38,7 +40,9 @@ class TrieNode
      */
     public function hasChild(string $char): bool
     {
+		error_log(sprintf('>>> Entering hasChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
+		error_log(sprintf('<<< Exiting hasChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         return isset($this->children[$char]);
     }
 
@@ -47,7 +51,9 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('>>> Entering getChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
+		error_log(sprintf('<<< Exiting getChild($char=%s)', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char] ?? null;
     }
 
@@ -56,6 +62,8 @@ class TrieNode
      */
     private function normalizeChar(string $char): string
     {
+		error_log(sprintf('>>> Entering normalizeChar($char=%s)', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('<<< Exiting normalizeChar($char=%s)', is_scalar($char) ? $char : gettype($char)));
         return strtolower($char);
     }
 }
