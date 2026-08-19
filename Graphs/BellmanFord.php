@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 function bellmanFord(array $verticesNames, array $edges, string $start, bool $verbose = false): array
 {
+	error_log(sprintf('>>> Entering bellmanFord($verticesNames=%s,$edges=%s,$start=%s,$verbose=%s)', is_scalar($verticesNames) ? $verticesNames : gettype($verticesNames), is_scalar($edges) ? $edges : gettype($edges), is_scalar($start) ? $start : gettype($start), is_scalar($verbose) ? $verbose : gettype($verbose)));
     $vertices = array_combine($verticesNames, array_fill(0, count($verticesNames), PHP_INT_MAX));
 
     $change = true;
@@ -50,5 +51,6 @@ function bellmanFord(array $verticesNames, array $edges, string $start, bool $ve
         $round++;
     }
 
+	error_log(sprintf('<<< Exiting bellmanFord($verticesNames=%s,$edges=%s,$start=%s,$verbose=%s)', is_scalar($verticesNames) ? $verticesNames : gettype($verticesNames), is_scalar($edges) ? $edges : gettype($edges), is_scalar($start) ? $start : gettype($start), is_scalar($verbose) ? $verbose : gettype($verbose)));
     return $vertices;
 }

@@ -32,6 +32,8 @@ class BSTree extends BinaryTreeTraversal
         }
 
         parent::setTraversalType($traversalType);
+		error_log(sprintf('>>> Entering insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('<<< Exiting insert($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -41,16 +43,22 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getRoot(): ?BSTNode
     {
+		error_log(sprintf('>>> Entering getRoot()'));
+		error_log(sprintf('<<< Exiting getRoot()'));
         return $this->root;
     }
 
     public function size(): int
     {
+		error_log(sprintf('>>> Entering size()'));
+		error_log(sprintf('<<< Exiting size()'));
         return $this->counter;
     }
 
     public function isEmpty(): bool
     {
+		error_log(sprintf('>>> Entering isEmpty()'));
+		error_log(sprintf('<<< Exiting isEmpty()'));
         return !$this->root instanceof \DataStructures\BinarySearchTree\BSTNode;
     }
 
@@ -68,6 +76,7 @@ class BSTree extends BinaryTreeTraversal
 
     private function insertNode(?BSTNode &$rootPtr, int $key, $value): void
     {
+		error_log(sprintf('>>> Entering insertNode($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $rootPtr = new BSTNode($key, $value);
             return;
@@ -80,6 +89,8 @@ class BSTree extends BinaryTreeTraversal
             $this->insertNode($rootPtr->right, $key, $value);
             $rootPtr->right->parent = $rootPtr;
         } else {
+			error_log(sprintf('Throwing DuplicateKeyException from insertNode($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('<<< Exiting insertNode($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new DuplicateKeyException($key);
         }
     }
@@ -91,16 +102,19 @@ class BSTree extends BinaryTreeTraversal
      */
     public function remove(int $key): ?BSTNode
     {
+		error_log(sprintf('>>> Entering remove($key=%s)', is_scalar($key) ? $key : gettype($key)));
         $discardedNode = $this->removeNode($this->root, $key);
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
         }
 
+		error_log(sprintf('<<< Exiting remove($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
     private function removeNode(?BSTNode &$rootPtr, int $key): ?BSTNode
     {
+		error_log(sprintf('>>> Entering removeNode($key=%s)', is_scalar($key) ? $key : gettype($key)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
@@ -116,6 +130,7 @@ class BSTree extends BinaryTreeTraversal
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
 
+		error_log(sprintf('<<< Exiting removeNode($key=%s)', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -146,6 +161,7 @@ class BSTree extends BinaryTreeTraversal
      */
     private function handleNodeWithSingleOrZeroChild(BSTNode &$rootPtr): ?BSTNode
     {
+		error_log(sprintf('>>> Entering handleNodeWithSingleOrZeroChild()'));
         $discard = $rootPtr;
 
         if ($discard->isLeaf()) {           // Case 1: Node to be removed is a leaf node
@@ -165,6 +181,7 @@ class BSTree extends BinaryTreeTraversal
 
         // Unlink the discarded node from its parent
         $discard->parent = null;
+		error_log(sprintf('<<< Exiting handleNodeWithSingleOrZeroChild()'));
         return $discard;
     }
 
@@ -173,7 +190,9 @@ class BSTree extends BinaryTreeTraversal
      */
     public function minNode(?BSTNode $node): ?BSTNode
     {
+		error_log(sprintf('>>> Entering minNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
+		error_log(sprintf('<<< Exiting minNode($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return null;
         }
 
@@ -189,7 +208,9 @@ class BSTree extends BinaryTreeTraversal
      */
     public function search(int $key): ?BSTNode
     {
+		error_log(sprintf('>>> Entering search($key=%s)', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
+		error_log(sprintf('<<< Exiting search($key=%s)', is_scalar($key) ? $key : gettype($key)));
             return null;
         }
 
@@ -198,6 +219,7 @@ class BSTree extends BinaryTreeTraversal
 
     private function searchNode(?BSTNode $node, int $key): ?BSTNode
     {
+		error_log(sprintf('>>> Entering searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
@@ -208,6 +230,7 @@ class BSTree extends BinaryTreeTraversal
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         } else {
+		error_log(sprintf('<<< Exiting searchNode($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             return $this->searchNode($node->right, $key);
         }
     }
@@ -222,6 +245,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function isFound(?BSTNode $node, int $key): bool
     {
+		error_log(sprintf('>>> Entering isFound($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return false;
         }
@@ -232,6 +256,7 @@ class BSTree extends BinaryTreeTraversal
         if ($key < $node->key) {
             return $this->isFound($node->left, $key);
         } else {
+		error_log(sprintf('<<< Exiting isFound($node=%s,$key=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             return $this->isFound($node->right, $key);
         }
     }
@@ -247,6 +272,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('>>> Entering getDepth($node=%s)', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('<<< Exiting getDepth($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -263,6 +290,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getHeight(BSTNode $node): int
     {
+		error_log(sprintf('>>> Entering getHeight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node->isLeaf()) {
             return 0;
         }
@@ -274,6 +302,7 @@ class BSTree extends BinaryTreeTraversal
             $height = max($height, $this->getHeight($childNode));
         }
 
+		error_log(sprintf('<<< Exiting getHeight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return 1 + $height;
     }
 
@@ -282,6 +311,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering inOrderTraversal()'));
+		error_log(sprintf('<<< Exiting inOrderTraversal()'));
         return $this->inOrder($this->root);
     }
 
@@ -290,6 +321,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering preOrderTraversal()'));
+		error_log(sprintf('<<< Exiting preOrderTraversal()'));
         return $this->preOrder($this->root);
     }
 
@@ -298,6 +331,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('>>> Entering postOrderTraversal()'));
+		error_log(sprintf('<<< Exiting postOrderTraversal()'));
         return $this->postOrder($this->root);
     }
 
@@ -306,6 +341,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('>>> Entering breadthFirstTraversal()'));
+		error_log(sprintf('<<< Exiting breadthFirstTraversal()'));
         return $this->breadthFirst($this->root);
     }
 
@@ -316,6 +353,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function serialize(): string
     {
+		error_log(sprintf('>>> Entering serialize()'));
+		error_log(sprintf('<<< Exiting serialize()'));
         return json_encode($this->serializeTree($this->root));
     }
 
@@ -327,7 +366,9 @@ class BSTree extends BinaryTreeTraversal
      */
     private function serializeTree(?BSTNode $node): array
     {
+		error_log(sprintf('>>> Entering serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
+		error_log(sprintf('<<< Exiting serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return [];
         }
 
@@ -347,12 +388,14 @@ class BSTree extends BinaryTreeTraversal
      */
     public function deserialize(string $data): BSTree
     {
+		error_log(sprintf('>>> Entering deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
         $arrayRepresentation = json_decode($data, true);
 
         $binarySearchTree = new self();
         $binarySearchTree->root = $binarySearchTree->deserializeTree($arrayRepresentation, null);
 
         $binarySearchTree->updateNodeCount($binarySearchTree->root);
+		error_log(sprintf('<<< Exiting deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
         return $binarySearchTree;
     }
 
@@ -364,6 +407,7 @@ class BSTree extends BinaryTreeTraversal
      */
     private function deserializeTree(array $data, ?BSTNode $parent): ?BSTNode
     {
+		error_log(sprintf('>>> Entering deserializeTree($data=%s,$parent=%s)', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         if ($data === []) {
             return null;
         }
@@ -374,6 +418,7 @@ class BSTree extends BinaryTreeTraversal
         $node->left = $this->deserializeTree($data['left'], $node);
         $node->right = $this->deserializeTree($data['right'], $node);
 
+		error_log(sprintf('<<< Exiting deserializeTree($data=%s,$parent=%s)', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         return $node;
     }
 
@@ -382,10 +427,12 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('>>> Entering updateNodeCount($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('<<< Exiting updateNodeCount($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 }

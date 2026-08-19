@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 function reverseString(string $string): string
 {
+	error_log(sprintf('>>> Entering reverseString($string=%s)', is_scalar($string) ? $string : gettype($string)));
     $string = trim($string); // Removing leading and trailing spaces
 
     $characters = str_split($string);
@@ -17,5 +18,6 @@ function reverseString(string $string): string
         $reversedCharacters[] = $characters[$i];
     }
 
+	error_log(sprintf('<<< Exiting reverseString($string=%s)', is_scalar($string) ? $string : gettype($string)));
     return implode('', $reversedCharacters);
 }

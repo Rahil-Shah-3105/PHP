@@ -13,7 +13,9 @@ declare(strict_types=1);
  */
 function median(...$numbers): float|int
 {
+	error_log(sprintf('>>> Entering median($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
     if ($numbers === []) {
+		error_log(sprintf('Throwing new from median($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
         throw new \Exception('Please pass values to find mean value');
     }
 
@@ -27,6 +29,7 @@ function median(...$numbers): float|int
     $length = count($numbers);
     $middle = intdiv($length, 2);
     if ($length % 2 == 0) {
+	error_log(sprintf('<<< Exiting median($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
         return ($numbers[$middle] + $numbers[$middle - 1]) / 2;
     }
 

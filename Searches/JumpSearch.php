@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 function jumpSearch(array $list, $key): int
 {
+	error_log(sprintf('>>> Entering jumpSearch($list=%s,$key=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($key) ? $key : gettype($key)));
     /*number of elements in the sorted array*/
     $num = count($list);
 
@@ -37,5 +38,6 @@ function jumpSearch(array $list, $key): int
         }
     }
 
+	error_log(sprintf('<<< Exiting jumpSearch($list=%s,$key=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($key) ? $key : gettype($key)));
     return $list[$prev] === $key ? $prev : -1;
 }
