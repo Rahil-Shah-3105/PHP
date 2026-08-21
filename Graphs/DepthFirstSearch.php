@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 function dfs(array $adjList, $start): array
 {
+	error_log(sprintf('>>> Entering dfs($adjList=%s,$start=%s)', is_scalar($adjList) ? $adjList : gettype($adjList), is_scalar($start) ? $start : gettype($start)));
     $visited = [];
     $stack = [$start];
     while ($stack !== []) {

@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 function ternarySearchByRecursion(array $arr, $key, $low, $high)
 {
+	error_log(sprintf('>>> Entering ternarySearchByRecursion($arr=%s,$key=%s,$low=%s,$high=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key), is_scalar($low) ? $low : gettype($low), is_scalar($high) ? $high : gettype($high)));
     // Return null if high is less than low (base case: key not found).
     if ($high < $low) {
         return null;
@@ -41,6 +42,7 @@ function ternarySearchByRecursion(array $arr, $key, $low, $high)
         return ternarySearchByRecursion($arr, $key, $mid2 + 1, $high);
     } else {
         // Key is in the middle section, between $mid1 and $mid2.
+	error_log(sprintf('<<< Exiting ternarySearchByRecursion($arr=%s,$key=%s,$low=%s,$high=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key), is_scalar($low) ? $low : gettype($low), is_scalar($high) ? $high : gettype($high)));
         return ternarySearchByRecursion($arr, $key, $mid1 + 1, $mid2 - 1);
     }
     return null;
@@ -48,6 +50,7 @@ function ternarySearchByRecursion(array $arr, $key, $low, $high)
 
 function ternarySearchIterative(array $arr, $key): ?float
 {
+	error_log(sprintf('>>> Entering ternarySearchIterative($arr=%s,$key=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key)));
     // Initialize low and high pointers.
     $low = 0;
     $high = count($arr) - 1;
@@ -82,5 +85,6 @@ function ternarySearchIterative(array $arr, $key): ?float
     }
 
     // Key was not found.
+	error_log(sprintf('<<< Exiting ternarySearchIterative($arr=%s,$key=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key)));
     return null;
 }

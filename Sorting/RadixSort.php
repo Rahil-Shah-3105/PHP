@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 function radixSort($nums)
 {
+	error_log(sprintf('>>> Entering radixSort($nums=%s)', is_scalar($nums) ? $nums : gettype($nums)));
     $maxDigitsCount = maxDigits($nums);
     for ($k = 0; $k < $maxDigitsCount; $k++) {
         $digitBucket = array_fill(0, 10, []);
@@ -22,6 +23,7 @@ function radixSort($nums)
         $nums = concat($digitBucket);
     }
 
+	error_log(sprintf('<<< Exiting radixSort($nums=%s)', is_scalar($nums) ? $nums : gettype($nums)));
     return $nums;
 }
 
@@ -37,6 +39,7 @@ function radixSort($nums)
  */
 function getDigit($num, $i): int
 {
+	error_log(sprintf('>>> Entering getDigit($num=%s,$i=%s)', is_scalar($num) ? $num : gettype($num), is_scalar($i) ? $i : gettype($i)));
     return floor(abs($num) / 10 ** $i) % 10;
 }
 
@@ -48,7 +51,9 @@ function getDigit($num, $i): int
  */
 function digitsCount($num): int|float
 {
+	error_log(sprintf('>>> Entering digitsCount($num=%s)', is_scalar($num) ? $num : gettype($num)));
     if ($num == 0) {
+	error_log(sprintf('<<< Exiting digitsCount($num=%s)', is_scalar($num) ? $num : gettype($num)));
         return 1;
     }
 
@@ -63,6 +68,7 @@ function digitsCount($num): int|float
  */
 function maxDigits($arr)
 {
+	error_log(sprintf('>>> Entering maxDigits($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     $maxDigits = 0;
     $counter = count($arr);
 
@@ -70,6 +76,7 @@ function maxDigits($arr)
         $maxDigits = max($maxDigits, digitsCount($arr[$i]));
     }
 
+	error_log(sprintf('<<< Exiting maxDigits($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     return $maxDigits;
 }
 
@@ -78,6 +85,7 @@ function maxDigits($arr)
  */
 function concat(array $array): array
 {
+	error_log(sprintf('>>> Entering concat($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $newArray = [];
     $counter = count($array);
 
@@ -87,5 +95,6 @@ function concat(array $array): array
         }
     }
 
+	error_log(sprintf('<<< Exiting concat($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $newArray;
 }

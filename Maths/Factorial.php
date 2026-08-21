@@ -14,9 +14,11 @@ declare(strict_types=1);
  */
 function factorial(int $number)
 {
+	error_log(sprintf('>>> Entering factorial($number=%s)', is_scalar($number) ? $number : gettype($number)));
     static $cache = []; //internal caching memory for speed
 
     if ($number < 0) {
+		error_log(sprintf('Throwing new from factorial($number=%s)', is_scalar($number) ? $number : gettype($number)));
         throw new \Exception("Negative numbers are not allowed for calculating Factorial");
     }
 
@@ -34,5 +36,6 @@ function factorial(int $number)
 
     $cache[$number] = $fact;
 
+	error_log(sprintf('<<< Exiting factorial($number=%s)', is_scalar($number) ? $number : gettype($number)));
     return $fact;
 }

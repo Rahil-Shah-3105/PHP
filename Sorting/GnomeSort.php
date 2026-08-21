@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 function gnomeSort(array $array): array
 {
+	error_log(sprintf('>>> Entering gnomeSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $a = 1;
     $b = 2;
 
@@ -30,5 +31,6 @@ function gnomeSort(array $array): array
         }
     }
 
+	error_log(sprintf('<<< Exiting gnomeSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }

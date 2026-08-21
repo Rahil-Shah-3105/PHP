@@ -18,7 +18,9 @@ declare(strict_types=1);
  */
 function octalToDecimal($octalNumber): int|float
 {
+	error_log(sprintf('>>> Entering octalToDecimal($octalNumber=%s)', is_scalar($octalNumber) ? $octalNumber : gettype($octalNumber)));
     if (!is_numeric($octalNumber)) {
+		error_log(sprintf('Throwing new from octalToDecimal($octalNumber=%s)', is_scalar($octalNumber) ? $octalNumber : gettype($octalNumber)));
         throw new \Exception('Please pass a valid Octal Number for Converting it to a Decimal Number.');
     }
 
@@ -29,6 +31,7 @@ function octalToDecimal($octalNumber): int|float
         $decimalNumber += $digit * 8 ** $index;
     }
 
+	error_log(sprintf('<<< Exiting octalToDecimal($octalNumber=%s)', is_scalar($octalNumber) ? $octalNumber : gettype($octalNumber)));
     return $decimalNumber;
 }
 
@@ -42,7 +45,9 @@ function octalToDecimal($octalNumber): int|float
  */
 function decimalToOctal($decimalNumber): string
 {
+	error_log(sprintf('>>> Entering decimalToOctal($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     if (!is_numeric($decimalNumber)) {
+		error_log(sprintf('Throwing new from decimalToOctal($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
         throw new \Exception('Please pass a valid Decimal Number for Converting it to an Octal Number.');
     }
 
@@ -54,5 +59,6 @@ function decimalToOctal($decimalNumber): string
         $decimalNumber = intdiv($decimalNumber, 8);
     }
 
+	error_log(sprintf('<<< Exiting decimalToOctal($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     return $octalNumber;
 }

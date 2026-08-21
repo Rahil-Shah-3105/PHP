@@ -12,10 +12,12 @@ declare(strict_types=1);
  */
 function loop($i, Generator $set)
 {
+	error_log(sprintf('>>> Entering loop($i=%s,$set=%s)', is_scalar($i) ? $i : gettype($i), is_scalar($set) ? $set : gettype($set)));
     while ($i-- > 0 && $set->valid()) {
         yield $set->current();
         $set->next();
     }
+	error_log(sprintf('<<< Exiting loop($i=%s,$set=%s)', is_scalar($i) ? $i : gettype($i), is_scalar($set) ? $set : gettype($set)));
 }
 
 /*
@@ -23,6 +25,7 @@ function loop($i, Generator $set)
  */
 function fib()
 {
+	error_log(sprintf('>>> Entering fib()'));
     yield $i = 0;
     yield $j = 1;
 
@@ -31,6 +34,7 @@ function fib()
         $i = $j;
         $j = $k;
     }
+	error_log(sprintf('<<< Exiting fib()'));
 }
 
 /*

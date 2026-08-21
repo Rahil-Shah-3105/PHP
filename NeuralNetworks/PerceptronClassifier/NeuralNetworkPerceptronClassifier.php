@@ -15,6 +15,7 @@ class NeuralNetworkPerceptronClassifier
 {
     public function trainModel(array $X, array $Y, int $iterations, float $learningRate): array
     {
+		error_log(sprintf('>>> Entering trainModel($X=%s,$Y=%s,$iterations=%s,$learningRate=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($Y) ? $Y : gettype($Y), is_scalar($iterations) ? $iterations : gettype($iterations), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         [$W, $b] = $this->initParams(count($X));
 
         for ($i = 0; $i < $iterations; $i++) {
@@ -35,12 +36,15 @@ class NeuralNetworkPerceptronClassifier
             }
         }
 
+		error_log(sprintf('<<< Exiting trainModel($X=%s,$Y=%s,$iterations=%s,$learningRate=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($Y) ? $Y : gettype($Y), is_scalar($iterations) ? $iterations : gettype($iterations), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         return [$W, $b];
     }
 
     public function predict(array $X, array $W, float $b): array
     {
+		error_log(sprintf('>>> Entering predict($X=%s,$W=%s,$b=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b)));
         $A = $this->forwardPropagation($X, $W, $b);
+		error_log(sprintf('<<< Exiting predict($X=%s,$W=%s,$b=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b)));
         return array_map(fn ($a): int => $a > 0.5 ? 1 : 0, $A);
     }
 
@@ -50,6 +54,7 @@ class NeuralNetworkPerceptronClassifier
      */
     public function generateTrainingSet(): array
     {
+		error_log(sprintf('>>> Entering generateTrainingSet()'));
         $m = 50;
 
         // Generate a 2 x m matrix with binary values (0 or 1)
@@ -66,6 +71,7 @@ class NeuralNetworkPerceptronClassifier
             $Y[$j] = ($X[0][$j] == 1 && $X[1][$j] == 0) ? 1 : 0;
         }
 
+		error_log(sprintf('<<< Exiting generateTrainingSet()'));
         return [$X, $Y];
     }
 
@@ -76,12 +82,14 @@ class NeuralNetworkPerceptronClassifier
      */
     private function initParams(int $n): array
     {
+		error_log(sprintf('>>> Entering initParams($n=%s)', is_scalar($n) ? $n : gettype($n)));
         $W = [];
         for ($i = 0; $i < $n; $i++) {
             $W[$i] = mt_rand() / mt_getrandmax(); // Small random values
         }
 
         $b = 0.0; // Bias initialized to zero
+		error_log(sprintf('<<< Exiting initParams($n=%s)', is_scalar($n) ? $n : gettype($n)));
         return [$W, $b];
     }
 
@@ -90,6 +98,7 @@ class NeuralNetworkPerceptronClassifier
      */
     private function sigmoid(float $z): float
     {
+		error_log(sprintf('>>> Entering sigmoid($z=%s)', is_scalar($z) ? $z : gettype($z)));
         return 1 / (1 + exp(-$z));
     }
 
@@ -98,6 +107,7 @@ class NeuralNetworkPerceptronClassifier
      */
     private function forwardPropagation(array $X, array $W, float $b): array
     {
+		error_log(sprintf('>>> Entering forwardPropagation($X=%s,$W=%s,$b=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b)));
         $Z = [];
         $counter = count($X[0]);
         for ($j = 0; $j < $counter; $j++) {
@@ -109,6 +119,7 @@ class NeuralNetworkPerceptronClassifier
             $Z[$j] = $this->sigmoid($sum);
         }
 
+		error_log(sprintf('<<< Exiting forwardPropagation($X=%s,$W=%s,$b=%s)', is_scalar($X) ? $X : gettype($X), is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b)));
         return $Z;
     }
 
@@ -117,12 +128,14 @@ class NeuralNetworkPerceptronClassifier
      */
     private function computeCost(array $A, array $Y): float
     {
+		error_log(sprintf('>>> Entering computeCost($A=%s,$Y=%s)', is_scalar($A) ? $A : gettype($A), is_scalar($Y) ? $Y : gettype($Y)));
         $m = count($Y);
         $cost = 0.0;
         for ($i = 0; $i < $m; $i++) {
             $cost += -($Y[$i] * log($A[$i]) + (1 - $Y[$i]) * log(1 - $A[$i]));
         }
 
+		error_log(sprintf('<<< Exiting computeCost($A=%s,$Y=%s)', is_scalar($A) ? $A : gettype($A), is_scalar($Y) ? $Y : gettype($Y)));
         return $cost / $m;
     }
 
@@ -131,6 +144,7 @@ class NeuralNetworkPerceptronClassifier
      */
     private function backwardPropagation(array $A, array $X, array $Y): array
     {
+		error_log(sprintf('>>> Entering backwardPropagation($A=%s,$X=%s,$Y=%s)', is_scalar($A) ? $A : gettype($A), is_scalar($X) ? $X : gettype($X), is_scalar($Y) ? $Y : gettype($Y)));
         $m = count($Y);
         $dW = array_fill(0, count($X), 0.0);
         $db = 0.0;
@@ -155,6 +169,7 @@ class NeuralNetworkPerceptronClassifier
 
         $db /= $m;
 
+		error_log(sprintf('<<< Exiting backwardPropagation($A=%s,$X=%s,$Y=%s)', is_scalar($A) ? $A : gettype($A), is_scalar($X) ? $X : gettype($X), is_scalar($Y) ? $Y : gettype($Y)));
         return [$dW, $db];
     }
 
@@ -163,6 +178,7 @@ class NeuralNetworkPerceptronClassifier
      */
     private function updateParams(array $W, float $b, array $dW, float $db, float $learningRate): array
     {
+		error_log(sprintf('>>> Entering updateParams($W=%s,$b=%s,$dW=%s,$db=%s,$learningRate=%s)', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         $counter = count($W);
         for ($i = 0; $i < $counter; $i++) {
             $W[$i] -= $learningRate * $dW[$i];
@@ -170,6 +186,7 @@ class NeuralNetworkPerceptronClassifier
 
         $b -= $learningRate * $db;
 
+		error_log(sprintf('<<< Exiting updateParams($W=%s,$b=%s,$dW=%s,$db=%s,$learningRate=%s)', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         return [$W, $b];
     }
 }

@@ -36,23 +36,28 @@ class SegmentTree
      */
     public function __construct(private array $currentArray, ?callable $callback = null)
     {
+		error_log(sprintf('>>> Entering __construct($currentArray=%s,$callback=%s)', is_scalar($currentArray) ? $currentArray : gettype($currentArray), is_scalar($callback) ? $callback : gettype($callback)));
         $this->arraySize = count($this->currentArray);
         $this->callback = $callback;
 
         if ($this->isUnsupportedArray()) {
+			error_log(sprintf('Throwing InvalidArgumentException from __construct($currentArray=%s,$callback=%s)', is_scalar($currentArray) ? $currentArray : gettype($currentArray), is_scalar($callback) ? $callback : gettype($callback)));
             throw new InvalidArgumentException("Array must not be empty, must contain numeric values 
             and must be non-associative.");
         }
 
         $this->root = $this->buildTree($this->currentArray, 0, $this->arraySize - 1);
+		error_log(sprintf('<<< Exiting __construct($currentArray=%s,$callback=%s)', is_scalar($currentArray) ? $currentArray : gettype($currentArray), is_scalar($callback) ? $callback : gettype($callback)));
     }
 
     private function isUnsupportedArray(): bool
     {
+		error_log(sprintf('>>> Entering isUnsupportedArray()'));
         if ($this->currentArray === []) {
             return true;
         }
         if ($this->isNonNumeric()) {
+		error_log(sprintf('<<< Exiting isUnsupportedArray()'));
             return true;
         }
         return $this->isAssociative();
@@ -63,6 +68,8 @@ class SegmentTree
      */
     private function isNonNumeric(): bool
     {
+		error_log(sprintf('>>> Entering isNonNumeric()'));
+		error_log(sprintf('<<< Exiting isNonNumeric()'));
         return !array_reduce($this->currentArray, fn ($carry, $item): bool => $carry && is_numeric($item), true);
     }
 
@@ -71,6 +78,7 @@ class SegmentTree
      */
     private function isAssociative(): bool
     {
+		error_log(sprintf('>>> Entering isAssociative()'));
         return array_keys($this->currentArray) !== range(0, $this->arraySize - 1);
     }
 
@@ -79,6 +87,7 @@ class SegmentTree
      */
     public function getRoot(): SegmentTreeNode
     {
+		error_log(sprintf('>>> Entering getRoot()'));
         return $this->root;
     }
 
@@ -87,6 +96,7 @@ class SegmentTree
      */
     public function getCurrentArray(): array
     {
+		error_log(sprintf('>>> Entering getCurrentArray()'));
         return $this->currentArray;
     }
 
@@ -100,6 +110,7 @@ class SegmentTree
      */
     private function buildTree(array $arr, int $start, int $end): SegmentTreeNode
     {
+		error_log(sprintf('>>> Entering buildTree($arr=%s,$start=%s,$end=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         // Leaf node
         if ($start === $end) {
             return new SegmentTreeNode($start, $end, $arr[$start]);
@@ -132,11 +143,14 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('>>> Entering query($start=%s,$end=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
+			error_log(sprintf('Throwing OutOfBoundsException from query($start=%s,$end=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
         }
 
+		error_log(sprintf('<<< Exiting query($start=%s,$end=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         return $this->queryTree($this->root, $start, $end);
     }
 
@@ -150,6 +164,7 @@ class SegmentTree
      */
     private function queryTree(SegmentTreeNode $node, int $start, int $end)
     {
+		error_log(sprintf('>>> Entering queryTree($node=%s,$start=%s,$end=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($node->start === $start && $node->end === $end) {
             return $node->value;
         }
@@ -166,6 +181,7 @@ class SegmentTree
             $leftResult = $this->queryTree($node->left, $start, $mid);
             $rightResult = $this->queryTree($node->right, $mid + 1, $end);
 
+			error_log(sprintf('<<< Exiting queryTree($node=%s,$start=%s,$end=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
             return $this->callback
                 ? ($this->callback)($leftResult, $rightResult)
                 : $leftResult + $rightResult;                   // Default sum if no callback
@@ -181,13 +197,16 @@ class SegmentTree
      */
     public function update(int $index, int $value): void
     {
+		error_log(sprintf('>>> Entering update($index=%s,$value=%s)', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         if ($index < 0 || $index >= $this->arraySize) {
+				error_log(sprintf('Throwing OutOfBoundsException from update($index=%s,$value=%s)', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
         }
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
+		error_log(sprintf('<<< Exiting update($index=%s,$value=%s)', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -199,6 +218,7 @@ class SegmentTree
      */
     private function updateTree(SegmentTreeNode $node, int $index, $value): void
     {
+		error_log(sprintf('>>> Entering updateTree($node=%s,$index=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         // Leaf node
         if ($node->start === $node->end) {
             $node->value = $value;
@@ -218,6 +238,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('<<< Exiting updateTree($node=%s,$index=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -230,7 +251,9 @@ class SegmentTree
      */
     public function rangeUpdate(int $start, int $end, $value): void
     {
+		error_log(sprintf('>>> Entering rangeUpdate($start=%s,$end=%s,$value=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
         if ($start < 0 || $end >= $this->arraySize || $start > $end) {
+			error_log(sprintf('Throwing OutOfBoundsException from rangeUpdate($start=%s,$end=%s,$value=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
             throw new OutOfBoundsException(sprintf('Invalid range: start = %d, end = %d.', $start, $end));
         }
 
@@ -238,6 +261,7 @@ class SegmentTree
 
         // Update the original array to reflect the range update
         $this->currentArray = array_replace($this->currentArray, array_fill_keys(range($start, $end), $value));
+		error_log(sprintf('<<< Exiting rangeUpdate($start=%s,$end=%s,$value=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -250,6 +274,7 @@ class SegmentTree
      */
     private function rangeUpdateTree(SegmentTreeNode $node, int $start, int $end, $value): void
     {
+		error_log(sprintf('>>> Entering rangeUpdateTree($node=%s,$start=%s,$end=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
         // Leaf node
         if ($node->start === $node->end) {
             $node->value = $value;
@@ -273,6 +298,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('<<< Exiting rangeUpdateTree($node=%s,$start=%s,$end=%s,$value=%s)', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -282,6 +308,7 @@ class SegmentTree
      */
     public function serialize(): string
     {
+		error_log(sprintf('>>> Entering serialize()'));
         return json_encode($this->serializeTree($this->root));
     }
 
@@ -293,7 +320,9 @@ class SegmentTree
      */
     private function serializeTree(?SegmentTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if (!$node instanceof \DataStructures\SegmentTree\SegmentTreeNode) {
+		error_log(sprintf('<<< Exiting serializeTree($node=%s)', is_scalar($node) ? $node : gettype($node)));
             return [];
         }
 
@@ -314,12 +343,14 @@ class SegmentTree
      */
     public static function deserialize(string $data): self
     {
+		error_log(sprintf('>>> Entering deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
         $array = json_decode($data, true);
 
         $initialiseArray = array_fill(0, $array['end'] + 1, 0);
         $segmentTree = new self($initialiseArray);
 
         $segmentTree->root = $segmentTree->deserializeTree($array);
+		error_log(sprintf('<<< Exiting deserialize($data=%s)', is_scalar($data) ? $data : gettype($data)));
         return $segmentTree;
     }
 
@@ -331,6 +362,7 @@ class SegmentTree
      */
     private function deserializeTree(array $data): ?SegmentTreeNode
     {
+		error_log(sprintf('>>> Entering deserializeTree($data=%s)', is_scalar($data) ? $data : gettype($data)));
         if ($data === []) {
             return null;
         }
@@ -339,6 +371,7 @@ class SegmentTree
 
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
+		error_log(sprintf('<<< Exiting deserializeTree($data=%s)', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 }

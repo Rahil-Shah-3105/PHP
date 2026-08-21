@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 function atbash_encrypt($plainText): string
 {
+	error_log(sprintf('>>> Entering atbash_encrypt($plainText=%s)', is_scalar($plainText) ? $plainText : gettype($plainText)));
     $result = '';
     $plainText = strtoupper($plainText);
     for ($i = 0; $i < strlen($plainText); $i++) {
@@ -27,6 +28,7 @@ function atbash_encrypt($plainText): string
         $result .= $encryptedChar;
     }
 
+	error_log(sprintf('<<< Exiting atbash_encrypt($plainText=%s)', is_scalar($plainText) ? $plainText : gettype($plainText)));
     return $result;
 }
 
@@ -39,5 +41,6 @@ function atbash_encrypt($plainText): string
  */
 function atbash_decrypt($cipherText): string
 {
+	error_log(sprintf('>>> Entering atbash_decrypt($cipherText=%s)', is_scalar($cipherText) ? $cipherText : gettype($cipherText)));
     return atbash_encrypt($cipherText); // Decryption is the same as encryption
 }
