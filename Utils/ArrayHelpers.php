@@ -8,6 +8,7 @@ declare(strict_types=1);
  */
 function isSortedAscendingInts(array $arr): void
 {
+	error_log(sprintf('>>> Entering isSortedAscendingInts($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
     $len = count($arr);
 
     if ($len == 0) {
@@ -15,6 +16,7 @@ function isSortedAscendingInts(array $arr): void
     }
 
     if (!is_int($arr[0])) {
+		error_log(sprintf('Throwing new from isSortedAscendingInts($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
         throw new \UnexpectedValueException();
     }
 
@@ -24,4 +26,5 @@ function isSortedAscendingInts(array $arr): void
             throw new \UnexpectedValueException();
         }
     }
+	error_log(sprintf('<<< Exiting isSortedAscendingInts($arr=%s)', is_scalar($arr) ? $arr : gettype($arr)));
 }

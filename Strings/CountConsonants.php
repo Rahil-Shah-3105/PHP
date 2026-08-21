@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 function countConsonants(string $string): int
 {
+	error_log(sprintf('>>> Entering countConsonants($string=%s)', is_scalar($string) ? $string : gettype($string)));
     if ($string === '' || $string === '0') {
+		error_log(sprintf('Throwing new from countConsonants($string=%s)', is_scalar($string) ? $string : gettype($string)));
         throw new \Exception('Please pass a non-empty string value');
     }
 
@@ -28,5 +30,6 @@ function countConsonants(string $string): int
         }
     }
 
+	error_log(sprintf('<<< Exiting countConsonants($string=%s)', is_scalar($string) ? $string : gettype($string)));
     return $consonantCount;
 }

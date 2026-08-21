@@ -20,6 +20,7 @@ abstract class TreeTraversal
      */
     public static function inOrder(?AVLTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering inOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $result = array_merge($result, self::inOrder($node->left));
@@ -27,6 +28,7 @@ abstract class TreeTraversal
             $result = array_merge($result, self::inOrder($node->right));
         }
 
+		error_log(sprintf('<<< Exiting inOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -36,6 +38,7 @@ abstract class TreeTraversal
      */
     public static function preOrder(?AVLTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering preOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $result[] = [$node->key => $node->value];
@@ -43,6 +46,7 @@ abstract class TreeTraversal
             $result = array_merge($result, self::preOrder($node->right));
         }
 
+		error_log(sprintf('<<< Exiting preOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -52,6 +56,7 @@ abstract class TreeTraversal
      */
     public static function postOrder(?AVLTreeNode $node): array
     {
+		error_log(sprintf('>>> Entering postOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $result = array_merge($result, self::postOrder($node->left));
@@ -59,6 +64,7 @@ abstract class TreeTraversal
             $result[] = [$node->key => $node->value];
         }
 
+		error_log(sprintf('<<< Exiting postOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -67,6 +73,7 @@ abstract class TreeTraversal
      */
     public static function breadthFirst(?AVLTreeNode $root): array
     {
+		error_log(sprintf('>>> Entering breadthFirst($root=%s)', is_scalar($root) ? $root : gettype($root)));
         $result = [];
         if (!$root instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return $result;
@@ -88,6 +95,7 @@ abstract class TreeTraversal
             }
         }
 
+		error_log(sprintf('<<< Exiting breadthFirst($root=%s)', is_scalar($root) ? $root : gettype($root)));
         return $result;
     }
 }

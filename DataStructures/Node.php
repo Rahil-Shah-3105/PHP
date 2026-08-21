@@ -14,5 +14,6 @@ class Node
     // Constructor
     public function __construct(public $data)
     {
+	error_log(sprintf('>>> Entering __construct($data=%s)', is_scalar($data) ? $data : gettype($data)));
     }
 }

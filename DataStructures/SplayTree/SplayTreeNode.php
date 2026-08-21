@@ -26,15 +26,18 @@ class SplayTreeNode
      */
     public function __construct(public int $key, public mixed $value)
     {
+	error_log(sprintf('>>> Entering __construct($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     public function isLeaf(): bool
     {
+		error_log(sprintf('>>> Entering isLeaf()'));
         return !$this->left instanceof \DataStructures\SplayTree\SplayTreeNode && !$this->right instanceof \DataStructures\SplayTree\SplayTreeNode;
     }
 
     public function isRoot(): bool
     {
+		error_log(sprintf('>>> Entering isRoot()'));
         return !$this->parent instanceof \DataStructures\SplayTree\SplayTreeNode;
     }
 }

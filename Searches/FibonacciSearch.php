@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 function fibonacciPosition(int $n, array &$m = [])
 {
+	error_log(sprintf('>>> Entering fibonacciPosition($n=%s)', is_scalar($n) ? $n : gettype($n)));
     if (isset($m[$n])) {
         return $m[$n];
     }
@@ -23,6 +24,7 @@ function fibonacciPosition(int $n, array &$m = [])
 
     $m[$n] = fibonacciPosition($n - 1, $m) + fibonacciPosition($n - 2, $m);
 
+	error_log(sprintf('<<< Exiting fibonacciPosition($n=%s)', is_scalar($n) ? $n : gettype($n)));
     return $m[$n];
 }
 

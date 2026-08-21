@@ -21,6 +21,7 @@ require_once __DIR__ . '/../Utils/ArrayHelpers.php';
  */
 function lowerBound(array $arr, int $elem): float|int
 {
+	error_log(sprintf('>>> Entering lowerBound($arr=%s,$elem=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($elem) ? $elem : gettype($elem)));
     isSortedAscendingInts($arr);
     $hi = count($arr);
     $lo = 0;
@@ -35,5 +36,6 @@ function lowerBound(array $arr, int $elem): float|int
         }
     }
 
+	error_log(sprintf('<<< Exiting lowerBound($arr=%s,$elem=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($elem) ? $elem : gettype($elem)));
     return $lo;
 }

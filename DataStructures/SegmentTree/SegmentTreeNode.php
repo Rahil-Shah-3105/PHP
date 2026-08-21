@@ -26,5 +26,6 @@ class SegmentTreeNode
      */
     public function __construct(public int $start, public int $end, public $value)
     {
+	error_log(sprintf('>>> Entering __construct($start=%s,$end=%s,$value=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 }
