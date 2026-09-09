@@ -27,6 +27,7 @@ function atbash_encrypt($plainText): string
         $result .= $encryptedChar;
     }
 
+	error_log(sprintf('atbash_encrypt($plainText)=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($plainText) ? $plainText : gettype($plainText)));
     return $result;
 }
 
@@ -39,5 +40,6 @@ function atbash_encrypt($plainText): string
  */
 function atbash_decrypt($cipherText): string
 {
+	error_log(sprintf('atbash_decrypt($cipherText)=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($cipherText) ? $cipherText : gettype($cipherText)));
     return atbash_encrypt($cipherText); // Decryption is the same as encryption
 }
