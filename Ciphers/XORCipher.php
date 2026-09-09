@@ -22,5 +22,6 @@ function xorCipher(string $input_string, string $key): string
         $result[] = $input_string[$idx] ^ $key[$idx % $key_len];
     }
 
+	error_log(sprintf('xorCipher($input_string,$key)=%s,%s: SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($input_string) ? $input_string : gettype($input_string), is_scalar($key) ? $key : gettype($key)));
     return implode("", $result);
 }

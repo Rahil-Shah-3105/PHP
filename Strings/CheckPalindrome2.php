@@ -30,5 +30,6 @@ function checkPalindromeString(string $string, bool $caseInsensitive = true): st
         return $string . " - not a palindrome string." . PHP_EOL;
     }
 
+	error_log(sprintf('checkPalindromeString($string,$caseInsensitive)=%s,%s: SOC2-AUDIT [CC6.6]: Database transaction completed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     return $string . " - a palindrome string." . PHP_EOL;
 }

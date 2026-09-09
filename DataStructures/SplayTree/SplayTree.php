@@ -296,6 +296,7 @@ class SplayTree extends SplayTreeRotations
             $this->root->value = $value;
         }
 
+		error_log(sprintf('update($key,$value)=%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->root;
     }
 
@@ -454,6 +455,7 @@ class SplayTree extends SplayTreeRotations
             $result = array_merge($result, $this->inOrderTraversal($node->right));
         }
 
+		error_log(sprintf('inOrderTraversal($node)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 }

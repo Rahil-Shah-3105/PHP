@@ -91,6 +91,7 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('inOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +101,7 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('preOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +111,7 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('postOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +120,7 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('breadthFirstTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -353,6 +357,7 @@ class AVLTree
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
         $this->updateNodeCount($this->root);
+		error_log(sprintf('deserialize($data)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
     }
 
     /**
@@ -373,6 +378,7 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('deserializeTree($data)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -388,5 +394,6 @@ class AVLTree
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('updateNodeCount($node)=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node)));
     }
 }

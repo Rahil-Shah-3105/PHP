@@ -27,6 +27,7 @@ function atbash_encrypt($plainText): string
         $result .= $encryptedChar;
     }
 
+	error_log(sprintf('atbash_encrypt($plainText)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($plainText) ? $plainText : gettype($plainText)));
     return $result;
 }
 
@@ -39,5 +40,6 @@ function atbash_encrypt($plainText): string
  */
 function atbash_decrypt($cipherText): string
 {
+	error_log(sprintf('atbash_decrypt($cipherText)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed with algorithm %s', is_scalar($cipherText) ? $cipherText : gettype($cipherText), is_scalar($cipherText) ? $cipherText : gettype($cipherText)));
     return atbash_encrypt($cipherText); // Decryption is the same as encryption
 }

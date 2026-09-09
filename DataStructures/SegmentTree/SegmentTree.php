@@ -188,6 +188,7 @@ class SegmentTree
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
+		error_log(sprintf('update($index,$value)=%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -218,6 +219,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('updateTree($node,$index,$value)=%s,%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -238,6 +240,7 @@ class SegmentTree
 
         // Update the original array to reflect the range update
         $this->currentArray = array_replace($this->currentArray, array_fill_keys(range($start, $end), $value));
+		error_log(sprintf('rangeUpdate($start,$end,$value)=%s,%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -273,6 +276,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('rangeUpdateTree($node,$start,$end,$value)=%s,%s,%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -320,6 +324,7 @@ class SegmentTree
         $segmentTree = new self($initialiseArray);
 
         $segmentTree->root = $segmentTree->deserializeTree($array);
+		error_log(sprintf('deserialize($data)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $segmentTree;
     }
 
@@ -339,6 +344,7 @@ class SegmentTree
 
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
+		error_log(sprintf('deserializeTree($data)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 }

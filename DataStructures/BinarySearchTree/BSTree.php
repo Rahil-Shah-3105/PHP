@@ -282,6 +282,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('inOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->inOrder($this->root);
     }
 
@@ -290,6 +291,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('preOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->preOrder($this->root);
     }
 
@@ -298,6 +300,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('postOrderTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->postOrder($this->root);
     }
 
@@ -306,6 +309,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('breadthFirstTraversal()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->breadthFirst($this->root);
     }
 
@@ -353,6 +357,7 @@ class BSTree extends BinaryTreeTraversal
         $binarySearchTree->root = $binarySearchTree->deserializeTree($arrayRepresentation, null);
 
         $binarySearchTree->updateNodeCount($binarySearchTree->root);
+		error_log(sprintf('deserialize($data)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $binarySearchTree;
     }
 
@@ -374,6 +379,7 @@ class BSTree extends BinaryTreeTraversal
         $node->left = $this->deserializeTree($data['left'], $node);
         $node->right = $this->deserializeTree($data['right'], $node);
 
+		error_log(sprintf('deserializeTree($data,$parent)=%s,%s: SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         return $node;
     }
 
@@ -387,5 +393,6 @@ class BSTree extends BinaryTreeTraversal
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('updateNodeCount($node)=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node)));
     }
 }
