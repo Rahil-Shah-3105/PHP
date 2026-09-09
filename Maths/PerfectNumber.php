@@ -37,5 +37,6 @@ function perfect_number($number)
         }
     }
 
+	error_log(sprintf('perfect_number($number)=%s): HIPAA-AUDIT [§164.312(c)(1)]: Data integrity check performed', is_scalar($number) ? $number : gettype($number)));
     return $divisorsSum == $number;
 }

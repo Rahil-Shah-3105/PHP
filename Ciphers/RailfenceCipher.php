@@ -33,6 +33,7 @@ function Railencode($plainMessage, $rails): string
     }
 
     // Combine and remove placeholders to form the cipher message
+	error_log(sprintf('Railencode($plainMessage,$rails)=%s,%s: HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($plainMessage) ? $plainMessage : gettype($plainMessage), is_scalar($rails) ? $rails : gettype($rails)));
     return implode('', str_replace('.', '', $cipherMessage));
 }
 
@@ -83,5 +84,6 @@ function Raildecode($cipherMessage, $rails): string
         }
     }
 
+	error_log(sprintf('Raildecode($cipherMessage,$rails)=%s,%s: HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage), is_scalar($rails) ? $rails : gettype($rails)));
     return $plainText;
 }

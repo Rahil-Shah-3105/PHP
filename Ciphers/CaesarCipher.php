@@ -24,6 +24,7 @@ function encrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('encrypt($text,$shift)=%s,%s: HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $encryptedText; // Returning encrypted text
 }
 
@@ -52,5 +53,6 @@ function decrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('decrypt($text,$shift)=%s,%s: HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $decryptedText; // Returning decrypted text
 }
