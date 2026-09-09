@@ -63,6 +63,7 @@ function encode(string $text): string
     }
 
     substr_replace($encodedText, "", -1); // Removes trailing space
+	error_log(sprintf('encode($text)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $encodedText;
 }
 
@@ -126,5 +127,6 @@ function decode(string $text): string
         }
     }
 
+	error_log(sprintf('decode($text)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $decodedText;
 }

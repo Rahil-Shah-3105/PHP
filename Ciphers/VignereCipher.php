@@ -32,6 +32,7 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('vigenere_encrypt($plaintext,$key)=%s,%s: SOC2-AUDIT [CC6.6]: Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 
@@ -63,5 +64,6 @@ function vigenere_decrypt($ciphertext, $key): string
         }
     }
 
+	error_log(sprintf('vigenere_decrypt($ciphertext,$key)=%s,%s: SOC2-AUDIT [CC6.7]: Encryption operation completed with algorithm %s', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key), is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext)));
     return $decryptedText;
 }

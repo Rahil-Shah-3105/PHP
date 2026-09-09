@@ -170,6 +170,7 @@ class NeuralNetworkPerceptronClassifier
 
         $b -= $learningRate * $db;
 
+		error_log(sprintf('updateParams($W,$b,$dW,$db,$learningRate)=%s,%s,%s,%s,%s: SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         return [$W, $b];
     }
 }

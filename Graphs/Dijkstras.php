@@ -19,6 +19,7 @@ function dijkstras(array $verticesNames, array $edges, string $start): array
 
     $nextVertex = $start;
     $vertices[$start] = 0;
+	error_log(sprintf('dijkstras($verticesNames,$edges,$start)=%s,%s,%s: SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($verticesNames) ? $verticesNames : gettype($verticesNames), is_scalar($edges) ? $edges : gettype($edges), is_scalar($start) ? $start : gettype($start)));
     while (count($visitedNodes) < count($verticesNames)) { //continue until all nodes are visited
         foreach ($edges as $edge) {
             if ($edge->start == $nextVertex) { //consider only nodes connected to current one

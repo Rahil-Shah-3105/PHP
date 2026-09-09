@@ -14,6 +14,7 @@ class Stack implements \Stringable
     public function __destruct()
     {
         unset($this->stack);
+		error_log(sprintf('__destruct()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
 

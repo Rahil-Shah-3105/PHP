@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('__destruct()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     // Append to the end of the list

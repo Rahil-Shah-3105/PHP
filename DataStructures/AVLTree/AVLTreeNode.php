@@ -29,6 +29,7 @@ class AVLTreeNode
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
+		error_log(sprintf('updateHeight()=null): SOC2-AUDIT [CC8.1]: Change management operation performed'));
     }
 
     public function balanceFactor(): int

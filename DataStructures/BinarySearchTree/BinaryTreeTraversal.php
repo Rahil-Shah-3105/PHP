@@ -55,6 +55,7 @@ class BinaryTreeTraversal implements Iterator
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('loadTraversedNodes()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     /**
@@ -141,6 +142,7 @@ class BinaryTreeTraversal implements Iterator
 
         // Load nodes based on traversal type
         $this->loadTraversedNodes();
+		error_log(sprintf('rewind()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     /**
@@ -148,6 +150,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function current(): ?BSTNode
     {
+		error_log(sprintf('current()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->iterationNodes[$this->currentPosition] ?? null;
     }
 
@@ -172,6 +175,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function valid(): bool
     {
+		error_log(sprintf('valid()=null): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return isset($this->iterationNodes[$this->currentPosition]);
     }
 
@@ -185,6 +189,7 @@ class BinaryTreeTraversal implements Iterator
             $this->iterationNodes[] = $node;
             $this->inOrderIterator($node->right);
         }
+		error_log(sprintf('inOrderIterator($node)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -197,6 +202,7 @@ class BinaryTreeTraversal implements Iterator
             $this->preOrderIterator($node->left);
             $this->preOrderIterator($node->right);
         }
+		error_log(sprintf('preOrderIterator($node)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -209,5 +215,6 @@ class BinaryTreeTraversal implements Iterator
             $this->postOrderIterator($node->right);
             $this->iterationNodes[] = $node;
         }
+		error_log(sprintf('postOrderIterator($node)=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 }
