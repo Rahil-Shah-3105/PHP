@@ -24,6 +24,7 @@ class DisjointSet
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 

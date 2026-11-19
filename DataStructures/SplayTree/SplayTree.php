@@ -49,6 +49,7 @@ class SplayTree extends SplayTreeRotations
     protected function setRoot(SplayTreeNode $node): void
     {
         $this->root = $node;
+		error_log(sprintf('[INFO] setRoot($node=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -174,6 +175,7 @@ class SplayTree extends SplayTreeRotations
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
 
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->splay($this->root, $key);
     }
 
@@ -205,6 +207,7 @@ class SplayTree extends SplayTreeRotations
             throw new LogicException("Duplicate key: " . $key);
         }
 
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $node;
     }
 
@@ -321,6 +324,7 @@ class SplayTree extends SplayTreeRotations
 
         $this->isolateRoot();
         $this->counter--;
+		error_log(sprintf('[INFO] delete($key=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->restructureAfterDeletion($leftSubtree, $rightSubtree);
     }
 

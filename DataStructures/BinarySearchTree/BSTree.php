@@ -63,6 +63,7 @@ class BSTree extends BinaryTreeTraversal
     {
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->root;
     }
 
@@ -82,6 +83,7 @@ class BSTree extends BinaryTreeTraversal
         } else {
             throw new DuplicateKeyException($key);
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -96,6 +98,7 @@ class BSTree extends BinaryTreeTraversal
             $this->counter--;
         }
 
+		error_log(sprintf('[INFO] remove($key=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -116,6 +119,7 @@ class BSTree extends BinaryTreeTraversal
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
 
+		error_log(sprintf('[INFO] removeNode($key=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -193,6 +197,7 @@ class BSTree extends BinaryTreeTraversal
             return null;
         }
 
+		error_log(sprintf('[INFO] search($key=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -205,6 +210,7 @@ class BSTree extends BinaryTreeTraversal
             return $node;
         }
 
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         } else {
@@ -247,6 +253,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -274,6 +281,7 @@ class BSTree extends BinaryTreeTraversal
             $height = max($height, $this->getHeight($childNode));
         }
 
+		error_log(sprintf('[INFO] getHeight($node=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return 1 + $height;
     }
 
@@ -387,5 +395,6 @@ class BSTree extends BinaryTreeTraversal
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 }

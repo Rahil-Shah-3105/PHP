@@ -92,6 +92,7 @@ class DoublyLinkedList implements \Stringable
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
         $current->prev = $newNode;
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
     }
 
     // Delete a node from the list
@@ -128,6 +129,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -169,6 +171,7 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
         $current->next->prev = $current->prev;
+		error_log(sprintf('[INFO] deleteAt($position=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
     }
 
     // Print the list
@@ -299,6 +302,7 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return null
+		error_log(sprintf('[INFO] search($data=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return null;
     }
 

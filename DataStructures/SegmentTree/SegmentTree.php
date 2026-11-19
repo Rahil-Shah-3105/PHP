@@ -137,6 +137,7 @@ class SegmentTree
             Must be between 0 and " . ($this->arraySize - 1));
         }
 
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         return $this->queryTree($this->root, $start, $end);
     }
 
@@ -188,6 +189,7 @@ class SegmentTree
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -218,6 +220,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
