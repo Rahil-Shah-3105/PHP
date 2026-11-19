@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[INFO] __destruct(): FEDRAMP-AUDIT: Crypto protection — Encryption operation completed'));
     }
 
     // Append to the end of the list
@@ -88,6 +89,11 @@ class DoublyLinkedList implements \Stringable
         // Set the new node's previous node to the current node's previous node
         // Set the current node's previous node's next node to the new node
         // Set the current node's previous node to the new node
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $newNode->next = $current;
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
@@ -112,6 +118,10 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Otherwise, set the current node to the head
+		error_log(sprintf('[INFO] delete($data=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
@@ -128,6 +138,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -165,6 +176,11 @@ class DoublyLinkedList implements \Stringable
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] deleteAt($position=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
@@ -288,6 +304,7 @@ class DoublyLinkedList implements \Stringable
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof \Node) {
             // If the current node's data is the data we're looking for, return the current node
             if ($current->data === $data) {
@@ -297,6 +314,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;

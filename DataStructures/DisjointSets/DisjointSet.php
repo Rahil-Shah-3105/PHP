@@ -19,11 +19,17 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
             $node->parent = $this->findSet($node->parent);
+			error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 

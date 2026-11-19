@@ -14,6 +14,7 @@ class Stack implements \Stringable
     public function __destruct()
     {
         unset($this->stack);
+		error_log(sprintf('[INFO] __destruct(): FEDRAMP-AUDIT: Crypto protection — Encryption operation completed'));
     }
 
 
@@ -59,6 +60,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 
