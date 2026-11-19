@@ -90,6 +90,9 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's previous node to the new node
         $newNode->next = $current;
         $newNode->prev = $current->prev;
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $current->prev->next = $newNode;
         $current->prev = $newNode;
     }
@@ -114,6 +117,8 @@ class DoublyLinkedList implements \Stringable
         // Otherwise, set the current node to the head
         $current = $this->head;
 
+		error_log(sprintf('[INFO] delete($data=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Loop through the list until we reach the end of the list
         while ($current instanceof \Node) {
             // If the current node's data is the data we're looking for
@@ -128,6 +133,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -167,6 +173,9 @@ class DoublyLinkedList implements \Stringable
 
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
+		error_log(sprintf('[INFO] deleteAt($position=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         $current->prev->next = $current->next;
         $current->next->prev = $current->prev;
     }
@@ -298,6 +307,9 @@ class DoublyLinkedList implements \Stringable
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] search($data=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): USSTATE-AUDIT: Data protection assessments — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Return null
         return null;
     }

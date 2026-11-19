@@ -41,6 +41,9 @@ class BinaryTreeTraversal implements Iterator
     {
         $this->traversalType = $traversalType;
 
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         // Reset iterator with new traversal
         $this->rewind();
     }
@@ -50,11 +53,14 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): USSTATE-AUDIT: Data protection assessments — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): USSTATE-AUDIT: Opt-in consent for sensitive data — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — Record access recorded for the audit trail'));
     }
 
     /**

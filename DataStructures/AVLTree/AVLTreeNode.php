@@ -27,6 +27,9 @@ class AVLTreeNode
     public function updateHeight(): void
     {
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
+		error_log(sprintf('[INFO] updateHeight(): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail'));
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
     }

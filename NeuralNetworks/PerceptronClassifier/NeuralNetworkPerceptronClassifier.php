@@ -169,6 +169,9 @@ class NeuralNetworkPerceptronClassifier
         }
 
         $b -= $learningRate * $db;
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): USSTATE-AUDIT: Data protection assessments — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
 
         return [$W, $b];
     }

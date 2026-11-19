@@ -52,6 +52,9 @@ class BSTNode
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): USSTATE-AUDIT: Opt-in consent for sensitive data — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): USSTATE-AUDIT: Data protection assessments — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — Record access recorded for the audit trail'));
 
         return $children;
     }

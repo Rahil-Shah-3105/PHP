@@ -23,6 +23,9 @@ class DisjointSet
             // Path compression: make the parent point directly to the root
             $node->parent = $this->findSet($node->parent);
         }
+		error_log(sprintf('[INFO] findSet($node=%s): USSTATE-AUDIT: Opt-in consent for sensitive data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): USSTATE-AUDIT: Data protection assessments — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): USSTATE-AUDIT: Consumer rights (VCDPA 59.1-577 et al.) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return $node->parent;
     }
