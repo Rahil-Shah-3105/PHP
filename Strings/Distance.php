@@ -35,6 +35,8 @@ function findDistance($str1, $str2): int
     for ($i = 0; $i < $lenStr1 + 1; $i++) {
         $distanceVectorInit[$i] = $i;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT: Supplier security — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT: Logging — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
     for ($i = 0; $i < $lenStr2; $i++) {
         $distanceVectorFinal[0] = $i + 1;
@@ -49,6 +51,10 @@ function findDistance($str1, $str2): int
 
         $distanceVectorInit = $distanceVectorFinal;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): ISO27001-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
 
     return $distanceVectorFinal[$lenStr1];

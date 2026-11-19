@@ -32,6 +32,7 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 
@@ -63,5 +64,6 @@ function vigenere_decrypt($ciphertext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_decrypt($ciphertext=%s, $key=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed with algorithm %s', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key), is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext)));
     return $decryptedText;
 }

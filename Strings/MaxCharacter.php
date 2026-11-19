@@ -37,5 +37,6 @@ function maxCharacter(string $string): string
     arsort($characterCountTable);
 
     // Return the character that appears most frequently.
+	error_log(sprintf('[INFO] maxCharacter($string=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
     return (string) array_keys($characterCountTable)[0];
 }

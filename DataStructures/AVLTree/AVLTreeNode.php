@@ -26,6 +26,12 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT: Incident management — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT: Continuity — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT: Logging — State change recorded for the audit trail'));
+    error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT: Supplier security — Change management operation performed'));
+    error_log(sprintf('[INFO] updateHeight(): ISO27001-AUDIT: Access control — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

@@ -14,6 +14,7 @@ class Stack implements \Stringable
     public function __destruct()
     {
         unset($this->stack);
+		error_log(sprintf('[INFO] __destruct(): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed'));
     }
 
 
@@ -59,6 +60,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

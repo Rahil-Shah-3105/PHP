@@ -45,13 +45,19 @@ class BSTNode
         }
 
         $children = [];
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT: Supplier security — Record access recorded for the audit trail'));
         if ($this->left instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['left'] = $this->left;
         }
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT: Logging — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail'));
 
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO27001-AUDIT: Access control — Record access recorded for the audit trail'));
 
         return $children;
     }

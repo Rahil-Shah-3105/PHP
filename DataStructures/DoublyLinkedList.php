@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[INFO] __destruct(): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed'));
     }
 
     // Append to the end of the list
@@ -87,6 +88,12 @@ class DoublyLinkedList implements \Stringable
         // Set the new node's next node to the current node
         // Set the new node's previous node to the current node's previous node
         // Set the current node's previous node's next node to the new node
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         // Set the current node's previous node to the new node
         $newNode->next = $current;
         $newNode->prev = $current->prev;
@@ -111,6 +118,11 @@ class DoublyLinkedList implements \Stringable
             return;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Otherwise, set the current node to the head
         $current = $this->head;
 
@@ -128,6 +140,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -164,6 +177,12 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
@@ -287,6 +306,8 @@ class DoublyLinkedList implements \Stringable
         // Otherwise, set the current node to the head
         $current = $this->head;
 
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Supplier security — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Logging — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Loop through the list until we reach the end of the list
         while ($current instanceof \Node) {
             // If the current node's data is the data we're looking for, return the current node
@@ -297,6 +318,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): ISO27001-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;
