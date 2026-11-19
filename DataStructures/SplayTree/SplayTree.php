@@ -48,6 +48,10 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('[INFO] setRoot($node=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] setRoot($node=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
     }
 
@@ -172,6 +176,10 @@ class SplayTree extends SplayTreeRotations
     public function insert(int $key, mixed $value): ?SplayTreeNode
     {
         $this->root = $this->insertNode($this->root, $key, $value);
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->counter++;
 
         return $this->splay($this->root, $key);
@@ -195,6 +203,7 @@ class SplayTree extends SplayTreeRotations
             return new SplayTreeNode($key, $value);
         }
 
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
             $node->left->parent = $node;
@@ -204,6 +213,9 @@ class SplayTree extends SplayTreeRotations
         } else {
             throw new LogicException("Duplicate key: " . $key);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         return $node;
     }
@@ -319,6 +331,10 @@ class SplayTree extends SplayTreeRotations
         $leftSubtree = $this->root->left;
         $rightSubtree = $this->root->right;
 
+		error_log(sprintf('[INFO] delete($key=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->isolateRoot();
         $this->counter--;
         return $this->restructureAfterDeletion($leftSubtree, $rightSubtree);

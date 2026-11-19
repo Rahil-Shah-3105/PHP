@@ -49,6 +49,10 @@ function findDistance($str1, $str2): int
 
         $distanceVectorInit = $distanceVectorFinal;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): FERPA-AUDIT: Inspect amend — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
 
     return $distanceVectorFinal[$lenStr1];

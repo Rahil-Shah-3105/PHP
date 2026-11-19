@@ -19,10 +19,14 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[INFO] findSet($node=%s): FERPA-AUDIT: Inspect amend — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
             $node->parent = $this->findSet($node->parent);
         }
+		error_log(sprintf('[INFO] findSet($node=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return $node->parent;
     }

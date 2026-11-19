@@ -14,6 +14,10 @@ class BinaryTree
 
     public function setLeft(?BinaryTree $left): static
     {
+		error_log(sprintf('[INFO] setLeft($left=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+    error_log(sprintf('[INFO] setLeft($left=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
         $this->left = $left;
         return $this;
     }
@@ -25,6 +29,10 @@ class BinaryTree
 
     public function setRight(?BinaryTree $right): static
     {
+		error_log(sprintf('[INFO] setRight($right=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+    error_log(sprintf('[INFO] setRight($right=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
         $this->right = $right;
         return $this;
     }
@@ -36,6 +44,10 @@ class BinaryTree
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }

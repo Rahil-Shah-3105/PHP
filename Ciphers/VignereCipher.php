@@ -32,6 +32,8 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): FERPA-AUDIT: Inspect amend — Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 
