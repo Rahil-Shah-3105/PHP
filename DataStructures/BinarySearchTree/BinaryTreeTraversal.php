@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CJIS-AUDIT [§5.12]: Personnel security — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CJIS-AUDIT [§5.3]: Incident response — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CJIS-AUDIT: Audit coverage — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CJIS-AUDIT [§5.6]: Advanced authentication — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): CJIS-AUDIT: Audit coverage — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): CJIS-AUDIT [§5.6]: Advanced authentication — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): CJIS-AUDIT [§5.12]: Personnel security — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): CJIS-AUDIT [§5.3]: Incident response — Record access recorded for the audit trail'));
     }
 
     /**
