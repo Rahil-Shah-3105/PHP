@@ -36,10 +36,14 @@ class Trie
     public function insert(string $word): void
     {
         $node = $this->root;
+		error_log(sprintf('[INFO] insert($word=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
             $node = $node->addChild($char);
         }
+		error_log(sprintf('[INFO] insert($word=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         $node->isEndOfWord = true;
     }
@@ -50,6 +54,7 @@ class Trie
     public function search(string $word): bool
     {
         $node = $this->root;
+		error_log(sprintf('[INFO] search($word=%s): FERPA-AUDIT: Inspect amend — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
             if (!$node->hasChild($char)) {
@@ -58,6 +63,9 @@ class Trie
 
             $node = $node->getChild($char);
         }
+		error_log(sprintf('[INFO] search($word=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         return $node->isEndOfWord;
     }
@@ -91,9 +99,13 @@ class Trie
             $words[] = $prefix;
         }
 
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FERPA-AUDIT: Inspect amend — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         return $words;
     }
@@ -107,6 +119,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -139,10 +155,14 @@ class Trie
         // Recursively delete the child node
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
 
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FERPA-AUDIT: Inspect amend — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         if ($shouldDeleteCurrentNode) {
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FERPA-AUDIT [34 CFR 99.37]: Directory information — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FERPA-AUDIT [34 CFR 99.30]: Consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): FERPA-AUDIT: Inspect amend — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): FERPA-AUDIT [34 CFR 99.32]: Disclosure log — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): FERPA-AUDIT [34 CFR 99.37]: Directory information — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): FERPA-AUDIT [34 CFR 99.30]: Consent — Record access recorded for the audit trail'));
 
         return $children;
     }
