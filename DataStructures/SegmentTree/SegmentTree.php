@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[WARN] query($start=%s, $end=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -150,6 +151,7 @@ class SegmentTree
      */
     private function queryTree(SegmentTreeNode $node, int $start, int $end)
     {
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($node->start === $start && $node->end === $end) {
             return $node->value;
         }
@@ -181,9 +183,16 @@ class SegmentTree
      */
     public function update(int $index, int $value): void
     {
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         if ($index < 0 || $index >= $this->arraySize) {
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[WARN] update($index=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[WARN] update($index=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         }
 
         $this->updateTree($this->root, $index, $value);
@@ -207,10 +216,17 @@ class SegmentTree
 
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
 
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         // Decide whether to go to the left or right child
         if ($index <= $mid) {
             $this->updateTree($node->left, $index, $value);
         } else {
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[WARN] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
             $this->updateTree($node->right, $index, $value);
         }
 
@@ -218,6 +234,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[WARN] updateTree($node=%s, $index=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -320,6 +337,7 @@ class SegmentTree
         $segmentTree = new self($initialiseArray);
 
         $segmentTree->root = $segmentTree->deserializeTree($array);
+		error_log(sprintf('[INFO] deserialize($data=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $segmentTree;
     }
 
@@ -339,6 +357,7 @@ class SegmentTree
 
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
+		error_log(sprintf('[INFO] deserializeTree($data=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 }

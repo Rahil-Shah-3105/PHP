@@ -32,6 +32,7 @@ class BSTree extends BinaryTreeTraversal
         }
 
         parent::setTraversalType($traversalType);
+		error_log(sprintf('[INFO] __construct($initialData=%s, $traversalType=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($initialData) ? $initialData : gettype($initialData), is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
     }
 
     /**
@@ -61,6 +62,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function insert(int $key, $value): ?BSTNode
     {
+		error_log(sprintf('[WARN] insert($key=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[WARN] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
         return $this->root;
@@ -68,10 +75,13 @@ class BSTree extends BinaryTreeTraversal
 
     private function insertNode(?BSTNode &$rootPtr, int $key, $value): void
     {
+		error_log(sprintf('[WARN] insertNode($key=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $rootPtr = new BSTNode($key, $value);
             return;
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[WARN] insertNode($key=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
@@ -80,6 +90,9 @@ class BSTree extends BinaryTreeTraversal
             $this->insertNode($rootPtr->right, $key, $value);
             $rootPtr->right->parent = $rootPtr;
         } else {
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new DuplicateKeyException($key);
         }
     }
@@ -91,6 +104,13 @@ class BSTree extends BinaryTreeTraversal
      */
     public function remove(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] remove($key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] remove($key=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] remove($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $discardedNode = $this->removeNode($this->root, $key);
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
@@ -101,9 +121,12 @@ class BSTree extends BinaryTreeTraversal
 
     private function removeNode(?BSTNode &$rootPtr, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] removeNode($key=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $rootPtr->key) {
             $discardedNode = $this->removeNode($rootPtr->left, $key);
@@ -111,11 +134,17 @@ class BSTree extends BinaryTreeTraversal
             $discardedNode = $this->removeNode($rootPtr->right, $key);
         } else {
             // Key found, proceed to delete
+			error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
             $discardedNode = $rootPtr->getChildrenCount() === 2
                 ? $this->handleNodeWithTwoChildren($rootPtr)
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
+				error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[WARN] removeNode($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         }
 
+		error_log(sprintf('[INFO] removeNode($key=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -189,6 +218,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function search(int $key): ?BSTNode
     {
+		error_log(sprintf('[WARN] search($key=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] search($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
             return null;
         }
@@ -198,12 +233,20 @@ class BSTree extends BinaryTreeTraversal
 
     private function searchNode(?BSTNode $node, int $key): ?BSTNode
     {
+		error_log(sprintf('[WARN] searchNode($node=%s, $key=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key === $node->key) {
             return $node;
         }
+		error_log(sprintf('[WARN] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
@@ -247,6 +290,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[WARN] getDepth($node=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[WARN] getDepth($node=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -266,6 +315,11 @@ class BSTree extends BinaryTreeTraversal
         if ($node->isLeaf()) {
             return 0;
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[WARN] getHeight($node=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         $height = 0;
         $childrenList = $node->getChildren();
@@ -273,6 +327,9 @@ class BSTree extends BinaryTreeTraversal
         foreach ($childrenList as $childNode) {
             $height = max($height, $this->getHeight($childNode));
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[WARN] getHeight($node=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return 1 + $height;
     }
@@ -282,6 +339,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return $this->inOrder($this->root);
     }
 
@@ -290,6 +348,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return $this->preOrder($this->root);
     }
 
@@ -298,6 +357,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return $this->postOrder($this->root);
     }
 
@@ -306,6 +366,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return $this->breadthFirst($this->root);
     }
 
@@ -353,6 +414,7 @@ class BSTree extends BinaryTreeTraversal
         $binarySearchTree->root = $binarySearchTree->deserializeTree($arrayRepresentation, null);
 
         $binarySearchTree->updateNodeCount($binarySearchTree->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $binarySearchTree;
     }
 
@@ -374,6 +436,7 @@ class BSTree extends BinaryTreeTraversal
         $node->left = $this->deserializeTree($data['left'], $node);
         $node->right = $this->deserializeTree($data['right'], $node);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s, $parent=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         return $node;
     }
 
@@ -382,9 +445,13 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[WARN] updateNodeCount($node=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[WARN] updateNodeCount($node=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }

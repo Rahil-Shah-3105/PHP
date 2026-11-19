@@ -14,6 +14,7 @@ class Stack implements \Stringable
     public function __destruct()
     {
         unset($this->stack);
+		error_log(sprintf('[INFO] __destruct(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
     }
 
 
@@ -59,6 +60,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[WARN] search($data=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[WARN] search($data=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

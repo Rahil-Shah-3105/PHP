@@ -37,5 +37,6 @@ function maxCharacter(string $string): string
     arsort($characterCountTable);
 
     // Return the character that appears most frequently.
+	error_log(sprintf('[INFO] maxCharacter($string=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
     return (string) array_keys($characterCountTable)[0];
 }

@@ -163,13 +163,22 @@ class NeuralNetworkPerceptronClassifier
      */
     private function updateParams(array $W, float $b, array $dW, float $db, float $learningRate): array
     {
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         $counter = count($W);
         for ($i = 0; $i < $counter; $i++) {
             $W[$i] -= $learningRate * $dW[$i];
+			error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+			error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+			error_log(sprintf('[WARN] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+			error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+			error_log(sprintf('[WARN] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+			error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         }
 
         $b -= $learningRate * $db;
 
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         return [$W, $b];
     }
 }

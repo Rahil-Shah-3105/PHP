@@ -31,10 +31,14 @@ function findDistance($str1, $str2): int
         $distanceVectorInit[] = 0;
         $distanceVectorFinal[] = 0;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
     for ($i = 0; $i < $lenStr1 + 1; $i++) {
         $distanceVectorInit[$i] = $i;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
     for ($i = 0; $i < $lenStr2; $i++) {
         $distanceVectorFinal[0] = $i + 1;
@@ -49,6 +53,10 @@ function findDistance($str1, $str2): int
 
         $distanceVectorInit = $distanceVectorFinal;
     }
+	error_log(sprintf('[WARN] findDistance($str1=%s, $str2=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[WARN] findDistance($str1=%s, $str2=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
 
     return $distanceVectorFinal[$lenStr1];

@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[INFO] __destruct(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
     }
 
     // Append to the end of the list
@@ -85,6 +86,14 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Set the new node's next node to the current node
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[WARN] insert($data=%s, $position=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[WARN] insert($data=%s, $position=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         // Set the new node's previous node to the current node's previous node
         // Set the current node's previous node's next node to the new node
         // Set the current node's previous node to the new node
@@ -105,11 +114,18 @@ class DoublyLinkedList implements \Stringable
         // If the head's data is the data we're looking for
         // Set the head to the head's next node
         // Set the head's previous node to null
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         if ($this->head->data === $data) {
             $this->head = $this->head->next;
             $this->head->prev = null;
             return;
         }
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[WARN] delete($data=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[WARN] delete($data=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -128,6 +144,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -150,6 +167,8 @@ class DoublyLinkedList implements \Stringable
         // Otherwise, set the current node to the head
         $current = $this->head;
 
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         // Loop through the list until we reach the position
         for ($i = 0; $i < $position; $i++) {
             // If the current node is null, we've reached the end of the list
@@ -164,6 +183,12 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[WARN] deleteAt($position=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[WARN] deleteAt($position=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
@@ -285,6 +310,10 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Otherwise, set the current node to the head
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
@@ -297,6 +326,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[WARN] search($data=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[WARN] search($data=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;

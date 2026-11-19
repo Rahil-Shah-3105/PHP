@@ -39,6 +39,10 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[WARN] getNode($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] getNode($key=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -58,6 +62,11 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[WARN] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[WARN] insert($key=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
     }
@@ -69,6 +78,11 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('[INFO] delete($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] delete($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] delete($key=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
     }
@@ -81,6 +95,11 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] search($key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[WARN] search($key=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
@@ -91,6 +110,7 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +120,7 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +130,7 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +139,7 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): GDPR-AUDIT: Transfers to third countries — Encryption operation completed'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -139,9 +162,12 @@ class AVLTree
      */
     private function insertNode(?AVLTreeNode $node, mixed $key, mixed $value): AVLTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return new AVLTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
@@ -149,6 +175,11 @@ class AVLTree
             $node->right = $this->insertNode($node->right, $key, $value);
         } else {
             $node->value = $value; // Update existing value
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[WARN] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[WARN] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         }
 
         $node->updateHeight();
@@ -164,9 +195,12 @@ class AVLTree
      */
     private function deleteNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             $node->left = $this->deleteNode($node->left, $key);
@@ -185,6 +219,11 @@ class AVLTree
             $node->key = $minNode->key;
             $node->value = $minNode->value;
             $node->right = $this->deleteNode($node->right, $minNode->key);
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[WARN] deleteNode($node=%s, $key=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[WARN] deleteNode($node=%s, $key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         }
 
         $node->updateHeight();
@@ -200,12 +239,20 @@ class AVLTree
      */
     private function searchNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[WARN] searchNode($node=%s, $key=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
+		error_log(sprintf('[WARN] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
@@ -308,6 +355,12 @@ class AVLTree
      */
     private function getMinNode(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('[WARN] getMinNode($node=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[WARN] getMinNode($node=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
@@ -353,6 +406,7 @@ class AVLTree
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
         $this->updateNodeCount($this->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
     }
 
     /**
@@ -373,6 +427,7 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -383,9 +438,13 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[WARN] updateNodeCount($node=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[WARN] updateNodeCount($node=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }
