@@ -52,6 +52,9 @@ class BSTNode
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): ISO42001-AUDIT: Lifecycle — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO42001-AUDIT [A.7]: Data governance — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO42001-AUDIT: Ai governance — Record access recorded for the audit trail'));
 
         return $children;
     }
