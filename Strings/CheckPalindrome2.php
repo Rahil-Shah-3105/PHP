@@ -30,5 +30,6 @@ function checkPalindromeString(string $string, bool $caseInsensitive = true): st
         return $string . " - not a palindrome string." . PHP_EOL;
     }
 
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — Database transaction completed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     return $string . " - a palindrome string." . PHP_EOL;
 }
