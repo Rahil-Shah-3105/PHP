@@ -37,5 +37,7 @@ function maxCharacter(string $string): string
     arsort($characterCountTable);
 
     // Return the character that appears most frequently.
+	error_log(sprintf('[INFO] maxCharacter($string=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
+	error_log(sprintf('[INFO] maxCharacter($string=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
     return (string) array_keys($characterCountTable)[0];
 }

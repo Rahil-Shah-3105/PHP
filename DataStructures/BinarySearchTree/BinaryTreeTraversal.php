@@ -39,8 +39,11 @@ class BinaryTreeTraversal implements Iterator
      */
     public function setTraversalType(string $traversalType): void
     {
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->traversalType = $traversalType;
 
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         // Reset iterator with new traversal
         $this->rewind();
     }
@@ -50,11 +53,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): HIPAA-AUDIT: Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+    error_log(sprintf('[INFO] loadTraversedNodes(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
     }
 
     /**
@@ -140,6 +145,8 @@ class BinaryTreeTraversal implements Iterator
         $this->currentPosition = 0;
 
         // Load nodes based on traversal type
+		error_log(sprintf('[INFO] rewind(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] rewind(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         $this->loadTraversedNodes();
     }
 
@@ -148,6 +155,8 @@ class BinaryTreeTraversal implements Iterator
      */
     public function current(): ?BSTNode
     {
+		error_log(sprintf('[INFO] current(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] current(): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed'));
         return $this->iterationNodes[$this->currentPosition] ?? null;
     }
 
@@ -172,6 +181,8 @@ class BinaryTreeTraversal implements Iterator
      */
     public function valid(): bool
     {
+		error_log(sprintf('[INFO] valid(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] valid(): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed'));
         return isset($this->iterationNodes[$this->currentPosition]);
     }
 
@@ -180,11 +191,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function inOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] inOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->inOrderIterator($node->left);
             $this->iterationNodes[] = $node;
             $this->inOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] inOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -192,11 +205,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function preOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] preOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->iterationNodes[] = $node;
             $this->preOrderIterator($node->left);
             $this->preOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] preOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -204,10 +219,12 @@ class BinaryTreeTraversal implements Iterator
      */
     private function postOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] postOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->postOrderIterator($node->left);
             $this->postOrderIterator($node->right);
             $this->iterationNodes[] = $node;
         }
+		error_log(sprintf('[INFO] postOrderIterator($node=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 }

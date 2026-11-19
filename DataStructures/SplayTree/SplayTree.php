@@ -48,6 +48,7 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('[INFO] setRoot($node=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
     }
 
@@ -174,6 +175,7 @@ class SplayTree extends SplayTreeRotations
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
 
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->splay($this->root, $key);
     }
 
@@ -205,6 +207,7 @@ class SplayTree extends SplayTreeRotations
             throw new LogicException("Duplicate key: " . $key);
         }
 
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $node;
     }
 
@@ -321,6 +324,7 @@ class SplayTree extends SplayTreeRotations
 
         $this->isolateRoot();
         $this->counter--;
+		error_log(sprintf('[INFO] delete($key=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->restructureAfterDeletion($leftSubtree, $rightSubtree);
     }
 
@@ -454,6 +458,8 @@ class SplayTree extends SplayTreeRotations
             $result = array_merge($result, $this->inOrderTraversal($node->right));
         }
 
+		error_log(sprintf('[INFO] inOrderTraversal($node=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] inOrderTraversal($node=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 }

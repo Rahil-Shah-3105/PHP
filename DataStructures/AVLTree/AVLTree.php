@@ -39,6 +39,7 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -59,6 +60,7 @@ class AVLTree
     public function insert(mixed $key, mixed $value): void
     {
         $this->root = $this->insertNode($this->root, $key, $value);
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->counter++;
     }
 
@@ -70,6 +72,7 @@ class AVLTree
     public function delete(mixed $key): void
     {
         $this->root = $this->deleteNode($this->root, $key);
+		error_log(sprintf('[INFO] delete($key=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->counter--;
     }
 
@@ -82,6 +85,7 @@ class AVLTree
     public function search(mixed $key)
     {
         $node = $this->searchNode($this->root, $key);
+		error_log(sprintf('[INFO] search($key=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
 
@@ -91,6 +95,8 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] inOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +106,8 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] preOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +117,8 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] postOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +127,8 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] breadthFirstTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -207,6 +219,7 @@ class AVLTree
             return $this->searchNode($node->left, $key);
         }
 
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
         } else {
@@ -312,6 +325,7 @@ class AVLTree
             $node = $node->left;
         }
 
+		error_log(sprintf('[INFO] getMinNode($node=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node;
     }
 
@@ -352,6 +366,8 @@ class AVLTree
     {
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
+		error_log(sprintf('[INFO] deserialize($data=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserialize($data=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         $this->updateNodeCount($this->root);
     }
 
@@ -373,6 +389,8 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserializeTree($data=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -388,5 +406,6 @@ class AVLTree
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 }

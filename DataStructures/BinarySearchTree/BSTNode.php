@@ -53,6 +53,7 @@ class BSTNode
             $children['right'] = $this->right;
         }
 
+		error_log(sprintf('[INFO] getChildren(): HIPAA-AUDIT: Record access recorded for the audit trail'));
         return $children;
     }
 

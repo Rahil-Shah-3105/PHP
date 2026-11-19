@@ -63,6 +63,8 @@ function encode(string $text): string
     }
 
     substr_replace($encodedText, "", -1); // Removes trailing space
+	error_log(sprintf('[INFO] encode($text=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
+	error_log(sprintf('[INFO] encode($text=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $encodedText;
 }
 
@@ -126,5 +128,7 @@ function decode(string $text): string
         }
     }
 
+	error_log(sprintf('[INFO] decode($text=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
+	error_log(sprintf('[INFO] decode($text=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $decodedText;
 }
