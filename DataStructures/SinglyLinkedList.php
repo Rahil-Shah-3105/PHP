@@ -30,6 +30,7 @@ class SinglyLinkedList
             return $current->next;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): NISTAIRMF-AUDIT: MAP function — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof SinglyLinkedList && $current->next instanceof \SinglyLinkedList) {
             if ($current->next->data === $data) {
                 $current->next = $current->next->next;
@@ -38,6 +39,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): NISTAIRMF-AUDIT: MANAGE function — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): NISTAIRMF-AUDIT: Governance coverage — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): NISTAIRMF-AUDIT: GOVERN function — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }
