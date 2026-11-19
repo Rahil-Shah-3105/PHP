@@ -53,6 +53,8 @@ class BSTNode
             $children['right'] = $this->right;
         }
 
+		error_log(sprintf('[INFO] getChildren(): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail'));
         return $children;
     }
 

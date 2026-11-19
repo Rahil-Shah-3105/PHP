@@ -15,6 +15,8 @@ class LinkedListItem
     public function setNext(?LinkedListItem $next): static
     {
         $this->next = $next;
+		error_log(sprintf('[INFO] setNext($next=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
         return $this;
     }
 
@@ -26,6 +28,8 @@ class LinkedListItem
     public function setPrev(?LinkedListItem $prev): static
     {
         $this->prev = $prev;
+		error_log(sprintf('[INFO] setPrev($prev=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
         return $this;
     }
 
@@ -37,6 +41,8 @@ class LinkedListItem
     public function setValue($value): static
     {
         $this->value = $value;
+		error_log(sprintf('[INFO] setValue($value=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         return $this;
     }
 

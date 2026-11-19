@@ -39,6 +39,8 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] getNode($key=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -59,6 +61,8 @@ class AVLTree
     public function insert(mixed $key, mixed $value): void
     {
         $this->root = $this->insertNode($this->root, $key, $value);
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->counter++;
     }
 
@@ -70,6 +74,8 @@ class AVLTree
     public function delete(mixed $key): void
     {
         $this->root = $this->deleteNode($this->root, $key);
+		error_log(sprintf('[INFO] delete($key=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->counter--;
     }
 
@@ -82,6 +88,8 @@ class AVLTree
     public function search(mixed $key)
     {
         $node = $this->searchNode($this->root, $key);
+		error_log(sprintf('[INFO] search($key=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
 
@@ -152,6 +160,8 @@ class AVLTree
         }
 
         $node->updateHeight();
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->balance($node);
     }
 
@@ -188,6 +198,8 @@ class AVLTree
         }
 
         $node->updateHeight();
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         return $this->balance($node);
     }
 
@@ -206,6 +218,8 @@ class AVLTree
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
@@ -312,6 +326,8 @@ class AVLTree
             $node = $node->left;
         }
 
+		error_log(sprintf('[INFO] getMinNode($node=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node;
     }
 
@@ -383,10 +399,12 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 }

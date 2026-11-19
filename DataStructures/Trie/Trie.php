@@ -41,6 +41,8 @@ class Trie
             $node = $node->addChild($char);
         }
 
+		error_log(sprintf('[INFO] insert($word=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node->isEndOfWord = true;
     }
 
@@ -59,6 +61,8 @@ class Trie
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('[INFO] search($word=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -95,6 +99,8 @@ class Trie
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
 
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $words;
     }
 
@@ -107,6 +113,8 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -144,6 +152,8 @@ class Trie
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
 
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         return false;
     }
 

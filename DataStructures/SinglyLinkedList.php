@@ -39,6 +39,8 @@ class SinglyLinkedList
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return $this;
     }
 }
