@@ -30,6 +30,7 @@ class TrieNode
             $this->children[$char] = new TrieNode();
         }
 
+		error_log(sprintf('[INFO] addChild($char=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char];
     }
 
@@ -48,6 +49,7 @@ class TrieNode
     public function getChild(string $char): ?TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] getChild($char=%s): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char] ?? null;
     }
 

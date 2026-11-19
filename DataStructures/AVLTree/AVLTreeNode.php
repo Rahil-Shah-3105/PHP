@@ -29,6 +29,7 @@ class AVLTreeNode
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
+		error_log(sprintf('[INFO] updateHeight(): GEN-AUDIT: Security hygiene — State change recorded for the audit trail'));
     }
 
     public function balanceFactor(): int

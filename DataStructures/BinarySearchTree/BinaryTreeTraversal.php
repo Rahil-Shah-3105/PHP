@@ -43,6 +43,7 @@ class BinaryTreeTraversal implements Iterator
 
         // Reset iterator with new traversal
         $this->rewind();
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): GEN-AUDIT: Security hygiene — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
     }
 
     /**
@@ -55,6 +56,7 @@ class BinaryTreeTraversal implements Iterator
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): GEN-AUDIT: Security hygiene — Record access recorded for the audit trail'));
     }
 
     /**
