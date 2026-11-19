@@ -26,9 +26,13 @@ class TrieNode
     public function addChild(string $char): TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] addChild($char=%s): NERCCIP-AUDIT: Monitoring coverage — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): NERCCIP-AUDIT: Incident recovery — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): NERCCIP-AUDIT: Electronic perimeter — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): NERCCIP-AUDIT: Change management — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +51,10 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): NERCCIP-AUDIT: Incident recovery — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): NERCCIP-AUDIT: Electronic perimeter — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): NERCCIP-AUDIT: Monitoring coverage — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): NERCCIP-AUDIT: Change management — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }

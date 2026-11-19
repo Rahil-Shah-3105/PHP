@@ -59,6 +59,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): NERCCIP-AUDIT: Electronic perimeter — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): NERCCIP-AUDIT: Monitoring coverage — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): NERCCIP-AUDIT: Change management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): NERCCIP-AUDIT: Incident recovery — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 
