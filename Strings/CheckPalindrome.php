@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 function isPalindrome(string $string, bool $caseInsensitive = true): bool
 {
+	error_log(sprintf('[ERROR] >>> Entering isPalindrome($string=%s,$caseInsensitive=%s)', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     $string = trim($string); // Removing leading and trailing spaces
 
     if ($string === '' || $string === '0') {
@@ -26,5 +27,6 @@ function isPalindrome(string $string, bool $caseInsensitive = true): bool
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting isPalindrome($string=%s,$caseInsensitive=%s)', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     return true;
 }

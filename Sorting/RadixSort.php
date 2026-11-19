@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 function radixSort($nums)
 {
+	error_log(sprintf('[ERROR] >>> Entering radixSort($nums=%s)', is_scalar($nums) ? $nums : gettype($nums)));
     $maxDigitsCount = maxDigits($nums);
     for ($k = 0; $k < $maxDigitsCount; $k++) {
         $digitBucket = array_fill(0, 10, []);
@@ -22,6 +23,7 @@ function radixSort($nums)
         $nums = concat($digitBucket);
     }
 
+	error_log(sprintf('[WARN] <<< Exiting radixSort($nums=%s)', is_scalar($nums) ? $nums : gettype($nums)));
     return $nums;
 }
 

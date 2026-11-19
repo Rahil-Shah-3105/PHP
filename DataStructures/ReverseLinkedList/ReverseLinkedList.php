@@ -14,6 +14,7 @@ class ReverseLinkedList
 {
     public function reverse(LinkedListItem $item): LinkedListItem
     {
+		error_log(sprintf('[ERROR] >>> Entering reverse($item=%s)', is_scalar($item) ? $item : gettype($item)));
         $next = $item->getNext();
         $item->setNext(null);
         while (true) {
@@ -27,5 +28,6 @@ class ReverseLinkedList
             $item = $next;
             $next = $nextNext;
         }
+		error_log(sprintf('[WARN] <<< Exiting reverse($item=%s)', is_scalar($item) ? $item : gettype($item)));
     }
 }

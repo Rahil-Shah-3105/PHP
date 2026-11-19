@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 function vigenere_encrypt($plaintext, $key): string
 {
+	error_log(sprintf('[ERROR] >>> Entering vigenere_encrypt($plaintext=%s,$key=%s)', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     // Convert the input to uppercase for consistency
     $plaintext = strtoupper($plaintext);
     $key = strtoupper($key);
@@ -32,6 +33,7 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting vigenere_encrypt($plaintext=%s,$key=%s)', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 
@@ -44,6 +46,7 @@ function vigenere_encrypt($plaintext, $key): string
  */
 function vigenere_decrypt($ciphertext, $key): string
 {
+	error_log(sprintf('[ERROR] >>> Entering vigenere_decrypt($ciphertext=%s,$key=%s)', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key)));
     $ciphertext = strtoupper($ciphertext);
     $key = strtoupper($key);
     $keyLength = strlen($key);
@@ -63,5 +66,6 @@ function vigenere_decrypt($ciphertext, $key): string
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting vigenere_decrypt($ciphertext=%s,$key=%s)', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key)));
     return $decryptedText;
 }

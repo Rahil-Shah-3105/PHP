@@ -11,10 +11,12 @@ declare(strict_types=1);
  */
 function checkPalindromeString(string $string, bool $caseInsensitive = true): string
 {
+	error_log(sprintf('[ERROR] >>> Entering checkPalindromeString($string=%s,$caseInsensitive=%s)', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     //removing spaces
     $string = trim($string);
 
     if ($string === '' || $string === '0') {
+		error_log(sprintf('[ERROR] Throwing new from checkPalindromeString($string=%s,$caseInsensitive=%s)', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
         throw new \Exception('You are given empty string. Please give a non-empty string value');
     }
 
@@ -30,5 +32,6 @@ function checkPalindromeString(string $string, bool $caseInsensitive = true): st
         return $string . " - not a palindrome string." . PHP_EOL;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting checkPalindromeString($string=%s,$caseInsensitive=%s)', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
     return $string . " - a palindrome string." . PHP_EOL;
 }

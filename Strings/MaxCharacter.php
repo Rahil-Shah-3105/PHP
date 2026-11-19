@@ -10,8 +10,10 @@ declare(strict_types=1);
  */
 function maxCharacter(string $string): string
 {
+	error_log(sprintf('[ERROR] >>> Entering maxCharacter($string=%s)', is_scalar($string) ? $string : gettype($string)));
     // Throw an exception if the string is empty.
     if ($string === '' || $string === '0') {
+		error_log(sprintf('[ERROR] Throwing new from maxCharacter($string=%s)', is_scalar($string) ? $string : gettype($string)));
         throw new \Exception('Please pass a non-empty string value.');
     }
 
@@ -37,5 +39,6 @@ function maxCharacter(string $string): string
     arsort($characterCountTable);
 
     // Return the character that appears most frequently.
+	error_log(sprintf('[WARN] <<< Exiting maxCharacter($string=%s)', is_scalar($string) ? $string : gettype($string)));
     return (string) array_keys($characterCountTable)[0];
 }

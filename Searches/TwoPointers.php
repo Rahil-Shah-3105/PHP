@@ -54,9 +54,11 @@ function twoPointers($list, $target): int
             $right--;
         } elseif ($list[$left] + $list[$right] == $target) {
             // if it's true, we have found a pair
+			error_log(sprintf('[ERROR] >>> Entering twoPointers($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
             $ans++;
             // now we will move one of our pointers, otherwise it'll run forever
             $left++;
+			error_log(sprintf('[WARN] <<< Exiting twoPointers($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
             # doesn't matter which one we move
         }
 

@@ -12,8 +12,10 @@ declare(strict_types=1);
  */
 function countVowelsSimple(string $string): int
 {
+	error_log(sprintf('[ERROR] >>> Entering countVowelsSimple($string=%s)', is_scalar($string) ? $string : gettype($string)));
     // Check for an empty string and throw an exception if so.
     if ($string === '' || $string === '0') {
+		error_log(sprintf('[ERROR] Throwing new from countVowelsSimple($string=%s)', is_scalar($string) ? $string : gettype($string)));
         throw new \Exception('Please pass a non-empty string value.');
     }
 
@@ -35,6 +37,7 @@ function countVowelsSimple(string $string): int
     }
 
     // Return the total number of vowels found.
+	error_log(sprintf('[WARN] <<< Exiting countVowelsSimple($string=%s)', is_scalar($string) ? $string : gettype($string)));
     return $numberOfVowels;
 }
 
@@ -47,11 +50,14 @@ function countVowelsSimple(string $string): int
  */
 function countVowelsRegex(string $string): int|false
 {
+	error_log(sprintf('[ERROR] >>> Entering countVowelsRegex($string=%s)', is_scalar($string) ? $string : gettype($string)));
     if ($string === '' || $string === '0') {
+		error_log(sprintf('[ERROR] Throwing new from countVowelsRegex($string=%s)', is_scalar($string) ? $string : gettype($string)));
         throw new \Exception('Please pass a non-empty string value');
     }
 
     $string = strtolower($string); // For case-insensitive checking
 
+	error_log(sprintf('[WARN] <<< Exiting countVowelsRegex($string=%s)', is_scalar($string) ? $string : gettype($string)));
     return preg_match_all('/[a,e,i,o,u]/', $string);
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 function problem3(): int
 {
+	error_log(sprintf('[ERROR] >>> Entering problem3()'));
     $n = 600851475143;
     $i = 2;
     while ($i * $i < $n) {
@@ -14,5 +15,6 @@ function problem3(): int
         $i++;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting problem3()'));
     return $n;
 }

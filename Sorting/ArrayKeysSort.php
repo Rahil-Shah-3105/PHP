@@ -18,6 +18,7 @@ class ArrayKeysSort
      */
     public static function sort($collection, array $keys, string $order = self::ORDER_ASC, bool $isCaseSensitive = false)
     {
+		error_log(sprintf('[ERROR] >>> Entering sort($collection=%s,$keys=%s,$order=%s,$isCaseSensitive=%s)', is_scalar($collection) ? $collection : gettype($collection), is_scalar($keys) ? $keys : gettype($keys), is_scalar($order) ? $order : gettype($order), is_scalar($isCaseSensitive) ? $isCaseSensitive : gettype($isCaseSensitive)));
         if (!empty($collection) && $keys !== []) {
             try {
                 usort($collection, function ($a, $b) use ($keys, $order, $isCaseSensitive): int {
@@ -29,6 +30,7 @@ class ArrayKeysSort
                             if (!isset($a[$key]) || !isset($b[$key])) {
                                 $errorMsg = 'The key "' . $key
                                         . '" does not exist in the collection';
+										error_log(sprintf('[ERROR] Throwing Exception from sort($collection=%s,$keys=%s,$order=%s,$isCaseSensitive=%s)', is_scalar($collection) ? $collection : gettype($collection), is_scalar($keys) ? $keys : gettype($keys), is_scalar($order) ? $order : gettype($order), is_scalar($isCaseSensitive) ? $isCaseSensitive : gettype($isCaseSensitive)));
                                 throw new Exception($errorMsg);
                             }
 
@@ -60,11 +62,13 @@ class ArrayKeysSort
                     }
                 });
             } catch (Exception $e) {
+				error_log(sprintf('[ERROR] Exception in sort($collection=%s,$keys=%s,$order=%s,$isCaseSensitive=%s): %s', is_scalar($collection) ? $collection : gettype($collection), is_scalar($keys) ? $keys : gettype($keys), is_scalar($order) ? $order : gettype($order), is_scalar($isCaseSensitive) ? $isCaseSensitive : gettype($isCaseSensitive), $e->getMessage()));
                 echo $e->getMessage();
                 die();
             }
         }
 
+		error_log(sprintf('[WARN] <<< Exiting sort($collection=%s,$keys=%s,$order=%s,$isCaseSensitive=%s)', is_scalar($collection) ? $collection : gettype($collection), is_scalar($keys) ? $keys : gettype($keys), is_scalar($order) ? $order : gettype($order), is_scalar($isCaseSensitive) ? $isCaseSensitive : gettype($isCaseSensitive)));
         return $collection;
     }
 }

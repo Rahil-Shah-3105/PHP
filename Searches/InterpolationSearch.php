@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 function interpolationSearch(array $arr, $key): ?int
 {
+	error_log(sprintf('[ERROR] >>> Entering interpolationSearch($arr=%s,$key=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key)));
     $length = count($arr) - 1;
     $low = 0;
     $high = $length;
@@ -52,5 +53,6 @@ function interpolationSearch(array $arr, $key): ?int
     }
 
     //when key not found in array or array not sorted
+	error_log(sprintf('[WARN] <<< Exiting interpolationSearch($arr=%s,$key=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($key) ? $key : gettype($key)));
     return null;
 }

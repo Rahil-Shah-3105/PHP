@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 function isPrime(int $number): bool
 {
+	error_log(sprintf('[ERROR] >>> Entering isPrime($number=%s)', is_scalar($number) ? $number : gettype($number)));
     if ($number === 2) {
         return true;
     }
@@ -29,5 +30,6 @@ function isPrime(int $number): bool
         $i += 2;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting isPrime($number=%s)', is_scalar($number) ? $number : gettype($number)));
     return true;
 }

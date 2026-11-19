@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 function encrypt(string $text, int $shift): string
 {
+	error_log(sprintf('[ERROR] >>> Entering encrypt($text=%s,$shift=%s)', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     $encryptedText = ''; // Empty string to store encrypted text
     foreach (str_split($text) as $c) { // Going through each character
         if (ctype_alpha($c)) {
@@ -24,6 +25,7 @@ function encrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting encrypt($text=%s,$shift=%s)', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $encryptedText; // Returning encrypted text
 }
 
@@ -35,6 +37,7 @@ function encrypt(string $text, int $shift): string
  */
 function decrypt(string $text, int $shift): string
 {
+	error_log(sprintf('[ERROR] >>> Entering decrypt($text=%s,$shift=%s)', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     $decryptedText = ''; // Empty string to store decrypted text
     foreach (str_split($text) as $c) { // Going through each character
         if (ctype_alpha($c)) {
@@ -52,5 +55,6 @@ function decrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting decrypt($text=%s,$shift=%s)', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $decryptedText; // Returning decrypted text
 }

@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 function convertSpeed(float $speed, string $unitFrom, string $unitTo): float
 {
+	error_log(sprintf('[ERROR] >>> Entering convertSpeed($speed=%s,$unitFrom=%s,$unitTo=%s)', is_scalar($speed) ? $speed : gettype($speed), is_scalar($unitFrom) ? $unitFrom : gettype($unitFrom), is_scalar($unitTo) ? $unitTo : gettype($unitTo)));
     $speedUnitsFrom = [
         'mph' => 1.609344,
         'km/h' => 1,
@@ -37,6 +38,7 @@ function convertSpeed(float $speed, string $unitFrom, string $unitTo): float
     $availableUnits = array_keys($speedUnitsFrom);
 
     if (!is_numeric($speed)) {
+		error_log(sprintf('[ERROR] Throwing new from convertSpeed($speed=%s,$unitFrom=%s,$unitTo=%s)', is_scalar($speed) ? $speed : gettype($speed), is_scalar($unitFrom) ? $unitFrom : gettype($unitFrom), is_scalar($unitTo) ? $unitTo : gettype($unitTo)));
         throw new \Exception("Please pass a valid speed number for converting it from one unit to another.");
     }
 
@@ -44,5 +46,6 @@ function convertSpeed(float $speed, string $unitFrom, string $unitTo): float
         throw new \Exception("Please pass a valid speed unit.\n\nAvailable units: " . implode(', ', $availableUnits));
     }
 
+	error_log(sprintf('[WARN] <<< Exiting convertSpeed($speed=%s,$unitFrom=%s,$unitTo=%s)', is_scalar($speed) ? $speed : gettype($speed), is_scalar($unitFrom) ? $unitFrom : gettype($unitFrom), is_scalar($unitTo) ? $unitTo : gettype($unitTo)));
     return round($speed * $speedUnitsFrom[$unitFrom] * $speedUnitsTo[$unitTo], 2);
 }

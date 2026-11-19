@@ -8,6 +8,7 @@ declare(strict_types=1);
  */
 function countSort($array)
 {
+	error_log(sprintf('[ERROR] >>> Entering countSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $count = [];
     $min = min($array);
     $max = max($array);
@@ -28,5 +29,6 @@ function countSort($array)
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting countSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }

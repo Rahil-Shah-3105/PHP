@@ -8,6 +8,7 @@ declare(strict_types=1);
  */
 function countHomogenous($s): int
 {
+	error_log(sprintf('[ERROR] >>> Entering countHomogenous($s=%s)', is_scalar($s) ? $s : gettype($s)));
     // Initialize the count of homogeneous substrings
     $count = 0;
 
@@ -29,5 +30,6 @@ function countHomogenous($s): int
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting countHomogenous($s=%s)', is_scalar($s) ? $s : gettype($s)));
     return $count;
 }

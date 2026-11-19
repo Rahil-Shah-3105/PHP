@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 function quickSort(array $input): array
 {
+	error_log(sprintf('[ERROR] >>> Entering quickSort($input=%s)', is_scalar($input) ? $input : gettype($input)));
     // Return nothing if input is empty
     if ($input === []) {
         return [];
@@ -28,5 +29,6 @@ function quickSort(array $input): array
         $value <= $shift ? $lt[] = $value : $gt[] = $value;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting quickSort($input=%s)', is_scalar($input) ? $input : gettype($input)));
     return array_merge(quickSort($lt), [$key => $shift], quickSort($gt));
 }

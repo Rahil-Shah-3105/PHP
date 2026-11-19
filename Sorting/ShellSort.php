@@ -38,6 +38,7 @@ function shellSort(array $array): array
  */
 function calculateKnuthSeries(int $n): array
 {
+	error_log(sprintf('[ERROR] >>> Entering calculateKnuthSeries($n=%s)', is_scalar($n) ? $n : gettype($n)));
     $h = 1;
     $series = [];
 
@@ -46,5 +47,6 @@ function calculateKnuthSeries(int $n): array
         $h = 3 * $h + 1;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting calculateKnuthSeries($n=%s)', is_scalar($n) ? $n : gettype($n)));
     return $series;
 }

@@ -19,11 +19,13 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[ERROR] >>> Entering findSet($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[WARN] <<< Exiting findSet($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 
@@ -32,6 +34,7 @@ class DisjointSet
      */
     public function unionSet(DisjointSetNode $nodeX, DisjointSetNode $nodeY): void
     {
+		error_log(sprintf('[ERROR] >>> Entering unionSet($nodeX=%s,$nodeY=%s)', is_scalar($nodeX) ? $nodeX : gettype($nodeX), is_scalar($nodeY) ? $nodeY : gettype($nodeY)));
         $rootX = $this->findSet($nodeX);
         $rootY = $this->findSet($nodeY);
 
@@ -48,5 +51,6 @@ class DisjointSet
                 $rootY->rank += 1;
             }
         }
+		error_log(sprintf('[WARN] <<< Exiting unionSet($nodeX=%s,$nodeY=%s)', is_scalar($nodeX) ? $nodeX : gettype($nodeX), is_scalar($nodeY) ? $nodeY : gettype($nodeY)));
     }
 }

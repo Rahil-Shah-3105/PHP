@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 function selectionSort(array $array): array
 {
+	error_log(sprintf('[ERROR] >>> Entering selectionSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $length = count($array);
 
     for ($i = 0; $i < $length; $i++) {
@@ -25,5 +26,6 @@ function selectionSort(array $array): array
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting selectionSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }

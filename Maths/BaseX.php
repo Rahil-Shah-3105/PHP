@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 function baseX($k, $x): string
 {
+	error_log(sprintf('[ERROR] >>> Entering baseX($k=%s,$x=%s)', is_scalar($k) ? $k : gettype($k), is_scalar($x) ? $x : gettype($x)));
     $arr = [];
 
     while (true) {
@@ -27,5 +28,6 @@ function baseX($k, $x): string
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting baseX($k=%s,$x=%s)', is_scalar($k) ? $k : gettype($k), is_scalar($x) ? $x : gettype($x)));
     return implode("", array_reverse($arr));
 }

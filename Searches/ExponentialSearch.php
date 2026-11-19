@@ -18,6 +18,7 @@ declare(strict_types=1);
  **/
 function binarySearch(array $arr, $value, $floor, $ceiling)
 {
+	error_log(sprintf('[ERROR] >>> Entering binarySearch($arr=%s,$value=%s,$floor=%s,$ceiling=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($value) ? $value : gettype($value), is_scalar($floor) ? $floor : gettype($floor), is_scalar($ceiling) ? $ceiling : gettype($ceiling)));
     // Get $middle index
     $mid = floor(($floor + $ceiling) / 2);
 
@@ -37,6 +38,7 @@ function binarySearch(array $arr, $value, $floor, $ceiling)
         return binarySearch($arr, $value, $floor, $mid - 1);
     }
     // search the right part of the $array If the $middle element is lower than the $value
+	error_log(sprintf('[WARN] <<< Exiting binarySearch($arr=%s,$value=%s,$floor=%s,$ceiling=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($value) ? $value : gettype($value), is_scalar($floor) ? $floor : gettype($floor), is_scalar($ceiling) ? $ceiling : gettype($ceiling)));
     return binarySearch($arr, $value, $mid + 1, $ceiling);
 }
 
@@ -46,6 +48,7 @@ function binarySearch(array $arr, $value, $floor, $ceiling)
  */
 function exponentialSearch(array $arr, $value)
 {
+	error_log(sprintf('[ERROR] >>> Entering exponentialSearch($arr=%s,$value=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($value) ? $value : gettype($value)));
     // If $value is the first element of the $array return this position
     if ($arr[0] === $value) {
         return 0;
@@ -62,5 +65,6 @@ function exponentialSearch(array $arr, $value)
     $ceiling = min($i, $length);
 
     // Call binary search for the range found above
+	error_log(sprintf('[WARN] <<< Exiting exponentialSearch($arr=%s,$value=%s)', is_scalar($arr) ? $arr : gettype($arr), is_scalar($value) ? $value : gettype($value)));
     return binarySearch($arr, $value, $floor, $ceiling);
 }

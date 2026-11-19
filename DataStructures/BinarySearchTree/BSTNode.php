@@ -26,20 +26,27 @@ class BSTNode
      */
     public function __construct(public int $key, public mixed $value)
     {
+	error_log(sprintf('[ERROR] >>> Entering __construct($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[WARN] <<< Exiting __construct($key=%s,$value=%s)', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     public function isRoot(): bool
     {
+		error_log(sprintf('[ERROR] >>> Entering isRoot()'));
+        error_log(sprintf('[WARN] <<< Exiting isRoot()'));
         return !$this->parent instanceof \DataStructures\BinarySearchTree\BSTNode;
     }
 
     public function isLeaf(): bool
     {
+		error_log(sprintf('[ERROR] >>> Entering isLeaf()'));
+        error_log(sprintf('[WARN] <<< Exiting isLeaf()'));
         return !$this->left instanceof \DataStructures\BinarySearchTree\BSTNode && !$this->right instanceof \DataStructures\BinarySearchTree\BSTNode;
     }
 
     public function getChildren(): array
     {
+		error_log(sprintf('[ERROR] >>> Entering getChildren()'));
         if ($this->isLeaf()) {
             return [];
         }
@@ -53,11 +60,14 @@ class BSTNode
             $children['right'] = $this->right;
         }
 
+		error_log(sprintf('[WARN] <<< Exiting getChildren()'));
         return $children;
     }
 
     public function getChildrenCount(): int
     {
+		error_log(sprintf('[ERROR] >>> Entering getChildrenCount()'));
+        error_log(sprintf('[WARN] <<< Exiting getChildrenCount()'));
         return count($this->getChildren());
     }
 }

@@ -39,10 +39,12 @@ class BinaryTreeTraversal implements Iterator
      */
     public function setTraversalType(string $traversalType): void
     {
+		error_log(sprintf('[ERROR] >>> Entering setTraversalType($traversalType=%s)', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->traversalType = $traversalType;
 
         // Reset iterator with new traversal
         $this->rewind();
+		error_log(sprintf('[WARN] <<< Exiting setTraversalType($traversalType=%s)', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
     }
 
     /**
@@ -50,11 +52,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering loadTraversedNodes()'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[WARN] <<< Exiting loadTraversedNodes()'));
     }
 
     /**
@@ -62,6 +66,7 @@ class BinaryTreeTraversal implements Iterator
      */
     protected function inOrder(?BSTNode $node): array
     {
+		error_log(sprintf('[ERROR] >>> Entering inOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $result += $this->inOrder($node->left);
@@ -69,6 +74,7 @@ class BinaryTreeTraversal implements Iterator
             $result += $this->inOrder($node->right);
         }
 
+		error_log(sprintf('[WARN] <<< Exiting inOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -77,6 +83,7 @@ class BinaryTreeTraversal implements Iterator
      */
     protected function preOrder(?BSTNode $node): array
     {
+		error_log(sprintf('[ERROR] >>> Entering preOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $result[$node->key] = $node->value;
@@ -84,6 +91,7 @@ class BinaryTreeTraversal implements Iterator
             $result += $this->preOrder($node->right);
         }
 
+		error_log(sprintf('[WARN] <<< Exiting preOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -92,6 +100,7 @@ class BinaryTreeTraversal implements Iterator
      */
     protected function postOrder(?BSTNode $node): array
     {
+		error_log(sprintf('[ERROR] >>> Entering postOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $result += $this->postOrder($node->left);
@@ -99,6 +108,7 @@ class BinaryTreeTraversal implements Iterator
             $result[$node->key] = $node->value;
         }
 
+		error_log(sprintf('[WARN] <<< Exiting postOrder($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -107,6 +117,7 @@ class BinaryTreeTraversal implements Iterator
      */
     protected function breadthFirst(?BSTNode $node): array
     {
+		error_log(sprintf('[ERROR] >>> Entering breadthFirst($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $result = [];
         if (!isset($node)) {
             return $result;
@@ -128,6 +139,7 @@ class BinaryTreeTraversal implements Iterator
             }
         }
 
+		error_log(sprintf('[WARN] <<< Exiting breadthFirst($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 
@@ -136,11 +148,13 @@ class BinaryTreeTraversal implements Iterator
      */
     public function rewind(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering rewind()'));
         $this->iterationNodes = [];
         $this->currentPosition = 0;
 
         // Load nodes based on traversal type
         $this->loadTraversedNodes();
+		error_log(sprintf('[WARN] <<< Exiting rewind()'));
     }
 
     /**
@@ -148,6 +162,8 @@ class BinaryTreeTraversal implements Iterator
      */
     public function current(): ?BSTNode
     {
+		error_log(sprintf('[ERROR] >>> Entering current()'));
+        error_log(sprintf('[WARN] <<< Exiting current()'));
         return $this->iterationNodes[$this->currentPosition] ?? null;
     }
 
@@ -156,6 +172,8 @@ class BinaryTreeTraversal implements Iterator
      */
     public function key(): int
     {
+		error_log(sprintf('[ERROR] >>> Entering key()'));
+        error_log(sprintf('[WARN] <<< Exiting key()'));
         return $this->currentPosition;
     }
 
@@ -164,7 +182,9 @@ class BinaryTreeTraversal implements Iterator
      */
     public function next(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering next()'));
         $this->currentPosition++;
+		error_log(sprintf('[WARN] <<< Exiting next()'));
     }
 
     /**
@@ -172,6 +192,8 @@ class BinaryTreeTraversal implements Iterator
      */
     public function valid(): bool
     {
+		error_log(sprintf('[ERROR] >>> Entering valid()'));
+        error_log(sprintf('[WARN] <<< Exiting valid()'));
         return isset($this->iterationNodes[$this->currentPosition]);
     }
 
@@ -180,11 +202,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function inOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[ERROR] >>> Entering inOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->inOrderIterator($node->left);
             $this->iterationNodes[] = $node;
             $this->inOrderIterator($node->right);
         }
+		error_log(sprintf('[WARN] <<< Exiting inOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -192,11 +216,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function preOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[ERROR] >>> Entering preOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->iterationNodes[] = $node;
             $this->preOrderIterator($node->left);
             $this->preOrderIterator($node->right);
         }
+		error_log(sprintf('[WARN] <<< Exiting preOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -204,10 +230,12 @@ class BinaryTreeTraversal implements Iterator
      */
     private function postOrderIterator(?BSTNode $node): void
     {
+		error_log(sprintf('[ERROR] >>> Entering postOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->postOrderIterator($node->left);
             $this->postOrderIterator($node->right);
             $this->iterationNodes[] = $node;
         }
+		error_log(sprintf('[WARN] <<< Exiting postOrderIterator($node=%s)', is_scalar($node) ? $node : gettype($node)));
     }
 }

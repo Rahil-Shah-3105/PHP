@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 function bubbleSort2(array $input)
 {
+	error_log(sprintf('[ERROR] >>> Entering bubbleSort2($input=%s)', is_scalar($input) ? $input : gettype($input)));
     // Return nothing if input is empty
     if (!isset($input)) {
         return [];
@@ -28,5 +29,6 @@ function bubbleSort2(array $input)
         }
     } while ($swapped);
 
+	error_log(sprintf('[WARN] <<< Exiting bubbleSort2($input=%s)', is_scalar($input) ? $input : gettype($input)));
     return $input;
 }

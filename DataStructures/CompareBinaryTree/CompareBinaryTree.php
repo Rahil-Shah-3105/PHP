@@ -17,6 +17,7 @@ class CompareBinaryTree
      */
     public function areTreesEqual(?BinaryTreeNode $a, ?BinaryTreeNode $b): bool
     {
+		error_log(sprintf('[ERROR] >>> Entering areTreesEqual($a=%s,$b=%s)', is_scalar($a) ? $a : gettype($a), is_scalar($b) ? $b : gettype($b)));
         if (!$a instanceof \DataStructures\CompareBinaryTree\BinaryTreeNode  &&  $b instanceof \DataStructures\CompareBinaryTree\BinaryTreeNode || $a instanceof \DataStructures\CompareBinaryTree\BinaryTreeNode && !$b instanceof \DataStructures\CompareBinaryTree\BinaryTreeNode) {
             return false;
         }
@@ -29,6 +30,7 @@ class CompareBinaryTree
             return false;
         }
 
+		error_log(sprintf('[WARN] <<< Exiting areTreesEqual($a=%s,$b=%s)', is_scalar($a) ? $a : gettype($a), is_scalar($b) ? $b : gettype($b)));
         return  $this->areTreesEqual($a->left, $b->left)
             &&  $this->areTreesEqual($a->right, $b->right);
     }

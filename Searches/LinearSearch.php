@@ -21,6 +21,7 @@ declare(strict_types=1);
  */
 function linearSearch(array $list, $target): int
 {
+	error_log(sprintf('[ERROR] >>> Entering linearSearch($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     $n = count($list);
     for ($i = 0; $i < $n; $i++) {
         if ($list[$i] == $target) {
@@ -28,5 +29,6 @@ function linearSearch(array $list, $target): int
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting linearSearch($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     return -1;
 }

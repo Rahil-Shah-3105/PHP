@@ -21,6 +21,7 @@ declare(strict_types=1);
  */
 function binarySearchIterative(array $list, $target): ?int
 {
+	error_log(sprintf('[ERROR] >>> Entering binarySearchIterative($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     $first = 0;
     $last = count($list) - 1;
 
@@ -64,6 +65,8 @@ function binarySearchIterative(array $list, $target): ?int
  */
 function binarySearchByRecursion(array $list, $target, $start, $end)
 {
+	error_log(sprintf('[ERROR] >>> Entering binarySearchByRecursion($list=%s,$target=%s,$start=%s,$end=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+    error_log(sprintf('[ERROR] >>> Entering binarySearchByRecursion($list=%s,$target=%s,$start=%s,$end=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
     if (count($list) == 0) {
         return null;
     }
@@ -90,5 +93,6 @@ function binarySearchByRecursion(array $list, $target, $start, $end)
         return binarySearchByRecursion($list, $target, $mid + 1, $end);
     }
 
+	error_log(sprintf('[WARN] <<< Exiting binarySearchByRecursion($list=%s,$target=%s,$start=%s,$end=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
     return null;
 }

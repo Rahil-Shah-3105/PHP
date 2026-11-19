@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 function findDistance($str1, $str2): int
 {
+	error_log(sprintf('[ERROR] >>> Entering findDistance($str1=%s,$str2=%s)', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
     $lenStr1 = strlen($str1);
     $lenStr2 = strlen($str2);
     if ($lenStr1 == 0) {
@@ -51,5 +52,6 @@ function findDistance($str1, $str2): int
     }
 
 
+	error_log(sprintf('[WARN] <<< Exiting findDistance($str1=%s,$str2=%s)', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
     return $distanceVectorFinal[$lenStr1];
 }

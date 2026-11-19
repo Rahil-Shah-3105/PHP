@@ -12,6 +12,7 @@ declare(strict_types=1);
 */
 function SentinelSearch($list, $target): int
 {
+	error_log(sprintf('[ERROR] >>> Entering SentinelSearch($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     //Length of array
     $len = count($list);
 
@@ -41,5 +42,6 @@ function SentinelSearch($list, $target): int
     if ($i < ($len - 1)) {
         return $i;
     }
+	error_log(sprintf('[WARN] <<< Exiting SentinelSearch($list=%s,$target=%s)', is_scalar($list) ? $list : gettype($list), is_scalar($target) ? $target : gettype($target)));
     return -1;
 }

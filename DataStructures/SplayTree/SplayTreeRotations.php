@@ -28,6 +28,8 @@ abstract class SplayTreeRotations
      */
     protected function zig(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zig($node=%s)', is_scalar($node) ? $node : gettype($node)));
+        error_log(sprintf('[WARN] <<< Exiting zig($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateRight($node);
     }
 
@@ -41,6 +43,8 @@ abstract class SplayTreeRotations
      */
     protected function zag(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zag($node=%s)', is_scalar($node) ? $node : gettype($node)));
+        error_log(sprintf('[WARN] <<< Exiting zag($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateLeft($node);
     }
 
@@ -54,7 +58,9 @@ abstract class SplayTreeRotations
      */
     protected function zigZig(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zigZig($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $node = $this->rotateRight($node);
+		error_log(sprintf('[WARN] <<< Exiting zigZig($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateRight($node);
     }
 
@@ -68,7 +74,9 @@ abstract class SplayTreeRotations
      */
     protected function zagZag(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zagZag($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $node = $this->rotateLeft($node);
+		error_log(sprintf('[WARN] <<< Exiting zagZag($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateLeft($node);
     }
 
@@ -83,7 +91,9 @@ abstract class SplayTreeRotations
      */
     protected function zigZag(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zigZag($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $node->left = $this->rotateLeft($node->left);
+		error_log(sprintf('[WARN] <<< Exiting zigZag($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateRight($node);
     }
 
@@ -98,7 +108,9 @@ abstract class SplayTreeRotations
      */
     protected function zagZig(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering zagZig($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $node->right = $this->rotateRight($node->right);
+		error_log(sprintf('[WARN] <<< Exiting zagZig($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $this->rotateLeft($node);
     }
 
@@ -148,6 +160,7 @@ abstract class SplayTreeRotations
      */
     private function rotateRight(SplayTreeNode $node): SplayTreeNode
     {
+		error_log(sprintf('[ERROR] >>> Entering rotateRight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         $leftChild = $node->left;
 
         if (!$leftChild instanceof \DataStructures\SplayTree\SplayTreeNode) {
@@ -173,6 +186,7 @@ abstract class SplayTreeRotations
         $leftChild->right = $node;
         $node->parent = $leftChild;
 
+		error_log(sprintf('[WARN] <<< Exiting rotateRight($node=%s)', is_scalar($node) ? $node : gettype($node)));
         return $leftChild;
     }
 }

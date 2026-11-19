@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 function problem1a(): int
 {
+	error_log(sprintf('[ERROR] >>> Entering problem1a()'));
     $maxNumber = 999; // below 1000
 
     $numbers = range(1, $maxNumber);
 
     return array_reduce($numbers, function ($carry, $number): float|int {
         $shouldCarry = $number % 3 == 0 || $number % 5 == 0;
+	error_log(sprintf('[WARN] <<< Exiting problem1a()'));
         return $carry + ($shouldCarry ? $number : 0);
     });
 }
 
 function problem1b(): int
 {
+	error_log(sprintf('[ERROR] >>> Entering problem1b()'));
     $maxNumber = 999; // below 1000
 
     $numbersMultByThree = range(3, $maxNumber, 3);
@@ -23,5 +26,6 @@ function problem1b(): int
 
     $numbers = array_merge($numbersMultByThree, $numbersMultByFive);
 
+	error_log(sprintf('[WARN] <<< Exiting problem1b()'));
     return array_sum(array_unique($numbers));
 }

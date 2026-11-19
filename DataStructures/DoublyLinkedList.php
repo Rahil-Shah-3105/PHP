@@ -16,13 +16,16 @@ class DoublyLinkedList implements \Stringable
     // Destructor
     public function __destruct()
     {
+		error_log(sprintf('[ERROR] >>> Entering __destruct()'));
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[WARN] <<< Exiting __destruct()'));
     }
 
     // Append to the end of the list
     public function append($data): void
     {
+		error_log(sprintf('[ERROR] >>> Entering append($data=%s)', is_scalar($data) ? $data : gettype($data)));
         $newNode = new Node($data);
 
         // If the list is empty, set the head and tail to the new node
@@ -40,11 +43,13 @@ class DoublyLinkedList implements \Stringable
 
         // Set the tail to the new node
         $this->tail = $newNode;
+		error_log(sprintf('[WARN] <<< Exiting append($data=%s)', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Insert a node after a given position
     public function insert($data, $position): void
     {
+		error_log(sprintf('[ERROR] >>> Entering insert($data=%s,$position=%s)', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $newNode = new Node($data);
 
         // If the list is empty, set the head and tail to the new node
@@ -92,11 +97,13 @@ class DoublyLinkedList implements \Stringable
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
         $current->prev = $newNode;
+		error_log(sprintf('[WARN] <<< Exiting insert($data=%s,$position=%s)', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
     }
 
     // Delete a node from the list
     public function delete($data): void
     {
+		error_log(sprintf('[ERROR] >>> Entering delete($data=%s)', is_scalar($data) ? $data : gettype($data)));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
@@ -128,11 +135,13 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[WARN] <<< Exiting delete($data=%s)', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
     public function deleteAt($position): void
     {
+		error_log(sprintf('[ERROR] >>> Entering deleteAt($position=%s)', is_scalar($position) ? $position : gettype($position)));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
@@ -169,11 +178,13 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
         $current->next->prev = $current->prev;
+		error_log(sprintf('[WARN] <<< Exiting deleteAt($position=%s)', is_scalar($position) ? $position : gettype($position)));
     }
 
     // Print the list
     public function printList(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering printList()'));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
@@ -190,11 +201,13 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[WARN] <<< Exiting printList()'));
     }
 
     // Print the list in reverse
     public function printListReverse(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering printListReverse()'));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
@@ -211,11 +224,13 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the previous node
             $current = $current->prev;
         }
+		error_log(sprintf('[WARN] <<< Exiting printListReverse()'));
     }
 
     // Reverse the list
     public function reverse(): void
     {
+		error_log(sprintf('[ERROR] >>> Entering reverse()'));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
@@ -247,11 +262,13 @@ class DoublyLinkedList implements \Stringable
 
         // Set the tail to the temp node
         $this->tail = $temp;
+		error_log(sprintf('[WARN] <<< Exiting reverse()'));
     }
 
     // Get the length of the list
     public function length(): int
     {
+		error_log(sprintf('[ERROR] >>> Entering length()'));
         // If the list is empty, return 0
         if (!$this->head instanceof \Node) {
             return 0;
@@ -273,12 +290,14 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return the length
+		error_log(sprintf('[WARN] <<< Exiting length()'));
         return $length;
     }
 
     // Search for a node
     public function search($data): ?Node
     {
+		error_log(sprintf('[ERROR] >>> Entering search($data=%s)', is_scalar($data) ? $data : gettype($data)));
         // If the list is empty, return null
         if (!$this->head instanceof \Node) {
             return null;
@@ -299,20 +318,24 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return null
+		error_log(sprintf('[WARN] <<< Exiting search($data=%s)', is_scalar($data) ? $data : gettype($data)));
         return null;
     }
 
     // Is the list empty?
     public function isEmpty(): bool
     {
+		error_log(sprintf('[ERROR] >>> Entering isEmpty()'));
         // If the head is null, return true
         // Otherwise, return false
+		error_log(sprintf('[WARN] <<< Exiting isEmpty()'));
         return !$this->head instanceof \Node;
     }
 
     // To String
     public function __toString(): string
     {
+		error_log(sprintf('[ERROR] >>> Entering __toString()'));
         // If the list is empty, return an empty string
         if (!$this->head instanceof \Node) {
             return '';
@@ -339,12 +362,14 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return the string
+		error_log(sprintf('[WARN] <<< Exiting __toString()'));
         return $string;
     }
 
     // To Array
     public function toArray(): array
     {
+		error_log(sprintf('[ERROR] >>> Entering toArray()'));
         // If the list is empty, return an empty array
         if (!$this->head instanceof \Node) {
             return [];
@@ -366,6 +391,7 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return the array
+		error_log(sprintf('[WARN] <<< Exiting toArray()'));
         return $array;
     }
 }

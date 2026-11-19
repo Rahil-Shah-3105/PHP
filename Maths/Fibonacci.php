@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 function fibonacciRecursive(int $num): array
 {
+	error_log(sprintf('[ERROR] >>> Entering fibonacciRecursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     /*
      * Fibonacci series using recursive approach
      */
@@ -18,6 +19,7 @@ function fibonacciRecursive(int $num): array
         $fibonacciRecursive[] = recursive($i);
     }
 
+	error_log(sprintf('[WARN] <<< Exiting fibonacciRecursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     return $fibonacciRecursive;
 }
 
@@ -27,12 +29,15 @@ function fibonacciRecursive(int $num): array
  */
 function recursive(int $num): float|int
 {
+	error_log(sprintf('[ERROR] >>> Entering recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
     if ($num < 0) {
+		error_log(sprintf('[ERROR] Throwing new from recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
         throw new \Exception("Number must be greater than 0.");
     }
     if ($num == 0 || $num == 1) {
         return $num;
     } else {
+		error_log(sprintf('[WARN] <<< Exiting recursive($num=%s)', is_scalar($num) ? $num : gettype($num)));
         return recursive($num - 1) + recursive($num - 2);
     }
 }
@@ -43,6 +48,8 @@ function recursive(int $num): float|int
  */
 function fibonacciWithBinetFormula(int $num): array
 {
+	error_log(sprintf('[ERROR] >>> Entering fibonacciWithBinetFormula($num=%s)', is_scalar($num) ? $num : gettype($num)));
+    error_log(sprintf('[WARN] <<< Exiting fibonacciWithBinetFormula($num=%s)', is_scalar($num) ? $num : gettype($num)));
     /*
      * Fibonacci series using Binet's formula given below
      * binet's formula =  ((1 + sqrt(5) / 2 ) ^ n - (1 - sqrt(5) / 2 ) ^ n ) ) / sqrt(5)

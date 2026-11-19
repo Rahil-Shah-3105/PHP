@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 function eratosthenesSieve(int $number): array
 {
+	error_log(sprintf('[ERROR] >>> Entering eratosthenesSieve($number=%s)', is_scalar($number) ? $number : gettype($number)));
     $primes = range(1, $number);
     $primes = array_combine($primes, $primes);
 
@@ -31,5 +32,6 @@ function eratosthenesSieve(int $number): array
         $current += 1;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting eratosthenesSieve($number=%s)', is_scalar($number) ? $number : gettype($number)));
     return array_values($primes);
 }

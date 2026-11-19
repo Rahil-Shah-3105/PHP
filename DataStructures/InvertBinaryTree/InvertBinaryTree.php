@@ -14,6 +14,7 @@ class InvertBinaryTree
 {
     public function invert(?BinaryTree $b): void
     {
+		error_log(sprintf('[ERROR] >>> Entering invert($b=%s)', is_scalar($b) ? $b : gettype($b)));
         if (!$b instanceof \DataStructures\InvertBinaryTree\BinaryTree) {
             return;
         }
@@ -23,5 +24,6 @@ class InvertBinaryTree
         $b->setRight($tmp);
         $this->invert($b->getLeft());
         $this->invert($b->getRight());
+		error_log(sprintf('[WARN] <<< Exiting invert($b=%s)', is_scalar($b) ? $b : gettype($b)));
     }
 }

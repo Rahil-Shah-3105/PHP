@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 function insertionSort(array $array): array
 {
+	error_log(sprintf('[ERROR] >>> Entering insertionSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     $counter = count($array);
     for ($i = 1; $i < $counter; $i++) {
         $currentVal = $array[$i];
@@ -18,5 +19,6 @@ function insertionSort(array $array): array
         $array[$j + 1] = $currentVal;
     }
 
+	error_log(sprintf('[WARN] <<< Exiting insertionSort($array=%s)', is_scalar($array) ? $array : gettype($array)));
     return $array;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 function problem4(): int
 {
+	error_log(sprintf('[ERROR] >>> Entering problem4()'));
     $largest  = 0;
 
     for ($i = 100; $i < 1000; $i++) {
@@ -16,5 +17,6 @@ function problem4(): int
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting problem4()'));
     return $largest;
 }

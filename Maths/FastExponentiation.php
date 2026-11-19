@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 function fastExponentiation(int $base, int $exponent)
 {
+	error_log(sprintf('[ERROR] >>> Entering fastExponentiation($base=%s,$exponent=%s)', is_scalar($base) ? $base : gettype($base), is_scalar($exponent) ? $exponent : gettype($exponent)));
     if ($exponent == 0) {
         return 1;
     }
@@ -22,5 +23,6 @@ function fastExponentiation(int $base, int $exponent)
     if ($exponent % 2 == 0) {
         return fastExponentiation($base * $base, $exponent / 2);
     }
+	error_log(sprintf('[WARN] <<< Exiting fastExponentiation($base=%s,$exponent=%s)', is_scalar($base) ? $base : gettype($base), is_scalar($exponent) ? $exponent : gettype($exponent)));
     return $base * fastExponentiation($base * $base, ($exponent - 1) / 2);
 }

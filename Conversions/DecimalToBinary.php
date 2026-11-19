@@ -12,7 +12,9 @@ declare(strict_types=1);
  */
 function decimalToBinary($decimalNumber): string
 {
+	error_log(sprintf('[ERROR] >>> Entering decimalToBinary($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     if (!is_numeric($decimalNumber)) {
+		error_log(sprintf('[ERROR] Throwing new from decimalToBinary($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
         throw new \Exception('Please pass a valid Decimal Number for Converting it to a Binary Number.');
     }
 
@@ -25,5 +27,6 @@ function decimalToBinary($decimalNumber): string
         $decimalNumber = intdiv($decimalNumber, 2);
     }
 
+	error_log(sprintf('[WARN] <<< Exiting decimalToBinary($decimalNumber=%s)', is_scalar($decimalNumber) ? $decimalNumber : gettype($decimalNumber)));
     return $binaryNumber;
 }

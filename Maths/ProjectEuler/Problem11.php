@@ -39,46 +39,56 @@ declare(strict_types=1);
 
 function horizontalProduct(array $grid, $row, $col): int|float
 {
+	error_log(sprintf('[ERROR] >>> Entering horizontalProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     $product = 1;
     for ($i = 0; $i < 4; $i++) {
         $product *= $grid[$row][$col + $i];
     }
 
+	error_log(sprintf('[WARN] <<< Exiting horizontalProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     return $product;
 }
 
 function verticalProduct(array $grid, $row, $col): int|float
 {
+	error_log(sprintf('[ERROR] >>> Entering verticalProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     $product = 1;
     for ($i = 0; $i < 4; $i++) {
         $product *= $grid[$row + $i][$col];
     }
 
+	error_log(sprintf('[WARN] <<< Exiting verticalProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     return $product;
 }
 
 function diagonalRightProduct(array $grid, $row, $col): int|float
 {
+	error_log(sprintf('[ERROR] >>> Entering diagonalRightProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     $product = 1;
     for ($i = 0; $i < 4; $i++) {
         $product *= $grid[$row + $i][$col + $i];
     }
 
+	error_log(sprintf('[WARN] <<< Exiting diagonalRightProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     return $product;
 }
 
 function diagonalLeftProduct(array $grid, $row, $col): int|float
 {
+	error_log(sprintf('[ERROR] >>> Entering diagonalLeftProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     $product = 1;
     for ($i = 0; $i < 4; $i++) {
         $product *= $grid[$row + $i][$col - $i];
     }
 
+	error_log(sprintf('[WARN] <<< Exiting diagonalLeftProduct($grid=%s,$row=%s,$col=%s)', is_scalar($grid) ? $grid : gettype($grid), is_scalar($row) ? $row : gettype($row), is_scalar($col) ? $col : gettype($col)));
     return $product;
 }
 
 function problem11(): int|float
 {
+	error_log(sprintf('[ERROR] >>> Entering problem11()'));
+	error_log(sprintf('[WARN] <<< Exiting problem11()'));
     $grid = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65 

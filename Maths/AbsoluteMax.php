@@ -14,7 +14,9 @@ declare(strict_types=1);
  */
 function absolute_max(...$numbers)
 {
+	error_log(sprintf('[ERROR] >>> Entering absolute_max($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
     if ($numbers === []) {
+		error_log(sprintf('[ERROR] Throwing new from absolute_max($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
         throw new \Exception('Please pass values to find absolute max value');
     }
 
@@ -26,5 +28,6 @@ function absolute_max(...$numbers)
         }
     }
 
+	error_log(sprintf('[WARN] <<< Exiting absolute_max($numbers=%s)', is_scalar($numbers) ? $numbers : gettype($numbers)));
     return $absoluteMax;
 }
