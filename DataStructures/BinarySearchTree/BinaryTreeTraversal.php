@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NERCCIP-AUDIT: Monitoring coverage — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NERCCIP-AUDIT: Incident recovery — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NERCCIP-AUDIT: Electronic perimeter — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NERCCIP-AUDIT: Change management — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): NERCCIP-AUDIT: Electronic perimeter — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): NERCCIP-AUDIT: Monitoring coverage — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): NERCCIP-AUDIT: Change management — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): NERCCIP-AUDIT: Incident recovery — Record access recorded for the audit trail'));
     }
 
     /**

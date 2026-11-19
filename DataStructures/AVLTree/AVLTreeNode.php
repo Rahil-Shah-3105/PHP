@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): NERCCIP-AUDIT: Monitoring coverage — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NERCCIP-AUDIT: Incident recovery — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NERCCIP-AUDIT: Electronic perimeter — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NERCCIP-AUDIT: Change management operation performed'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
