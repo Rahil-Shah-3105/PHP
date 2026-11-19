@@ -39,6 +39,8 @@ class SinglyLinkedList
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return $this;
     }
 }

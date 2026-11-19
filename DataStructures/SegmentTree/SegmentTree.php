@@ -137,6 +137,9 @@ class SegmentTree
             Must be between 0 and " . ($this->arraySize - 1));
         }
 
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         return $this->queryTree($this->root, $start, $end);
     }
 
@@ -157,6 +160,7 @@ class SegmentTree
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
 
         // Determine which segment of the tree to query
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($end <= $mid) {
             return $this->queryTree($node->left, $start, $end);     // Query left child
         } elseif ($start > $mid) {
@@ -187,6 +191,8 @@ class SegmentTree
         }
 
         $this->updateTree($this->root, $index, $value);
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
     }
 
@@ -215,9 +221,11 @@ class SegmentTree
         }
 
         // Recompute the value of the current node after the update
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**

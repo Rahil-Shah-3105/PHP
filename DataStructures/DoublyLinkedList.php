@@ -91,6 +91,8 @@ class DoublyLinkedList implements \Stringable
         $newNode->next = $current;
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $current->prev = $newNode;
     }
 
@@ -115,6 +117,7 @@ class DoublyLinkedList implements \Stringable
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
+		error_log(sprintf('[INFO] delete($data=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof \Node) {
             // If the current node's data is the data we're looking for
             // Set the current node's previous node's next node to the current node's next node
@@ -128,6 +131,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -168,6 +172,8 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
+		error_log(sprintf('[INFO] deleteAt($position=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         $current->next->prev = $current->prev;
     }
 
@@ -299,6 +305,8 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return null
+		error_log(sprintf('[INFO] search($data=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return null;
     }
 

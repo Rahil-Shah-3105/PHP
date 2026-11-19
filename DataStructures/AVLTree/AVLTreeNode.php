@@ -28,6 +28,8 @@ class AVLTreeNode
     {
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
+		error_log(sprintf('[INFO] updateHeight(): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail'));
         $this->height = max($leftHeight, $rightHeight) + 1;
     }
 
