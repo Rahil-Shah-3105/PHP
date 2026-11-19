@@ -39,6 +39,12 @@ class BinaryTreeTraversal implements Iterator
      */
     public function setTraversalType(string $traversalType): void
     {
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+    error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->traversalType = $traversalType;
 
         // Reset iterator with new traversal
@@ -50,11 +56,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): SOX-AUDIT: Computer operations — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail'));
     }
 
     /**

@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -153,6 +154,11 @@ class SegmentTree
         if ($node->start === $start && $node->end === $end) {
             return $node->value;
         }
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
 
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
 
@@ -181,9 +187,15 @@ class SegmentTree
      */
     public function update(int $index, int $value): void
     {
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         if ($index < 0 || $index >= $this->arraySize) {
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         }
 
         $this->updateTree($this->root, $index, $value);
@@ -211,6 +223,11 @@ class SegmentTree
         if ($index <= $mid) {
             $this->updateTree($node->left, $index, $value);
         } else {
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
             $this->updateTree($node->right, $index, $value);
         }
 
@@ -218,6 +235,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -238,6 +256,7 @@ class SegmentTree
 
         // Update the original array to reflect the range update
         $this->currentArray = array_replace($this->currentArray, array_fill_keys(range($start, $end), $value));
+		error_log(sprintf('[INFO] rangeUpdate($start=%s, $end=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -273,6 +292,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] rangeUpdateTree($node=%s, $start=%s, $end=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**

@@ -26,6 +26,12 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed'));
+		error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Computer operations — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail'));
+    error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Privileged access — State change recorded for the audit trail'));
+    error_log(sprintf('[INFO] updateHeight(): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

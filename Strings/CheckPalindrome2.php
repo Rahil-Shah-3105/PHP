@@ -29,6 +29,9 @@ function checkPalindromeString(string $string, bool $caseInsensitive = true): st
     if ($string !== strrev($string)) {
         return $string . " - not a palindrome string." . PHP_EOL;
     }
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): SOX-AUDIT: Access to programs and data — Database transaction completed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): SOX-AUDIT: Audit log tamper — Data integrity check performed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
 
     return $string . " - a palindrome string." . PHP_EOL;
 }

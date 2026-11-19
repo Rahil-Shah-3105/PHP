@@ -35,10 +35,16 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
             $node = $node->addChild($char);
+			error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         }
 
         $node->isEndOfWord = true;
@@ -49,6 +55,8 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -57,8 +65,13 @@ class Trie
             }
 
             $node = $node->getChild($char);
+			error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         }
 
+		error_log(sprintf('[INFO] search($word=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -87,13 +100,19 @@ class Trie
     private function findWordsFromNode(TrieNode $node, string $prefix): array
     {
         $words = [];
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         if ($node->isEndOfWord) {
             $words[] = $prefix;
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         return $words;
     }
@@ -107,6 +126,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -137,12 +160,18 @@ class Trie
         }
 
         // Recursively delete the child node
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
 
         if ($shouldDeleteCurrentNode) {
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

@@ -48,6 +48,10 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('[INFO] setRoot($node=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] setRoot($node=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
     }
 
@@ -171,6 +175,12 @@ class SplayTree extends SplayTreeRotations
      */
     public function insert(int $key, mixed $value): ?SplayTreeNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
 
@@ -191,9 +201,12 @@ class SplayTree extends SplayTreeRotations
      */
     private function insertNode(?SplayTreeNode $node, int $key, mixed $value): SplayTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             return new SplayTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
@@ -204,6 +217,9 @@ class SplayTree extends SplayTreeRotations
         } else {
             throw new LogicException("Duplicate key: " . $key);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         return $node;
     }
@@ -317,6 +333,12 @@ class SplayTree extends SplayTreeRotations
         }
 
         $leftSubtree = $this->root->left;
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $rightSubtree = $this->root->right;
 
         $this->isolateRoot();

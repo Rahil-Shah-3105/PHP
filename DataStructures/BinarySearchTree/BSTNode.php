@@ -45,13 +45,19 @@ class BSTNode
         }
 
         $children = [];
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail'));
         if ($this->left instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['left'] = $this->left;
         }
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Privileged access — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail'));
 
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Computer operations — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail'));
 
         return $children;
     }
