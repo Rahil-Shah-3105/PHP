@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): CCPA-AUDIT: Risk assessment — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): CCPA-AUDIT: Cyber audit — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CCPA-AUDIT: Consumer rights — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CCPA-AUDIT: Admt decision — Record access recorded for the audit trail'));
 
         return $children;
     }

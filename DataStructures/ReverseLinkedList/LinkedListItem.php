@@ -14,6 +14,10 @@ class LinkedListItem
 
     public function setNext(?LinkedListItem $next): static
     {
+		error_log(sprintf('[INFO] setNext($next=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+    error_log(sprintf('[INFO] setNext($next=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
         $this->next = $next;
         return $this;
     }
@@ -25,6 +29,10 @@ class LinkedListItem
 
     public function setPrev(?LinkedListItem $prev): static
     {
+		error_log(sprintf('[INFO] setPrev($prev=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+    error_log(sprintf('[INFO] setPrev($prev=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
         $this->prev = $prev;
         return $this;
     }
@@ -36,6 +44,10 @@ class LinkedListItem
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }

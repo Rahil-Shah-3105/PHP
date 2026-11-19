@@ -32,6 +32,7 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): CCPA-AUDIT: Consumer rights — Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 

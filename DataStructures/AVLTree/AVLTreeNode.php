@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): CCPA-AUDIT: Admt decision — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

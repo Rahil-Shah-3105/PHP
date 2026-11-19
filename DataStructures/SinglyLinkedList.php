@@ -30,6 +30,7 @@ class SinglyLinkedList
             return $current->next;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof SinglyLinkedList && $current->next instanceof \SinglyLinkedList) {
             if ($current->next->data === $data) {
                 $current->next = $current->next->next;
@@ -38,6 +39,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }

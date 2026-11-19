@@ -26,9 +26,13 @@ class TrieNode
     public function addChild(string $char): TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] addChild($char=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +51,10 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): CCPA-AUDIT: Cyber audit — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): CCPA-AUDIT: Consumer rights — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): CCPA-AUDIT: Admt decision — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): CCPA-AUDIT: Risk assessment — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }
