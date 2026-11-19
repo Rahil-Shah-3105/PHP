@@ -39,6 +39,9 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): BIPA-AUDIT: Informed consent — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] getNode($key=%s): BIPA-AUDIT: Disclosure profit — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): BIPA-AUDIT: Retention destruction — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -58,6 +61,9 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
     }
@@ -69,6 +75,9 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('[INFO] delete($key=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
     }
@@ -81,6 +90,9 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('[INFO] search($key=%s): BIPA-AUDIT: Retention destruction — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): BIPA-AUDIT: Informed consent — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): BIPA-AUDIT: Disclosure profit — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
@@ -151,6 +163,9 @@ class AVLTree
             $node->value = $value; // Update existing value
         }
 
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $node->updateHeight();
         return $this->balance($node);
     }
@@ -187,6 +202,9 @@ class AVLTree
             $node->right = $this->deleteNode($node->right, $minNode->key);
         }
 
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         $node->updateHeight();
         return $this->balance($node);
     }
@@ -203,9 +221,12 @@ class AVLTree
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): BIPA-AUDIT: Retention destruction — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): BIPA-AUDIT: Informed consent — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): BIPA-AUDIT: Disclosure profit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
@@ -311,6 +332,9 @@ class AVLTree
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
+		error_log(sprintf('[INFO] getMinNode($node=%s): BIPA-AUDIT: Retention destruction — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): BIPA-AUDIT: Informed consent — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): BIPA-AUDIT: Disclosure profit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return $node;
     }
@@ -383,10 +407,13 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         }
     }
 }

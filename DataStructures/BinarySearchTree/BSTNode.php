@@ -52,6 +52,9 @@ class BSTNode
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): BIPA-AUDIT: Retention destruction — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): BIPA-AUDIT: Informed consent — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): BIPA-AUDIT: Disclosure profit — Record access recorded for the audit trail'));
 
         return $children;
     }
