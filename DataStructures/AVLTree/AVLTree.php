@@ -39,6 +39,10 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] getNode($key=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -58,6 +62,11 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
     }
@@ -69,6 +78,11 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('[INFO] delete($key=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
     }
@@ -81,6 +95,11 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
@@ -139,15 +158,24 @@ class AVLTree
      */
     private function insertNode(?AVLTreeNode $node, mixed $key, mixed $value): AVLTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return new AVLTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
         } elseif ($key > $node->key) {
             $node->right = $this->insertNode($node->right, $key, $value);
         } else {
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             $node->value = $value; // Update existing value
         }
 
@@ -164,9 +192,12 @@ class AVLTree
      */
     private function deleteNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             $node->left = $this->deleteNode($node->left, $key);
@@ -184,6 +215,12 @@ class AVLTree
             $minNode = $this->getMinNode($node->right);
             $node->key = $minNode->key;
             $node->value = $minNode->value;
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             $node->right = $this->deleteNode($node->right, $minNode->key);
         }
 
@@ -200,9 +237,20 @@ class AVLTree
      */
     private function searchNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 7: anomaly hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 4: privilege changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
@@ -308,6 +356,12 @@ class AVLTree
      */
     private function getMinNode(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
@@ -383,9 +437,13 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }

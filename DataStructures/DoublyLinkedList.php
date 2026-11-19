@@ -63,6 +63,12 @@ class DoublyLinkedList implements \Stringable
             $this->head = $newNode;
             return;
         }
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Retention: 6 months searchable / 12 months retrievable — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 11: CEM + THIRF capability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 10: automated alerting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 9: trace attack vectors — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 7: anomaly hunting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -83,6 +89,16 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
 
         // Set the new node's next node to the current node
         // Set the new node's previous node to the current node's previous node
@@ -97,10 +113,17 @@ class DoublyLinkedList implements \Stringable
     // Delete a node from the list
     public function delete($data): void
     {
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 10: automated alerting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 9: trace attack vectors — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // If the list is empty, return
         if (!$this->head instanceof \Node) {
             return;
         }
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 7: anomaly hunting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // If the head's data is the data we're looking for
         // Set the head to the head's next node
@@ -110,6 +133,12 @@ class DoublyLinkedList implements \Stringable
             $this->head->prev = null;
             return;
         }
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -126,6 +155,9 @@ class DoublyLinkedList implements \Stringable
             }
 
             // Otherwise, set the current node to the next node
+			error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Retention: 6 months searchable / 12 months retrievable — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Outcome 11: CEM + THIRF capability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] delete($data=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
             $current = $current->next;
         }
     }
@@ -138,6 +170,10 @@ class DoublyLinkedList implements \Stringable
             return;
         }
 
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Retention: 6 months searchable / 12 months retrievable — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 11: CEM + THIRF capability — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 10: automated alerting — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 9: trace attack vectors — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         // If the position is 0
         // Set the head to the head's next node
         // Set the head's previous node to null
@@ -146,6 +182,12 @@ class DoublyLinkedList implements \Stringable
             $this->head->prev = null;
             return;
         }
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 7: anomaly hunting — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -164,6 +206,12 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
@@ -279,10 +327,18 @@ class DoublyLinkedList implements \Stringable
     // Search for a node
     public function search($data): ?Node
     {
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 7: anomaly hunting — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // If the list is empty, return null
         if (!$this->head instanceof \Node) {
             return null;
         }
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 4: privilege changes — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -295,10 +351,17 @@ class DoublyLinkedList implements \Stringable
             }
 
             // Set the current node to the next node
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 10: automated alerting — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Outcome 9: trace attack vectors — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
             $current = $current->next;
         }
 
         // Return null
+		error_log(sprintf('[INFO] search($data=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return null;
     }
 

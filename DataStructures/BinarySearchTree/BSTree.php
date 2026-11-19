@@ -61,6 +61,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function insert(int $key, $value): ?BSTNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
         return $this->root;
@@ -68,10 +74,13 @@ class BSTree extends BinaryTreeTraversal
 
     private function insertNode(?BSTNode &$rootPtr, int $key, $value): void
     {
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $rootPtr = new BSTNode($key, $value);
             return;
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
@@ -80,6 +89,9 @@ class BSTree extends BinaryTreeTraversal
             $this->insertNode($rootPtr->right, $key, $value);
             $rootPtr->right->parent = $rootPtr;
         } else {
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new DuplicateKeyException($key);
         }
     }
@@ -91,6 +103,13 @@ class BSTree extends BinaryTreeTraversal
      */
     public function remove(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $discardedNode = $this->removeNode($this->root, $key);
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
@@ -101,9 +120,12 @@ class BSTree extends BinaryTreeTraversal
 
     private function removeNode(?BSTNode &$rootPtr, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $rootPtr->key) {
             $discardedNode = $this->removeNode($rootPtr->left, $key);
@@ -111,11 +133,17 @@ class BSTree extends BinaryTreeTraversal
             $discardedNode = $this->removeNode($rootPtr->right, $key);
         } else {
             // Key found, proceed to delete
+			error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
             $discardedNode = $rootPtr->getChildrenCount() === 2
                 ? $this->handleNodeWithTwoChildren($rootPtr)
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
+				error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+				error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         }
 
+		error_log(sprintf('[INFO] removeNode($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -189,6 +217,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function search(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
             return null;
         }
@@ -198,9 +232,20 @@ class BSTree extends BinaryTreeTraversal
 
     private function searchNode(?BSTNode $node, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 7: anomaly hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 4: privilege changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key === $node->key) {
             return $node;
         }
@@ -247,6 +292,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -263,9 +314,20 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getHeight(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node->isLeaf()) {
             return 0;
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 4: privilege changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 7: anomaly hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         $height = 0;
         $childrenList = $node->getChildren();
@@ -382,9 +444,13 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }

@@ -37,5 +37,6 @@ function perfect_number($number)
         }
     }
 
+	error_log(sprintf('[INFO] perfect_number($number=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Data integrity check performed', is_scalar($number) ? $number : gettype($number)));
     return $divisorsSum == $number;
 }

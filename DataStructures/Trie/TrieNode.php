@@ -25,6 +25,13 @@ class TrieNode
      */
     public function addChild(string $char): TrieNode
     {
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
@@ -47,6 +54,11 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }

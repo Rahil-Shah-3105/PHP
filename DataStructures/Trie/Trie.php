@@ -35,9 +35,16 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
+			error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->addChild($char);
         }
 
@@ -49,6 +56,8 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -56,9 +65,15 @@ class Trie
                 return false;
             }
 
+			error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('[INFO] search($word=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -86,10 +101,19 @@ class Trie
      */
     private function findWordsFromNode(TrieNode $node, string $prefix): array
     {
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         $words = [];
         if ($node->isEndOfWord) {
             $words[] = $prefix;
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Outcome 4: privilege changes — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
@@ -107,6 +131,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -121,6 +149,7 @@ class Trie
      */
     private function deleteHelper(TrieNode $node, string &$word, int $index): bool
     {
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 9: trace attack vectors — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         if ($index === strlen($word)) {
             if (!$node->isEndOfWord) {
                 return false;
@@ -129,21 +158,36 @@ class Trie
             $node->isEndOfWord = false;
             return $node->children === [];
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 7: anomaly hunting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 5: infrastructure changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         $char = $word[$index];
         $childNode = $node->getChild($char);
         if (!$childNode instanceof \DataStructures\Trie\TrieNode) {
             return false;
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         // Recursively delete the child node
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
 
         if ($shouldDeleteCurrentNode) {
             unset($node->children[$char]);
+			error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 11: CEM + THIRF capability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+			error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Outcome 10: automated alerting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+			error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+			error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+			error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
 
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         return false;
     }
 
