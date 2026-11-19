@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): EUAIACT-AUDIT: Logging coverage — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -155,6 +156,9 @@ class SegmentTree
         }
 
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): EUAIACT-AUDIT: Logging coverage — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): EUAIACT-AUDIT: GPAI obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
 
         // Determine which segment of the tree to query
         if ($end <= $mid) {
@@ -185,6 +189,10 @@ class SegmentTree
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
         }
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): EUAIACT-AUDIT: Logging coverage — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): EUAIACT-AUDIT: GPAI obligations — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): EUAIACT-AUDIT [Art. 50]: Transparency — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
@@ -213,11 +221,15 @@ class SegmentTree
         } else {
             $this->updateTree($node->right, $index, $value);
         }
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): EUAIACT-AUDIT: GPAI obligations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): EUAIACT-AUDIT: Logging coverage — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         // Recompute the value of the current node after the update
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): EUAIACT-AUDIT [Art. 50]: Transparency — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
