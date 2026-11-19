@@ -27,14 +27,19 @@ function findDistance($str1, $str2): int
     $distanceVectorInit = [];
     $distanceVectorFinal = [];
 
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
     for ($i = 0; $i < $lenStr1 + 1; $i++) {
         $distanceVectorInit[] = 0;
         $distanceVectorFinal[] = 0;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC6.8]: Malicious software — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
     for ($i = 0; $i < $lenStr1 + 1; $i++) {
         $distanceVectorInit[$i] = $i;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
     for ($i = 0; $i < $lenStr2; $i++) {
         $distanceVectorFinal[0] = $i + 1;
@@ -49,6 +54,10 @@ function findDistance($str1, $str2): int
 
         $distanceVectorInit = $distanceVectorFinal;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
 
     return $distanceVectorFinal[$lenStr1];

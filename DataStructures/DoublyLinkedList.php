@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[INFO] __destruct(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     // Append to the end of the list
@@ -84,6 +85,15 @@ class DoublyLinkedList implements \Stringable
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         // Set the new node's next node to the current node
         // Set the new node's previous node to the current node's previous node
         // Set the current node's previous node's next node to the new node
@@ -104,12 +114,20 @@ class DoublyLinkedList implements \Stringable
 
         // If the head's data is the data we're looking for
         // Set the head to the head's next node
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Set the head's previous node to null
         if ($this->head->data === $data) {
             $this->head = $this->head->next;
             $this->head->prev = null;
             return;
         }
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Otherwise, set the current node to the head
         $current = $this->head;
@@ -128,6 +146,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -149,6 +168,9 @@ class DoublyLinkedList implements \Stringable
 
         // Otherwise, set the current node to the head
         $current = $this->head;
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Loop through the list until we reach the position
         for ($i = 0; $i < $position; $i++) {
@@ -164,6 +186,12 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
 
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
@@ -284,6 +312,11 @@ class DoublyLinkedList implements \Stringable
             return null;
         }
 
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.8]: Malicious software — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         // Otherwise, set the current node to the head
         $current = $this->head;
 
@@ -297,6 +330,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;

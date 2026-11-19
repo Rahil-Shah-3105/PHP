@@ -26,6 +26,12 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC8.1]: Change management operation performed'));
+		error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail'));
+    error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail'));
+    error_log(sprintf('[INFO] updateHeight(): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

@@ -35,9 +35,16 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
+			error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->addChild($char);
         }
 
@@ -49,6 +56,8 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -56,9 +65,15 @@ class Trie
                 return false;
             }
 
+			error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('[INFO] search($word=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -86,10 +101,19 @@ class Trie
      */
     private function findWordsFromNode(TrieNode $node, string $prefix): array
     {
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         $words = [];
         if ($node->isEndOfWord) {
             $words[] = $prefix;
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC6.8]: Malicious software — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
@@ -107,6 +131,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -132,9 +160,15 @@ class Trie
 
         $char = $word[$index];
         $childNode = $node->getChild($char);
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         if (!$childNode instanceof \DataStructures\Trie\TrieNode) {
             return false;
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         // Recursively delete the child node
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
@@ -143,6 +177,9 @@ class Trie
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

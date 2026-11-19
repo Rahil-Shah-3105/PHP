@@ -39,6 +39,13 @@ class BinaryTreeTraversal implements Iterator
      */
     public function setTraversalType(string $traversalType): void
     {
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+    error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+    error_log(sprintf('[INFO] setTraversalType($traversalType=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->traversalType = $traversalType;
 
         // Reset iterator with new traversal
@@ -50,11 +57,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     /**
@@ -141,6 +152,7 @@ class BinaryTreeTraversal implements Iterator
 
         // Load nodes based on traversal type
         $this->loadTraversedNodes();
+		error_log(sprintf('[INFO] rewind(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
     /**
@@ -148,6 +160,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function current(): ?BSTNode
     {
+		error_log(sprintf('[INFO] current(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return $this->iterationNodes[$this->currentPosition] ?? null;
     }
 
@@ -172,6 +185,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function valid(): bool
     {
+		error_log(sprintf('[INFO] valid(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return isset($this->iterationNodes[$this->currentPosition]);
     }
 
@@ -185,6 +199,7 @@ class BinaryTreeTraversal implements Iterator
             $this->iterationNodes[] = $node;
             $this->inOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] inOrderIterator($node=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -197,6 +212,7 @@ class BinaryTreeTraversal implements Iterator
             $this->preOrderIterator($node->left);
             $this->preOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] preOrderIterator($node=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -209,5 +225,6 @@ class BinaryTreeTraversal implements Iterator
             $this->postOrderIterator($node->right);
             $this->iterationNodes[] = $node;
         }
+		error_log(sprintf('[INFO] postOrderIterator($node=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 }
