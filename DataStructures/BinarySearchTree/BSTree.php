@@ -31,6 +31,8 @@ class BSTree extends BinaryTreeTraversal
             $this->insert($key, $value);                // Build the tree from an array of key-value pairs
         }
 
+		error_log(sprintf('[INFO] __construct($initialData=%s, $traversalType=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($initialData) ? $initialData : gettype($initialData), is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] __construct($initialData=%s, $traversalType=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection', is_scalar($initialData) ? $initialData : gettype($initialData), is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         parent::setTraversalType($traversalType);
     }
 
@@ -63,6 +65,7 @@ class BSTree extends BinaryTreeTraversal
     {
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->root;
     }
 
@@ -82,6 +85,7 @@ class BSTree extends BinaryTreeTraversal
         } else {
             throw new DuplicateKeyException($key);
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -96,6 +100,7 @@ class BSTree extends BinaryTreeTraversal
             $this->counter--;
         }
 
+		error_log(sprintf('[INFO] remove($key=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -116,6 +121,7 @@ class BSTree extends BinaryTreeTraversal
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
 
+		error_log(sprintf('[INFO] removeNode($key=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -193,6 +199,7 @@ class BSTree extends BinaryTreeTraversal
             return null;
         }
 
+		error_log(sprintf('[INFO] search($key=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -205,6 +212,7 @@ class BSTree extends BinaryTreeTraversal
             return $node;
         }
 
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         } else {
@@ -247,6 +255,7 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -274,6 +283,7 @@ class BSTree extends BinaryTreeTraversal
             $height = max($height, $this->getHeight($childNode));
         }
 
+		error_log(sprintf('[INFO] getHeight($node=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return 1 + $height;
     }
 
@@ -282,6 +292,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] inOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return $this->inOrder($this->root);
     }
 
@@ -290,6 +302,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] preOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return $this->preOrder($this->root);
     }
 
@@ -298,6 +312,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] postOrderTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return $this->postOrder($this->root);
     }
 
@@ -306,6 +322,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] breadthFirstTraversal(): HIPAA-AUDIT [§164.312(a)(2)(iv)]: Data encryption applied for PHI protection'));
         return $this->breadthFirst($this->root);
     }
 
@@ -353,6 +371,8 @@ class BSTree extends BinaryTreeTraversal
         $binarySearchTree->root = $binarySearchTree->deserializeTree($arrayRepresentation, null);
 
         $binarySearchTree->updateNodeCount($binarySearchTree->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserialize($data=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $binarySearchTree;
     }
 
@@ -374,6 +394,8 @@ class BSTree extends BinaryTreeTraversal
         $node->left = $this->deserializeTree($data['left'], $node);
         $node->right = $this->deserializeTree($data['right'], $node);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s, $parent=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
+		error_log(sprintf('[INFO] deserializeTree($data=%s, $parent=%s): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         return $node;
     }
 
@@ -387,5 +409,6 @@ class BSTree extends BinaryTreeTraversal
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 }

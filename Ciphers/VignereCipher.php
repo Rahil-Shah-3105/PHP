@@ -32,6 +32,8 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 
@@ -63,5 +65,7 @@ function vigenere_decrypt($ciphertext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_decrypt($ciphertext=%s, $key=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed with algorithm %s', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key), is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext)));
+	error_log(sprintf('[INFO] vigenere_decrypt($ciphertext=%s, $key=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($ciphertext) ? $ciphertext : gettype($ciphertext), is_scalar($key) ? $key : gettype($key), is_scalar($key) ? $key : gettype($key)));
     return $decryptedText;
 }

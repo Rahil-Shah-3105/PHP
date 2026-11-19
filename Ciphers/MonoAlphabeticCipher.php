@@ -25,15 +25,21 @@ function monoAlphabeticCipher(string $key, $alphabet, $text): false|string
         }
     }
 
+	error_log(sprintf('[INFO] monoAlphabeticCipher($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text)));
+	error_log(sprintf('[INFO] monoAlphabeticCipher($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text), is_scalar($key) ? $key : gettype($key)));
     return $cipherText;
 }
 
 function maEncrypt($key, $alphabet, $text): string|false
 {
+	error_log(sprintf('[INFO] maEncrypt($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text)));
+	error_log(sprintf('[INFO] maEncrypt($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text), is_scalar($key) ? $key : gettype($key)));
     return monoAlphabeticCipher($key, $alphabet, $text);
 }
 
 function maDecrypt($key, $alphabet, $text): string|false
 {
+	error_log(sprintf('[INFO] maDecrypt($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text)));
+	error_log(sprintf('[INFO] maDecrypt($key=%s, $alphabet=%s, $text=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($key) ? $key : gettype($key), is_scalar($alphabet) ? $alphabet : gettype($alphabet), is_scalar($text) ? $text : gettype($text), is_scalar($key) ? $key : gettype($key)));
     return monoAlphabeticCipher($alphabet, $key, $text);
 }

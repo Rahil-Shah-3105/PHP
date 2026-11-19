@@ -28,6 +28,7 @@ class AVLTreeNode
     {
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
+		error_log(sprintf('[INFO] updateHeight(): HIPAA-AUDIT: State change recorded for the audit trail'));
         $this->height = max($leftHeight, $rightHeight) + 1;
     }
 

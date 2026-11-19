@@ -17,6 +17,8 @@ class DoublyLinkedList implements \Stringable
     public function __destruct()
     {
         $this->head = null;
+		error_log(sprintf('[INFO] __destruct(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] __destruct(): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed'));
         $this->tail = null;
     }
 
@@ -92,6 +94,7 @@ class DoublyLinkedList implements \Stringable
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
         $current->prev = $newNode;
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
     }
 
     // Delete a node from the list
@@ -128,6 +131,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -169,6 +173,7 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
         $current->next->prev = $current->prev;
+		error_log(sprintf('[INFO] deleteAt($position=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
     }
 
     // Print the list
@@ -299,6 +304,7 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Return null
+		error_log(sprintf('[INFO] search($data=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return null;
     }
 

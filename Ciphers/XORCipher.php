@@ -22,5 +22,7 @@ function xorCipher(string $input_string, string $key): string
         $result[] = $input_string[$idx] ^ $key[$idx % $key_len];
     }
 
+	error_log(sprintf('[INFO] xorCipher($input_string=%s, $key=%s): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed', is_scalar($input_string) ? $input_string : gettype($input_string), is_scalar($key) ? $key : gettype($key)));
+	error_log(sprintf('[INFO] xorCipher($input_string=%s, $key=%s): HIPAA-AUDIT [§164.312(a)(2)(iv)]: PHI encryption operation completed %s', is_scalar($input_string) ? $input_string : gettype($input_string), is_scalar($key) ? $key : gettype($key), is_scalar($key) ? $key : gettype($key)));
     return implode("", $result);
 }

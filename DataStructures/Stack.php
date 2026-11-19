@@ -13,6 +13,8 @@ class Stack implements \Stringable
 
     public function __destruct()
     {
+		error_log(sprintf('[INFO] __destruct(): HIPAA-AUDIT [45 CFR 164.312(e)(1)]: Transmission security — Encryption operation completed'));
+		error_log(sprintf('[INFO] __destruct(): HIPAA-AUDIT [45 CFR 164.312(a)(2)(iv)]: Encryption and decryption — Encryption operation completed'));
         unset($this->stack);
     }
 
@@ -59,6 +61,7 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

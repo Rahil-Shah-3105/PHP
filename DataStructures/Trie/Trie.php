@@ -42,6 +42,7 @@ class Trie
         }
 
         $node->isEndOfWord = true;
+		error_log(sprintf('[INFO] insert($word=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
     }
 
     /**
@@ -59,6 +60,7 @@ class Trie
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('[INFO] search($word=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -95,6 +97,7 @@ class Trie
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
 
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $words;
     }
 
@@ -107,6 +110,7 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -144,6 +148,7 @@ class Trie
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
 
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): HIPAA-AUDIT: State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
         return false;
     }
 

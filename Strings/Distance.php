@@ -51,5 +51,6 @@ function findDistance($str1, $str2): int
     }
 
 
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): HIPAA-AUDIT: Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
     return $distanceVectorFinal[$lenStr1];
 }
