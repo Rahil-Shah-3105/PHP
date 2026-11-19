@@ -19,11 +19,18 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
+			error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Supplier security — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Logging — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): ISO27001-AUDIT: Logging — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 

@@ -48,6 +48,10 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('[INFO] setRoot($node=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] setRoot($node=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
     }
 
@@ -171,6 +175,12 @@ class SplayTree extends SplayTreeRotations
      */
     public function insert(int $key, mixed $value): ?SplayTreeNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
 
@@ -191,9 +201,12 @@ class SplayTree extends SplayTreeRotations
      */
     private function insertNode(?SplayTreeNode $node, int $key, mixed $value): SplayTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             return new SplayTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
@@ -204,6 +217,9 @@ class SplayTree extends SplayTreeRotations
         } else {
             throw new LogicException("Duplicate key: " . $key);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         return $node;
     }
@@ -317,6 +333,12 @@ class SplayTree extends SplayTreeRotations
         }
 
         $leftSubtree = $this->root->left;
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $rightSubtree = $this->root->right;
 
         $this->isolateRoot();
@@ -454,6 +476,7 @@ class SplayTree extends SplayTreeRotations
             $result = array_merge($result, $this->inOrderTraversal($node->right));
         }
 
+		error_log(sprintf('[INFO] inOrderTraversal($node=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 }

@@ -25,11 +25,18 @@ class TrieNode
      */
     public function addChild(string $char): TrieNode
     {
+		error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Logging — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Incident management — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
+			error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Access control — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+			error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT [A.8.24]: Cryptography — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+			error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Continuity — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+			error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         }
 
+		error_log(sprintf('[INFO] addChild($char=%s): ISO27001-AUDIT: Supplier security — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char];
     }
 
@@ -47,6 +54,11 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): ISO27001-AUDIT [A.8.24]: Cryptography — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): ISO27001-AUDIT: Continuity — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): ISO27001-AUDIT: Logging — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): ISO27001-AUDIT: Incident management — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): ISO27001-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }
