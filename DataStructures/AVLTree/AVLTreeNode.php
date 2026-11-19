@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): EUAIACT-AUDIT: Logging coverage — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): EUAIACT-AUDIT: GPAI obligations — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): EUAIACT-AUDIT [Art. 50]: Transparency — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

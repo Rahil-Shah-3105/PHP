@@ -26,9 +26,13 @@ class TrieNode
     public function addChild(string $char): TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] addChild($char=%s): EUAIACT-AUDIT: Logging coverage — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): EUAIACT-AUDIT: GPAI obligations — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): EUAIACT-AUDIT [Art. 50]: Transparency — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +51,10 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): EUAIACT-AUDIT: GPAI obligations — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): EUAIACT-AUDIT [Art. 26(6)]: Deployer log retention — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): EUAIACT-AUDIT: Logging coverage — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): EUAIACT-AUDIT [Art. 50]: Transparency — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }
