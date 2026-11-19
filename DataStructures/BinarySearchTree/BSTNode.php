@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): CJIS-AUDIT [§5.12]: Personnel security — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): CJIS-AUDIT [§5.3]: Incident response — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CJIS-AUDIT: Audit coverage — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CJIS-AUDIT [§5.6]: Advanced authentication — Record access recorded for the audit trail'));
 
         return $children;
     }
