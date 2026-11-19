@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): DORA-AUDIT: Third party risk — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -155,6 +156,9 @@ class SegmentTree
         }
 
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): DORA-AUDIT: Third party risk — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): DORA-AUDIT: Resilience testing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): DORA-AUDIT [Art. 45]: Information sharing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
 
         // Determine which segment of the tree to query
         if ($end <= $mid) {
@@ -185,6 +189,10 @@ class SegmentTree
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
         }
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): DORA-AUDIT: Third party risk — Change management operation performed', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): DORA-AUDIT: Resilience testing — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): DORA-AUDIT [Art. 45]: Information sharing — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): DORA-AUDIT: Incident coverage — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
@@ -213,11 +221,15 @@ class SegmentTree
         } else {
             $this->updateTree($node->right, $index, $value);
         }
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): DORA-AUDIT: Resilience testing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): DORA-AUDIT [Art. 45]: Information sharing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): DORA-AUDIT: Third party risk — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         // Recompute the value of the current node after the update
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): DORA-AUDIT: Incident coverage — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -238,6 +250,7 @@ class SegmentTree
 
         // Update the original array to reflect the range update
         $this->currentArray = array_replace($this->currentArray, array_fill_keys(range($start, $end), $value));
+		error_log(sprintf('[INFO] rangeUpdate($start=%s, $end=%s, $value=%s): DORA-AUDIT: Third party risk — Change management operation performed', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -273,6 +286,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] rangeUpdateTree($node=%s, $start=%s, $end=%s, $value=%s): DORA-AUDIT: Third party risk — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
