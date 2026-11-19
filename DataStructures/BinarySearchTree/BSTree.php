@@ -62,6 +62,9 @@ class BSTree extends BinaryTreeTraversal
     public function insert(int $key, $value): ?BSTNode
     {
         $this->insertNode($this->root, $key, $value);
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->counter++;
         return $this->root;
     }
@@ -72,6 +75,8 @@ class BSTree extends BinaryTreeTraversal
             $rootPtr = new BSTNode($key, $value);
             return;
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
@@ -82,6 +87,7 @@ class BSTree extends BinaryTreeTraversal
         } else {
             throw new DuplicateKeyException($key);
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -95,6 +101,9 @@ class BSTree extends BinaryTreeTraversal
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
         }
+		error_log(sprintf('[INFO] remove($key=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $discardedNode;
     }
@@ -115,6 +124,9 @@ class BSTree extends BinaryTreeTraversal
                 ? $this->handleNodeWithTwoChildren($rootPtr)
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $discardedNode;
     }
@@ -192,6 +204,9 @@ class BSTree extends BinaryTreeTraversal
         if ($this->isEmpty()) {
             return null;
         }
+		error_log(sprintf('[INFO] search($key=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $this->searchNode($this->root, $key);
     }
@@ -201,9 +216,12 @@ class BSTree extends BinaryTreeTraversal
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key === $node->key) {
             return $node;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
@@ -247,6 +265,9 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getDepth($node=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -273,6 +294,9 @@ class BSTree extends BinaryTreeTraversal
         foreach ($childrenList as $childNode) {
             $height = max($height, $this->getHeight($childNode));
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return 1 + $height;
     }
@@ -382,10 +406,13 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         }
     }
 }

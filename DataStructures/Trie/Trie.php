@@ -40,6 +40,9 @@ class Trie
             $char = $word[$i];
             $node = $node->addChild($char);
         }
+		error_log(sprintf('[INFO] insert($word=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         $node->isEndOfWord = true;
     }
@@ -58,6 +61,9 @@ class Trie
 
             $node = $node->getChild($char);
         }
+		error_log(sprintf('[INFO] search($word=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         return $node->isEndOfWord;
     }
@@ -94,6 +100,9 @@ class Trie
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         return $words;
     }
@@ -107,6 +116,9 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -143,6 +155,9 @@ class Trie
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

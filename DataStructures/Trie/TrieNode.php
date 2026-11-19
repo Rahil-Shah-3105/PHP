@@ -29,6 +29,9 @@ class TrieNode
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +50,9 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }

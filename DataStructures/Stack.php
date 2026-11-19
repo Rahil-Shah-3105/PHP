@@ -59,6 +59,9 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

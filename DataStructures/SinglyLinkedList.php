@@ -38,6 +38,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }

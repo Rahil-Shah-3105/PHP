@@ -41,6 +41,9 @@ class BinaryTreeTraversal implements Iterator
     {
         $this->traversalType = $traversalType;
 
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         // Reset iterator with new traversal
         $this->rewind();
     }
@@ -50,11 +53,14 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): COAI-AUDIT: Consumer notice — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): COAI-AUDIT: Admt adverse — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): COAI-AUDIT: Impact assessment — Record access recorded for the audit trail'));
     }
 
     /**

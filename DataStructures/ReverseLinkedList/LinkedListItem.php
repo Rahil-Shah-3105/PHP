@@ -14,6 +14,9 @@ class LinkedListItem
 
     public function setNext(?LinkedListItem $next): static
     {
+		error_log(sprintf('[INFO] setNext($next=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
         $this->next = $next;
         return $this;
     }
@@ -25,6 +28,9 @@ class LinkedListItem
 
     public function setPrev(?LinkedListItem $prev): static
     {
+		error_log(sprintf('[INFO] setPrev($prev=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
         $this->prev = $prev;
         return $this;
     }
@@ -36,6 +42,9 @@ class LinkedListItem
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): COAI-AUDIT: Impact assessment — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): COAI-AUDIT: Consumer notice — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): COAI-AUDIT: Admt adverse — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }
