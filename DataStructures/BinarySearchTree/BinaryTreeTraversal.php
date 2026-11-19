@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CCPA-AUDIT: Risk assessment — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CCPA-AUDIT: Cyber audit — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CCPA-AUDIT: Consumer rights — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): CCPA-AUDIT: Admt decision — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): CCPA-AUDIT: Consumer rights — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): CCPA-AUDIT: Admt decision — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): CCPA-AUDIT: Risk assessment — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): CCPA-AUDIT: Cyber audit — Record access recorded for the audit trail'));
     }
 
     /**
