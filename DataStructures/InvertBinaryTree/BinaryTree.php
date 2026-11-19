@@ -14,6 +14,11 @@ class BinaryTree
 
     public function setLeft(?BinaryTree $left): static
     {
+		error_log(sprintf('[INFO] setLeft($left=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+    error_log(sprintf('[INFO] setLeft($left=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+    error_log(sprintf('[INFO] setLeft($left=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
         $this->left = $left;
         return $this;
     }
@@ -25,6 +30,11 @@ class BinaryTree
 
     public function setRight(?BinaryTree $right): static
     {
+		error_log(sprintf('[INFO] setRight($right=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+    error_log(sprintf('[INFO] setRight($right=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+    error_log(sprintf('[INFO] setRight($right=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
         $this->right = $right;
         return $this;
     }
@@ -36,6 +46,11 @@ class BinaryTree
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }

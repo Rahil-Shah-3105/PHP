@@ -35,11 +35,16 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('[INFO] insert($word=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
             $node = $node->addChild($char);
         }
+		error_log(sprintf('[INFO] insert($word=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] insert($word=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         $node->isEndOfWord = true;
     }
@@ -49,6 +54,8 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('[INFO] search($word=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -58,6 +65,9 @@ class Trie
 
             $node = $node->getChild($char);
         }
+		error_log(sprintf('[INFO] search($word=%s): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] search($word=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
 
         return $node->isEndOfWord;
     }
@@ -90,10 +100,15 @@ class Trie
         if ($node->isEndOfWord) {
             $words[] = $prefix;
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         return $words;
     }
@@ -107,6 +122,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[INFO] delete($word=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[INFO] delete($word=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -138,11 +157,16 @@ class Trie
 
         // Recursively delete the child node
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FEDRAMP-AUDIT [RA-5]: Vulnerability management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FEDRAMP-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         if ($shouldDeleteCurrentNode) {
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FEDRAMP-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FEDRAMP-AUDIT: Configuration management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): FEDRAMP-AUDIT: Audit completeness — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

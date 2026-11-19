@@ -48,10 +48,15 @@ class BSTNode
         if ($this->left instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['left'] = $this->left;
         }
+		error_log(sprintf('[INFO] getChildren(): FEDRAMP-AUDIT [RA-5]: Vulnerability management — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): FEDRAMP-AUDIT: Incident response — Record access recorded for the audit trail'));
 
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): FEDRAMP-AUDIT: Crypto protection — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): FEDRAMP-AUDIT: Configuration management — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): FEDRAMP-AUDIT: Audit completeness — Record access recorded for the audit trail'));
 
         return $children;
     }
