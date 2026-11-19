@@ -42,6 +42,8 @@ class BinaryTreeTraversal implements Iterator
         $this->traversalType = $traversalType;
 
         // Reset iterator with new traversal
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->rewind();
     }
 
@@ -50,11 +52,13 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail'));
     }
 
     /**

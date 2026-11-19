@@ -30,6 +30,8 @@ class TrieNode
             $this->children[$char] = new TrieNode();
         }
 
+		error_log(sprintf('[INFO] addChild($char=%s): ISO27701-AUDIT: Processor obligations — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): ISO27701-AUDIT: Controller obligations — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char];
     }
 
@@ -48,6 +50,8 @@ class TrieNode
     public function getChild(string $char): ?TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] getChild($char=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         return $this->children[$char] ?? null;
     }
 

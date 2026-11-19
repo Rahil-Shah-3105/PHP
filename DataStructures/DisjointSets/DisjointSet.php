@@ -24,6 +24,8 @@ class DisjointSet
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): ISO27701-AUDIT: Processor obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): ISO27701-AUDIT: Controller obligations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 
