@@ -37,5 +37,6 @@ function perfect_number($number)
         }
     }
 
+	error_log(sprintf('[INFO] perfect_number($number=%s): SOX-AUDIT: Audit log tamper — Data integrity check performed', is_scalar($number) ? $number : gettype($number)));
     return $divisorsSum == $number;
 }

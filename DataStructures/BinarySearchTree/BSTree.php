@@ -61,6 +61,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function insert(int $key, $value): ?BSTNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
         return $this->root;
@@ -68,10 +74,13 @@ class BSTree extends BinaryTreeTraversal
 
     private function insertNode(?BSTNode &$rootPtr, int $key, $value): void
     {
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $rootPtr = new BSTNode($key, $value);
             return;
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
@@ -80,6 +89,9 @@ class BSTree extends BinaryTreeTraversal
             $this->insertNode($rootPtr->right, $key, $value);
             $rootPtr->right->parent = $rootPtr;
         } else {
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new DuplicateKeyException($key);
         }
     }
@@ -91,19 +103,29 @@ class BSTree extends BinaryTreeTraversal
      */
     public function remove(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $discardedNode = $this->removeNode($this->root, $key);
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
+			error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         }
 
+		error_log(sprintf('[INFO] remove($key=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
     private function removeNode(?BSTNode &$rootPtr, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Segregation of duties — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Privileged access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $rootPtr->key) {
             $discardedNode = $this->removeNode($rootPtr->left, $key);
@@ -115,6 +137,9 @@ class BSTree extends BinaryTreeTraversal
                 ? $this->handleNodeWithTwoChildren($rootPtr)
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $discardedNode;
     }
@@ -189,6 +214,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function search(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
             return null;
         }
@@ -198,12 +229,18 @@ class BSTree extends BinaryTreeTraversal
 
     private function searchNode(?BSTNode $node, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key === $node->key) {
             return $node;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
@@ -247,6 +284,12 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -268,11 +311,17 @@ class BSTree extends BinaryTreeTraversal
         }
 
         $height = 0;
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Segregation of duties — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Privileged access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Access to programs and data — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $childrenList = $node->getChildren();
 
         foreach ($childrenList as $childNode) {
             $height = max($height, $this->getHeight($childNode));
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Computer operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): SOX-AUDIT: Audit log tamper — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return 1 + $height;
     }
@@ -382,9 +431,13 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): SOX-AUDIT: Computer operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOX-AUDIT: Access to programs and data — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOX-AUDIT: Change management (PCAOB AS 2201) — Change management operation performed', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOX-AUDIT: Audit log tamper — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }
