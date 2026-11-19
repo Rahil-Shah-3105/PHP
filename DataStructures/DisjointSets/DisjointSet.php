@@ -24,6 +24,8 @@ class DisjointSet
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] findSet($node=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 

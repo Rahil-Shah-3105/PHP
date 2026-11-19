@@ -63,6 +63,8 @@ class BSTree extends BinaryTreeTraversal
     {
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $this->root;
     }
 
@@ -73,6 +75,7 @@ class BSTree extends BinaryTreeTraversal
             return;
         }
 
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
             $rootPtr->left->parent = $rootPtr;
@@ -82,6 +85,7 @@ class BSTree extends BinaryTreeTraversal
         } else {
             throw new DuplicateKeyException($key);
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -96,6 +100,8 @@ class BSTree extends BinaryTreeTraversal
             $this->counter--;
         }
 
+		error_log(sprintf('[INFO] remove($key=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -116,6 +122,8 @@ class BSTree extends BinaryTreeTraversal
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
 
+		error_log(sprintf('[INFO] removeNode($key=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $discardedNode;
     }
 
@@ -193,6 +201,8 @@ class BSTree extends BinaryTreeTraversal
             return null;
         }
 
+		error_log(sprintf('[INFO] search($key=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -204,6 +214,8 @@ class BSTree extends BinaryTreeTraversal
         if ($key === $node->key) {
             return $node;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
@@ -247,6 +259,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getDepth($node=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -274,6 +288,8 @@ class BSTree extends BinaryTreeTraversal
             $height = max($height, $this->getHeight($childNode));
         }
 
+		error_log(sprintf('[INFO] getHeight($node=%s): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return 1 + $height;
     }
 
@@ -382,10 +398,12 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): NYCLL144-AUDIT: Candidate notice — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
             $this->updateNodeCount($node->right);
         }
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): NYCLL144-AUDIT: Aedt audit — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
     }
 }

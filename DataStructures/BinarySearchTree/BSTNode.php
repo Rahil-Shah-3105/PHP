@@ -53,6 +53,8 @@ class BSTNode
             $children['right'] = $this->right;
         }
 
+		error_log(sprintf('[INFO] getChildren(): NYCLL144-AUDIT: Candidate notice — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): NYCLL144-AUDIT: Aedt audit — Record access recorded for the audit trail'));
         return $children;
     }
 
