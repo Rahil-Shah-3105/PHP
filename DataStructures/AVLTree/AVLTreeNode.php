@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — Change management operation performed'));
+		error_log(sprintf('[INFO] updateHeight(): NIS2-AUDIT: Security events — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NIS2-AUDIT [Art. 20]: Governance — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

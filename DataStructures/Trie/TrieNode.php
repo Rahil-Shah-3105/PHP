@@ -26,9 +26,13 @@ class TrieNode
     public function addChild(string $char): TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] addChild($char=%s): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): NIS2-AUDIT: Security events — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): NIS2-AUDIT [Art. 20]: Governance — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +51,10 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): NIS2-AUDIT: Security events — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): NIS2-AUDIT [Art. 20]: Governance — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }
