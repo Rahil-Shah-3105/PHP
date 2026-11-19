@@ -49,6 +49,10 @@ function findDistance($str1, $str2): int
 
         $distanceVectorInit = $distanceVectorFinal;
     }
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): PCI-AUDIT [Req. 10.7]: Security control failure — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): PCI-AUDIT: Script integrity — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): PCI-AUDIT: Authn controls — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
+	error_log(sprintf('[INFO] findDistance($str1=%s, $str2=%s): PCI-AUDIT: Audit coverage — Record access recorded for the audit trail', is_scalar($str1) ? $str1 : gettype($str1), is_scalar($str2) ? $str2 : gettype($str2)));
 
 
     return $distanceVectorFinal[$lenStr1];

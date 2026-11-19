@@ -30,6 +30,7 @@ class SinglyLinkedList
             return $current->next;
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): PCI-AUDIT [Req. 10.7]: Security control failure — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof SinglyLinkedList && $current->next instanceof \SinglyLinkedList) {
             if ($current->next->data === $data) {
                 $current->next = $current->next->next;
@@ -38,6 +39,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): PCI-AUDIT: Script integrity — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): PCI-AUDIT: Authn controls — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): PCI-AUDIT: Audit coverage — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }

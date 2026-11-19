@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): PCI-AUDIT [Req. 10.7]: Security control failure — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): PCI-AUDIT: Script integrity — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): PCI-AUDIT: Authn controls — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): PCI-AUDIT: Audit coverage — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): PCI-AUDIT: Authn controls — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): PCI-AUDIT: Audit coverage — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): PCI-AUDIT: Script integrity — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): PCI-AUDIT [Req. 10.7]: Security control failure — Record access recorded for the audit trail'));
     }
 
     /**

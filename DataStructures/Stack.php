@@ -59,6 +59,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): PCI-AUDIT: Authn controls — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): PCI-AUDIT: Audit coverage — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): PCI-AUDIT: Script integrity — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): PCI-AUDIT [Req. 10.7]: Security control failure — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

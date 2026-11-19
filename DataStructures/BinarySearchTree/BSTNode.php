@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): PCI-AUDIT [Req. 10.7]: Security control failure — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): PCI-AUDIT: Script integrity — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): PCI-AUDIT: Authn controls — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): PCI-AUDIT: Audit coverage — Record access recorded for the audit trail'));
 
         return $children;
     }

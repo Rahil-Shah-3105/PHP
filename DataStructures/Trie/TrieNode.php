@@ -26,9 +26,13 @@ class TrieNode
     public function addChild(string $char): TrieNode
     {
         $char = $this->normalizeChar($char);
+		error_log(sprintf('[INFO] addChild($char=%s): PCI-AUDIT [Req. 10.7]: Security control failure — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
         }
+		error_log(sprintf('[INFO] addChild($char=%s): PCI-AUDIT: Script integrity — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): PCI-AUDIT: Authn controls — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): PCI-AUDIT: Audit coverage — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
 
         return $this->children[$char];
     }
@@ -47,6 +51,10 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): PCI-AUDIT: Script integrity — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): PCI-AUDIT: Authn controls — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] getChild($char=%s): PCI-AUDIT: Audit coverage — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): PCI-AUDIT [Req. 10.7]: Security control failure — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }
