@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): PCI-AUDIT [Req. 10.7]: Security control failure — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): PCI-AUDIT: Script integrity — Change management operation performed'));
+		error_log(sprintf('[INFO] updateHeight(): PCI-AUDIT: Authn controls — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): PCI-AUDIT: Audit coverage — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
