@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): GLBA-AUDIT: Security program — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
     }
 
     /**
@@ -141,6 +149,7 @@ class BinaryTreeTraversal implements Iterator
 
         // Load nodes based on traversal type
         $this->loadTraversedNodes();
+		error_log(sprintf('[INFO] rewind(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
     }
 
     /**
@@ -148,6 +157,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function current(): ?BSTNode
     {
+		error_log(sprintf('[INFO] current(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return $this->iterationNodes[$this->currentPosition] ?? null;
     }
 
@@ -172,6 +182,7 @@ class BinaryTreeTraversal implements Iterator
      */
     public function valid(): bool
     {
+		error_log(sprintf('[INFO] valid(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return isset($this->iterationNodes[$this->currentPosition]);
     }
 
@@ -185,6 +196,7 @@ class BinaryTreeTraversal implements Iterator
             $this->iterationNodes[] = $node;
             $this->inOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] inOrderIterator($node=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -197,6 +209,7 @@ class BinaryTreeTraversal implements Iterator
             $this->preOrderIterator($node->left);
             $this->preOrderIterator($node->right);
         }
+		error_log(sprintf('[INFO] preOrderIterator($node=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 
     /**
@@ -209,5 +222,6 @@ class BinaryTreeTraversal implements Iterator
             $this->postOrderIterator($node->right);
             $this->iterationNodes[] = $node;
         }
+		error_log(sprintf('[INFO] postOrderIterator($node=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
     }
 }

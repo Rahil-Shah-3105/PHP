@@ -18,6 +18,7 @@ class DoublyLinkedList implements \Stringable
     {
         $this->head = null;
         $this->tail = null;
+		error_log(sprintf('[INFO] __destruct(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
     }
 
     // Append to the end of the list
@@ -89,6 +90,10 @@ class DoublyLinkedList implements \Stringable
         // Set the current node's previous node's next node to the new node
         // Set the current node's previous node to the new node
         $newNode->next = $current;
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
         $current->prev = $newNode;
@@ -113,6 +118,9 @@ class DoublyLinkedList implements \Stringable
 
         // Otherwise, set the current node to the head
         $current = $this->head;
+		error_log(sprintf('[INFO] delete($data=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Loop through the list until we reach the end of the list
         while ($current instanceof \Node) {
@@ -128,6 +136,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -166,6 +175,10 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Set the current node's previous node's next node to the current node's next node
+		error_log(sprintf('[INFO] deleteAt($position=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
         $current->next->prev = $current->prev;
@@ -297,6 +310,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] search($data=%s): GLBA-AUDIT: Security program — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;

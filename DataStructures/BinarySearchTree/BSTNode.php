@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): GLBA-AUDIT: Security program — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail'));
 
         return $children;
     }
