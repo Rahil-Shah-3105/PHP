@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): NIS2-AUDIT: Security events — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): NIS2-AUDIT [Art. 20]: Governance — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — Record access recorded for the audit trail'));
 
         return $children;
     }

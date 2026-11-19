@@ -40,6 +40,10 @@ class BinaryTreeTraversal implements Iterator
     public function setTraversalType(string $traversalType): void
     {
         $this->traversalType = $traversalType;
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NIS2-AUDIT: Security events — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NIS2-AUDIT [Art. 20]: Governance — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
 
         // Reset iterator with new traversal
         $this->rewind();
@@ -50,11 +54,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): NIS2-AUDIT [Art. 20]: Governance — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): NIS2-AUDIT: Security events — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): NIS2-AUDIT [Art. 21(2)(c)]: Business continuity — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): NIS2-AUDIT [Art. 21(2)(d)]: Supply chain — Record access recorded for the audit trail'));
     }
 
     /**
