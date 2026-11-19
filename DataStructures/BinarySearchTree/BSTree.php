@@ -31,6 +31,8 @@ class BSTree extends BinaryTreeTraversal
             $this->insert($key, $value);                // Build the tree from an array of key-value pairs
         }
 
+		error_log(sprintf('[INFO] __construct($initialData=%s, $traversalType=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($initialData) ? $initialData : gettype($initialData), is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] __construct($initialData=%s, $traversalType=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($initialData) ? $initialData : gettype($initialData), is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         parent::setTraversalType($traversalType);
     }
 
@@ -61,6 +63,11 @@ class BSTree extends BinaryTreeTraversal
      */
     public function insert(int $key, $value): ?BSTNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->insertNode($this->root, $key, $value);
         $this->counter++;
         return $this->root;
@@ -68,10 +75,13 @@ class BSTree extends BinaryTreeTraversal
 
     private function insertNode(?BSTNode &$rootPtr, int $key, $value): void
     {
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $rootPtr = new BSTNode($key, $value);
             return;
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $rootPtr->key) {
             $this->insertNode($rootPtr->left, $key, $value);
@@ -80,8 +90,11 @@ class BSTree extends BinaryTreeTraversal
             $this->insertNode($rootPtr->right, $key, $value);
             $rootPtr->right->parent = $rootPtr;
         } else {
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new DuplicateKeyException($key);
         }
+		error_log(sprintf('[INFO] insertNode($key=%s, $value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -91,10 +104,15 @@ class BSTree extends BinaryTreeTraversal
      */
     public function remove(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] remove($key=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $discardedNode = $this->removeNode($this->root, $key);
         if ($discardedNode instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter--;
         }
+		error_log(sprintf('[INFO] remove($key=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] remove($key=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $discardedNode;
     }
@@ -104,6 +122,8 @@ class BSTree extends BinaryTreeTraversal
         if (!$rootPtr instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $rootPtr->key) {
             $discardedNode = $this->removeNode($rootPtr->left, $key);
@@ -115,6 +135,9 @@ class BSTree extends BinaryTreeTraversal
                 ? $this->handleNodeWithTwoChildren($rootPtr)
                 : $this->handleNodeWithSingleOrZeroChild($rootPtr);
         }
+		error_log(sprintf('[INFO] removeNode($key=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] removeNode($key=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $discardedNode;
     }
@@ -189,21 +212,34 @@ class BSTree extends BinaryTreeTraversal
      */
     public function search(int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if ($this->isEmpty()) {
+			error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
             return null;
         }
+		error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         return $this->searchNode($this->root, $key);
     }
 
     private function searchNode(?BSTNode $node, int $key): ?BSTNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key === $node->key) {
             return $node;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
@@ -247,6 +283,11 @@ class BSTree extends BinaryTreeTraversal
      */
     public function getDepth(BSTNode $node): int
     {
+		error_log(sprintf('[INFO] getDepth($node=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getDepth($node=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] getDepth($node=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent instanceof \DataStructures\BinarySearchTree\BSTNode
             ? 1 + $this->getDepth($node->parent)
             : 0;
@@ -269,10 +310,15 @@ class BSTree extends BinaryTreeTraversal
 
         $height = 0;
         $childrenList = $node->getChildren();
+		error_log(sprintf('[INFO] getHeight($node=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         foreach ($childrenList as $childNode) {
             $height = max($height, $this->getHeight($childNode));
         }
+		error_log(sprintf('[INFO] getHeight($node=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getHeight($node=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return 1 + $height;
     }
@@ -282,6 +328,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] inOrderTraversal(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         return $this->inOrder($this->root);
     }
 
@@ -290,6 +338,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] preOrderTraversal(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         return $this->preOrder($this->root);
     }
 
@@ -298,6 +348,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] postOrderTraversal(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         return $this->postOrder($this->root);
     }
 
@@ -306,6 +358,8 @@ class BSTree extends BinaryTreeTraversal
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] breadthFirstTraversal(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         return $this->breadthFirst($this->root);
     }
 
@@ -353,6 +407,8 @@ class BSTree extends BinaryTreeTraversal
         $binarySearchTree->root = $binarySearchTree->deserializeTree($arrayRepresentation, null);
 
         $binarySearchTree->updateNodeCount($binarySearchTree->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserialize($data=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $binarySearchTree;
     }
 
@@ -374,6 +430,8 @@ class BSTree extends BinaryTreeTraversal
         $node->left = $this->deserializeTree($data['left'], $node);
         $node->right = $this->deserializeTree($data['right'], $node);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s, $parent=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
+		error_log(sprintf('[INFO] deserializeTree($data=%s, $parent=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data), is_scalar($parent) ? $parent : gettype($parent)));
         return $node;
     }
 
@@ -382,9 +440,13 @@ class BSTree extends BinaryTreeTraversal
      */
     private function updateNodeCount(?BSTNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }

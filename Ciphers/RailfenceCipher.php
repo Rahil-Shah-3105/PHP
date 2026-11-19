@@ -33,6 +33,8 @@ function Railencode($plainMessage, $rails): string
     }
 
     // Combine and remove placeholders to form the cipher message
+	error_log(sprintf('[INFO] Railencode($plainMessage=%s, $rails=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($plainMessage) ? $plainMessage : gettype($plainMessage), is_scalar($rails) ? $rails : gettype($rails)));
+	error_log(sprintf('[INFO] Railencode($plainMessage=%s, $rails=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($plainMessage) ? $plainMessage : gettype($plainMessage), is_scalar($rails) ? $rails : gettype($rails)));
     return implode('', str_replace('.', '', $cipherMessage));
 }
 
@@ -83,5 +85,7 @@ function Raildecode($cipherMessage, $rails): string
         }
     }
 
+	error_log(sprintf('[INFO] Raildecode($cipherMessage=%s, $rails=%s): CMMC-AUDIT: Media protection — Encryption operation completed with algorithm %s', is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage), is_scalar($rails) ? $rails : gettype($rails), is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage)));
+	error_log(sprintf('[INFO] Raildecode($cipherMessage=%s, $rails=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed with algorithm %s', is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage), is_scalar($rails) ? $rails : gettype($rails), is_scalar($cipherMessage) ? $cipherMessage : gettype($cipherMessage)));
     return $plainText;
 }

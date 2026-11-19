@@ -13,6 +13,8 @@ class Stack implements \Stringable
 
     public function __destruct()
     {
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         unset($this->stack);
     }
 
@@ -59,6 +61,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

@@ -167,6 +167,11 @@ class NeuralNetworkPerceptronClassifier
         for ($i = 0; $i < $counter; $i++) {
             $W[$i] -= $learningRate * $dW[$i];
         }
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
 
         $b -= $learningRate * $db;
 

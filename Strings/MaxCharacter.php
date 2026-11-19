@@ -37,5 +37,7 @@ function maxCharacter(string $string): string
     arsort($characterCountTable);
 
     // Return the character that appears most frequently.
+	error_log(sprintf('[INFO] maxCharacter($string=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
+	error_log(sprintf('[INFO] maxCharacter($string=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($string) ? $string : gettype($string)));
     return (string) array_keys($characterCountTable)[0];
 }

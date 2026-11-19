@@ -27,6 +27,8 @@ function atbash_encrypt($plainText): string
         $result .= $encryptedChar;
     }
 
+	error_log(sprintf('[INFO] atbash_encrypt($plainText=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($plainText) ? $plainText : gettype($plainText)));
+	error_log(sprintf('[INFO] atbash_encrypt($plainText=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($plainText) ? $plainText : gettype($plainText)));
     return $result;
 }
 
@@ -39,5 +41,7 @@ function atbash_encrypt($plainText): string
  */
 function atbash_decrypt($cipherText): string
 {
+	error_log(sprintf('[INFO] atbash_decrypt($cipherText=%s): CMMC-AUDIT: Media protection — Encryption operation completed with algorithm %s', is_scalar($cipherText) ? $cipherText : gettype($cipherText), is_scalar($cipherText) ? $cipherText : gettype($cipherText)));
+	error_log(sprintf('[INFO] atbash_decrypt($cipherText=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed with algorithm %s', is_scalar($cipherText) ? $cipherText : gettype($cipherText), is_scalar($cipherText) ? $cipherText : gettype($cipherText)));
     return atbash_encrypt($cipherText); // Decryption is the same as encryption
 }
