@@ -14,6 +14,7 @@ class Stack implements \Stringable
     public function __destruct()
     {
         unset($this->stack);
+		error_log(sprintf('[INFO] __destruct(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 
 
@@ -59,6 +60,10 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 

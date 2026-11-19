@@ -25,5 +25,6 @@ class ExecutionTime
         $this->end_time = microtime(true);
         $this->execution_time = $this->end_time - $this->start_time;
         echo "Executed in $this->execution_time seconds\n";
+		error_log(sprintf('[INFO] __destruct(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
     }
 }

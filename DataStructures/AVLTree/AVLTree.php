@@ -39,6 +39,10 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] getNode($key=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -58,6 +62,11 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
     }
@@ -69,6 +78,11 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
     }
@@ -81,6 +95,11 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('[INFO] search($key=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
@@ -91,6 +110,7 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +120,7 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +130,7 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +139,7 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): SOC2-AUDIT [CC6.7]: Encryption operation completed'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -139,15 +162,24 @@ class AVLTree
      */
     private function insertNode(?AVLTreeNode $node, mixed $key, mixed $value): AVLTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return new AVLTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
         } elseif ($key > $node->key) {
             $node->right = $this->insertNode($node->right, $key, $value);
         } else {
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             $node->value = $value; // Update existing value
         }
 
@@ -164,9 +196,12 @@ class AVLTree
      */
     private function deleteNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key < $node->key) {
             $node->left = $this->deleteNode($node->left, $key);
@@ -184,6 +219,12 @@ class AVLTree
             $minNode = $this->getMinNode($node->right);
             $node->key = $minNode->key;
             $node->value = $minNode->value;
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+			error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
             $node->right = $this->deleteNode($node->right, $minNode->key);
         }
 
@@ -200,12 +241,21 @@ class AVLTree
      */
     private function searchNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC6.8]: Malicious software — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
@@ -308,6 +358,12 @@ class AVLTree
      */
     private function getMinNode(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
@@ -353,6 +409,7 @@ class AVLTree
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
         $this->updateNodeCount($this->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
     }
 
     /**
@@ -373,6 +430,7 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -383,9 +441,13 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }

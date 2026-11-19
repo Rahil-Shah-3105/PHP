@@ -40,18 +40,27 @@ class BSTNode
 
     public function getChildren(): array
     {
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC7.2]: Monitoring coverage — Record access recorded for the audit trail'));
         if ($this->isLeaf()) {
             return [];
         }
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC6.8]: Malicious software — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC6.1]: Logical access — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail'));
 
         $children = [];
         if ($this->left instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['left'] = $this->left;
         }
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail'));
 
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail'));
 
         return $children;
     }

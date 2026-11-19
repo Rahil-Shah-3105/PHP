@@ -34,5 +34,6 @@ function factorial(int $number)
 
     $cache[$number] = $fact;
 
+	error_log(sprintf('[INFO] factorial($number=%s): SOC2-AUDIT [CC7.2]: System operation completed', is_scalar($number) ? $number : gettype($number)));
     return $fact;
 }

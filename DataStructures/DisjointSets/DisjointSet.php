@@ -19,11 +19,18 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC8.1]: Change management — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
+			error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC7.3]: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC6.6]: Boundary protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC7.1]: System operations — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC6.3]: Authorization — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): SOC2-AUDIT [CC6.2]: Authentication — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 

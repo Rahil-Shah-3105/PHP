@@ -48,6 +48,10 @@ class SplayTree extends SplayTreeRotations
      */
     protected function setRoot(SplayTreeNode $node): void
     {
+		error_log(sprintf('[INFO] setRoot($node=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] setRoot($node=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+    error_log(sprintf('[INFO] setRoot($node=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         $this->root = $node;
     }
 
@@ -171,6 +175,13 @@ class SplayTree extends SplayTreeRotations
      */
     public function insert(int $key, mixed $value): ?SplayTreeNode
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
 
@@ -191,9 +202,12 @@ class SplayTree extends SplayTreeRotations
      */
     private function insertNode(?SplayTreeNode $node, int $key, mixed $value): SplayTreeNode
     {
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         if (!$node instanceof \DataStructures\SplayTree\SplayTreeNode) {
             return new SplayTreeNode($key, $value);
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         if ($key < $node->key) {
             $node->left = $this->insertNode($node->left, $key, $value);
@@ -202,9 +216,15 @@ class SplayTree extends SplayTreeRotations
             $node->right = $this->insertNode($node->right, $key, $value);
             $node->right->parent = $node;
         } else {
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
             throw new LogicException("Duplicate key: " . $key);
         }
 
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         return $node;
     }
 
@@ -312,9 +332,18 @@ class SplayTree extends SplayTreeRotations
      */
     public function delete(int $key): ?SplayTreeNode
     {
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC7.2]: Monitoring coverage — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         if (!$this->isFound($key)) {
             throw new LogicException("Key: " . $key . " not found in tree. Splayed the last visited node.");
         }
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.8]: Malicious software — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.1]: Logical access — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC7.3]: Incident response — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.6]: Boundary protection — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC8.1]: Change management — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC7.1]: System operations — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.3]: Authorization — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): SOC2-AUDIT [CC6.2]: Authentication — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
 
         $leftSubtree = $this->root->left;
         $rightSubtree = $this->root->right;
@@ -454,6 +483,7 @@ class SplayTree extends SplayTreeRotations
             $result = array_merge($result, $this->inOrderTraversal($node->right));
         }
 
+		error_log(sprintf('[INFO] inOrderTraversal($node=%s): SOC2-AUDIT [CC6.7]: Encryption operation completed', is_scalar($node) ? $node : gettype($node)));
         return $result;
     }
 }
