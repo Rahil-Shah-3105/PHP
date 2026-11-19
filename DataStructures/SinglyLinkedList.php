@@ -38,6 +38,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }

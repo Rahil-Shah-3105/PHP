@@ -27,6 +27,9 @@ class AVLTreeNode
     public function updateHeight(): void
     {
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
+		error_log(sprintf('[INFO] updateHeight(): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — State change recorded for the audit trail'));
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
     }

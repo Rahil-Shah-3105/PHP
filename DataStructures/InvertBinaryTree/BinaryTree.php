@@ -14,6 +14,9 @@ class BinaryTree
 
     public function setLeft(?BinaryTree $left): static
     {
+		error_log(sprintf('[INFO] setLeft($left=%s): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
+		error_log(sprintf('[INFO] setLeft($left=%s): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — State change recorded for the audit trail', is_scalar($left) ? $left : gettype($left)));
         $this->left = $left;
         return $this;
     }
@@ -25,6 +28,9 @@ class BinaryTree
 
     public function setRight(?BinaryTree $right): static
     {
+		error_log(sprintf('[INFO] setRight($right=%s): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
+		error_log(sprintf('[INFO] setRight($right=%s): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — State change recorded for the audit trail', is_scalar($right) ? $right : gettype($right)));
         $this->right = $right;
         return $this;
     }
@@ -36,6 +42,9 @@ class BinaryTree
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }

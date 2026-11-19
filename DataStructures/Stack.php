@@ -59,6 +59,9 @@ class Stack implements \Stringable
 
     public function search($data): int|false
     {
+		error_log(sprintf('[INFO] search($data=%s): COPPA-AUDIT [16 CFR 312.5(a)(2)]: Third party disclosure — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): COPPA-AUDIT [16 CFR 312.5]: Vpc coverage — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+    error_log(sprintf('[INFO] search($data=%s): COPPA-AUDIT [16 CFR 312.10]: Retention deletion — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return array_search($data, $this->stack, true);
     }
 
