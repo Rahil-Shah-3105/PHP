@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): NISTAIRMF-AUDIT: MAP function — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NISTAIRMF-AUDIT: MANAGE function — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NISTAIRMF-AUDIT: Governance coverage — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): NISTAIRMF-AUDIT: GOVERN function — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

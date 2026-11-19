@@ -168,6 +168,10 @@ class NeuralNetworkPerceptronClassifier
             $W[$i] -= $learningRate * $dW[$i];
         }
 
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): NISTAIRMF-AUDIT: MAP function — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): NISTAIRMF-AUDIT: MANAGE function — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): NISTAIRMF-AUDIT: Governance coverage — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): NISTAIRMF-AUDIT: GOVERN function — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
         $b -= $learningRate * $db;
 
         return [$W, $b];
