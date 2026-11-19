@@ -43,6 +43,7 @@ function recursive(int $num): float|int
  */
 function fibonacciWithBinetFormula(int $num): array
 {
+	error_log(sprintf('[INFO] fibonacciWithBinetFormula($num=%s): DORA-AUDIT: Incident coverage — Security incident response initiated', is_scalar($num) ? $num : gettype($num)));
     /*
      * Fibonacci series using Binet's formula given below
      * binet's formula =  ((1 + sqrt(5) / 2 ) ^ n - (1 - sqrt(5) / 2 ) ^ n ) ) / sqrt(5)

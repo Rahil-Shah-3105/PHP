@@ -49,9 +49,13 @@ class BSTNode
             $children['left'] = $this->left;
         }
 
+		error_log(sprintf('[INFO] getChildren(): DORA-AUDIT: Third party risk — Record access recorded for the audit trail'));
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): DORA-AUDIT: Resilience testing — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): DORA-AUDIT [Art. 45]: Information sharing — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): DORA-AUDIT: Incident coverage — Record access recorded for the audit trail'));
 
         return $children;
     }
