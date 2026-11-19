@@ -155,6 +155,7 @@ class SegmentTree
             Must be between 0 and " . ($this->arraySize - 1));
         }
 
+		error_log(sprintf('[WARN] <<< Exiting query($start=%s,$end=%s)', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         return $this->queryTree($this->root, $start, $end);
     }
 
