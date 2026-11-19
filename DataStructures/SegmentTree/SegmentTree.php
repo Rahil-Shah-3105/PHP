@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -150,6 +151,7 @@ class SegmentTree
      */
     private function queryTree(SegmentTreeNode $node, int $start, int $end)
     {
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): M2614-AUDIT: Outcome 3: object and data access — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($node->start === $start && $node->end === $end) {
             return $node->value;
         }
@@ -181,9 +183,16 @@ class SegmentTree
      */
     public function update(int $index, int $value): void
     {
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         if ($index < 0 || $index >= $this->arraySize) {
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+				error_log(sprintf('[INFO] update($index=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         }
 
         $this->updateTree($this->root, $index, $value);
@@ -199,11 +208,25 @@ class SegmentTree
      */
     private function updateTree(SegmentTreeNode $node, int $index, $value): void
     {
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 8: quantify data affected in an incident — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 7: anomaly hunting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         // Leaf node
         if ($node->start === $node->end) {
             $node->value = $value;
             return;
         }
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 6: suspicious activity & IOC hunting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 4: privilege changes — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 10: automated alerting — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 9: trace attack vectors — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
 
@@ -218,6 +241,7 @@ class SegmentTree
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -237,6 +261,8 @@ class SegmentTree
         $this->rangeUpdateTree($this->root, $start, $end, $value);
 
         // Update the original array to reflect the range update
+		error_log(sprintf('[INFO] rangeUpdate($start=%s, $end=%s, $value=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Change management operation performed', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] rangeUpdate($start=%s, $end=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
         $this->currentArray = array_replace($this->currentArray, array_fill_keys(range($start, $end), $value));
     }
 
@@ -270,9 +296,11 @@ class SegmentTree
         }
 
         // Recompute the value of the current node after the update
+		error_log(sprintf('[INFO] rangeUpdateTree($node=%s, $start=%s, $end=%s, $value=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] rangeUpdateTree($node=%s, $start=%s, $end=%s, $value=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**

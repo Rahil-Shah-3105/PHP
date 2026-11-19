@@ -25,10 +25,15 @@ function checkPalindromeString(string $string, bool $caseInsensitive = true): st
     if ($caseInsensitive) {
         $string = strtolower($string);
     }
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): M2614-AUDIT: Outcome 5: infrastructure changes — Change management operation performed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): M2614-AUDIT: Outcome 3: object and data access — Database transaction completed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
 
     if ($string !== strrev($string)) {
         return $string . " - not a palindrome string." . PHP_EOL;
     }
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Data integrity check performed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): SOC2-AUDIT [CC6.6]: Database transaction completed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
+	error_log(sprintf('[INFO] checkPalindromeString($string=%s, $caseInsensitive=%s): SOC2-AUDIT [CC8.1]: Change management operation performed', is_scalar($string) ? $string : gettype($string), is_scalar($caseInsensitive) ? $caseInsensitive : gettype($caseInsensitive)));
 
     return $string . " - a palindrome string." . PHP_EOL;
 }

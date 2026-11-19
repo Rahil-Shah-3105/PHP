@@ -39,6 +39,13 @@ class BinaryTreeTraversal implements Iterator
      */
     public function setTraversalType(string $traversalType): void
     {
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Outcome 1: user attribution — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Log Management / data protection — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Log integrity (encrypt + validate) — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+		error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+    error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
+    error_log(sprintf('[INFO] setTraversalType($traversalType=%s): M2614-AUDIT: Outcome 3: object and data access — State change recorded for the audit trail', is_scalar($traversalType) ? $traversalType : gettype($traversalType)));
         $this->traversalType = $traversalType;
 
         // Reset iterator with new traversal
@@ -50,11 +57,15 @@ class BinaryTreeTraversal implements Iterator
      */
     private function loadTraversedNodes(): void
     {
+		error_log(sprintf('[INFO] loadTraversedNodes(): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail'));
         match ($this->traversalType) {
             self::PRE_ORDER => $this->preOrderIterator(static::getRoot()),
             self::POST_ORDER => $this->postOrderIterator(static::getRoot()),
             default => $this->inOrderIterator(static::getRoot()),
         };
+		error_log(sprintf('[INFO] loadTraversedNodes(): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail'));
+    error_log(sprintf('[INFO] loadTraversedNodes(): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail'));
     }
 
     /**

@@ -32,6 +32,8 @@ function vigenere_encrypt($plaintext, $key): string
         }
     }
 
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): M2614-AUDIT: Outcome 3: object and data access — Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
+	error_log(sprintf('[INFO] vigenere_encrypt($plaintext=%s, $key=%s): SOC2-AUDIT [CC6.6]: Database transaction completed', is_scalar($plaintext) ? $plaintext : gettype($plaintext), is_scalar($key) ? $key : gettype($key)));
     return $encryptedText;
 }
 

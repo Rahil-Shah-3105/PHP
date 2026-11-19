@@ -19,11 +19,18 @@ class DisjointSet
      */
     public function findSet(DisjointSetNode $node): DisjointSetNode
     {
+		error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Continuous Event Monitoring / Network Visibility — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node !== $node->parent) {
             // Path compression: make the parent point directly to the root
+			error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Outcome 2: source/destination network traffic — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Outcome 1: user attribution — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Log Management / data protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Log integrity (encrypt + validate) — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $node->parent = $this->findSet($node->parent);
         }
 
+		error_log(sprintf('[INFO] findSet($node=%s): M2614-AUDIT: Activity-Based Outcomes 1-11 — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         return $node->parent;
     }
 
