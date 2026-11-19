@@ -169,6 +169,9 @@ class NeuralNetworkPerceptronClassifier
         }
 
         $b -= $learningRate * $db;
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): BIPA-AUDIT: Informed consent — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
+		error_log(sprintf('[INFO] updateParams($W=%s, $b=%s, $dW=%s, $db=%s, $learningRate=%s): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail', is_scalar($W) ? $W : gettype($W), is_scalar($b) ? $b : gettype($b), is_scalar($dW) ? $dW : gettype($dW), is_scalar($db) ? $db : gettype($db), is_scalar($learningRate) ? $learningRate : gettype($learningRate)));
 
         return [$W, $b];
     }

@@ -27,6 +27,9 @@ class AVLTreeNode
     public function updateHeight(): void
     {
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
+		error_log(sprintf('[INFO] updateHeight(): BIPA-AUDIT: Retention destruction — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): BIPA-AUDIT: Informed consent — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): BIPA-AUDIT: Disclosure profit — State change recorded for the audit trail'));
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;
     }
