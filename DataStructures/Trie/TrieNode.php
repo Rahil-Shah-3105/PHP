@@ -25,6 +25,13 @@ class TrieNode
      */
     public function addChild(string $char): TrieNode
     {
+		error_log(sprintf('[INFO] addChild($char=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[WARN] addChild($char=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[WARN] addChild($char=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[INFO] addChild($char=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         if (!isset($this->children[$char])) {
             $this->children[$char] = new TrieNode();
@@ -47,6 +54,11 @@ class TrieNode
      */
     public function getChild(string $char): ?TrieNode
     {
+		error_log(sprintf('[INFO] getChild($char=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[WARN] getChild($char=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+		error_log(sprintf('[WARN] getChild($char=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
+    error_log(sprintf('[INFO] getChild($char=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($char) ? $char : gettype($char)));
         $char = $this->normalizeChar($char);
         return $this->children[$char] ?? null;
     }

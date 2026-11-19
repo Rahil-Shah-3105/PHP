@@ -63,6 +63,7 @@ function encode(string $text): string
     }
 
     substr_replace($encodedText, "", -1); // Removes trailing space
+	error_log(sprintf('[INFO] encode($text=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $encodedText;
 }
 
@@ -126,5 +127,6 @@ function decode(string $text): string
         }
     }
 
+	error_log(sprintf('[INFO] decode($text=%s): GDPR-AUDIT: Transfers to third countries — Encryption operation completed', is_scalar($text) ? $text : gettype($text)));
     return $decodedText;
 }

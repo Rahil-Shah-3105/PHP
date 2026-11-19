@@ -35,9 +35,16 @@ class Trie
      */
     public function insert(string $word): void
     {
+		error_log(sprintf('[INFO] insert($word=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[WARN] insert($word=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
+			error_log(sprintf('[INFO] insert($word=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[WARN] insert($word=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] insert($word=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->addChild($char);
         }
 
@@ -49,6 +56,8 @@ class Trie
      */
     public function search(string $word): bool
     {
+		error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[WARN] search($word=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         $node = $this->root;
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
@@ -56,9 +65,15 @@ class Trie
                 return false;
             }
 
+			error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[WARN] search($word=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+			error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
             $node = $node->getChild($char);
         }
 
+		error_log(sprintf('[INFO] search($word=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $node->isEndOfWord;
     }
 
@@ -86,15 +101,24 @@ class Trie
      */
     private function findWordsFromNode(TrieNode $node, string $prefix): array
     {
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT [Art. 32]: Security of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         $words = [];
         if ($node->isEndOfWord) {
             $words[] = $prefix;
         }
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+		error_log(sprintf('[WARN] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT: Access, erasure, portability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
 
         foreach ($node->children as $char => $childNode) {
             $words = array_merge($words, $this->findWordsFromNode($childNode, $prefix . $char));
+			error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT: Transfers to third countries — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+			error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+			error_log(sprintf('[WARN] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
+			error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         }
 
+		error_log(sprintf('[INFO] findWordsFromNode($node=%s, $prefix=%s): GDPR-AUDIT: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($prefix) ? $prefix : gettype($prefix)));
         return $words;
     }
 
@@ -107,6 +131,10 @@ class Trie
      */
     public function delete(string $word): bool
     {
+		error_log(sprintf('[WARN] delete($word=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+		error_log(sprintf('[WARN] delete($word=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
+    error_log(sprintf('[INFO] delete($word=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($word) ? $word : gettype($word)));
         return $this->deleteHelper($this->root, $word, 0);
     }
 
@@ -135,6 +163,11 @@ class Trie
         if (!$childNode instanceof \DataStructures\Trie\TrieNode) {
             return false;
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[WARN] deleteHelper($node=%s, $index=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         // Recursively delete the child node
         $shouldDeleteCurrentNode = $this->deleteHelper($childNode, $word, $index + 1);
@@ -143,6 +176,9 @@ class Trie
             unset($node->children[$char]);
             return !$node->isEndOfWord;     // true if current node is not the end of another word
         }
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[WARN] deleteHelper($node=%s, $index=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
+		error_log(sprintf('[INFO] deleteHelper($node=%s, $index=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index)));
 
         return false;
     }

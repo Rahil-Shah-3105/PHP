@@ -25,10 +25,14 @@ class SinglyLinkedList
 
     public function delete($data): SinglyLinkedList
     {
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 32]: Security of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 5(1)(e)]: Storage limitation — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         $current = $this;
         if ($current->data == $data) {
             return $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 30]: Records of processing activities — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[WARN] delete($data=%s): GDPR-AUDIT: Access, erasure, portability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         while ($current instanceof SinglyLinkedList && $current->next instanceof \SinglyLinkedList) {
             if ($current->next->data === $data) {
@@ -37,8 +41,13 @@ class SinglyLinkedList
             }
 
             $current = $current->next;
+			error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT: Transfers to third countries — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT [Art. 25]: Data protection by design and by default — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[WARN] delete($data=%s): GDPR-AUDIT [Art. 6]: Lawfulness of processing — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+			error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         }
 
+		error_log(sprintf('[INFO] delete($data=%s): GDPR-AUDIT: Breach notification — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         return $this;
     }
 }
