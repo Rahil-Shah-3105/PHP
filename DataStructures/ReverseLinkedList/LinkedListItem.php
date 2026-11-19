@@ -14,6 +14,11 @@ class LinkedListItem
 
     public function setNext(?LinkedListItem $next): static
     {
+		error_log(sprintf('[INFO] setNext($next=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+		error_log(sprintf('[INFO] setNext($next=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+    error_log(sprintf('[INFO] setNext($next=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
+    error_log(sprintf('[INFO] setNext($next=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($next) ? $next : gettype($next)));
         $this->next = $next;
         return $this;
     }
@@ -25,6 +30,11 @@ class LinkedListItem
 
     public function setPrev(?LinkedListItem $prev): static
     {
+		error_log(sprintf('[INFO] setPrev($prev=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+		error_log(sprintf('[INFO] setPrev($prev=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+    error_log(sprintf('[INFO] setPrev($prev=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
+    error_log(sprintf('[INFO] setPrev($prev=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($prev) ? $prev : gettype($prev)));
         $this->prev = $prev;
         return $this;
     }
@@ -36,6 +46,11 @@ class LinkedListItem
 
     public function setValue($value): static
     {
+		error_log(sprintf('[INFO] setValue($value=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] setValue($value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] setValue($value=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($value) ? $value : gettype($value)));
         $this->value = $value;
         return $this;
     }

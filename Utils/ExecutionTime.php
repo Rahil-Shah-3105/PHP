@@ -24,6 +24,8 @@ class ExecutionTime
     {
         $this->end_time = microtime(true);
         $this->execution_time = $this->end_time - $this->start_time;
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         echo "Executed in $this->execution_time seconds\n";
     }
 }

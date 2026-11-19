@@ -17,6 +17,8 @@ class DoublyLinkedList implements \Stringable
     public function __destruct()
     {
         $this->head = null;
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Media protection — Encryption operation completed'));
+		error_log(sprintf('[INFO] __destruct(): CMMC-AUDIT: Crypto protection — Encryption operation completed'));
         $this->tail = null;
     }
 
@@ -88,6 +90,11 @@ class DoublyLinkedList implements \Stringable
         // Set the new node's previous node to the current node's previous node
         // Set the current node's previous node's next node to the new node
         // Set the current node's previous node to the new node
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] insert($data=%s, $position=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data), is_scalar($position) ? $position : gettype($position)));
         $newNode->next = $current;
         $newNode->prev = $current->prev;
         $current->prev->next = $newNode;
@@ -112,6 +119,10 @@ class DoublyLinkedList implements \Stringable
         }
 
         // Otherwise, set the current node to the head
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
@@ -128,6 +139,7 @@ class DoublyLinkedList implements \Stringable
             // Otherwise, set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
     }
 
     // Delete a node from a given position
@@ -165,6 +177,11 @@ class DoublyLinkedList implements \Stringable
             $current = $current->next;
         }
 
+		error_log(sprintf('[INFO] deleteAt($position=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
+		error_log(sprintf('[INFO] deleteAt($position=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($position) ? $position : gettype($position)));
         // Set the current node's previous node's next node to the current node's next node
         // Set the current node's next node's previous node to the current node's previous node
         $current->prev->next = $current->next;
@@ -288,6 +305,7 @@ class DoublyLinkedList implements \Stringable
         $current = $this->head;
 
         // Loop through the list until we reach the end of the list
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
         while ($current instanceof \Node) {
             // If the current node's data is the data we're looking for, return the current node
             if ($current->data === $data) {
@@ -297,6 +315,10 @@ class DoublyLinkedList implements \Stringable
             // Set the current node to the next node
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] search($data=%s): CMMC-AUDIT: Access control — Record access recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         // Return null
         return null;

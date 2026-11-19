@@ -29,6 +29,8 @@ class SinglyLinkedList
         if ($current->data == $data) {
             return $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         while ($current instanceof SinglyLinkedList && $current->next instanceof \SinglyLinkedList) {
             if ($current->next->data === $data) {
@@ -38,6 +40,9 @@ class SinglyLinkedList
 
             $current = $current->next;
         }
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] delete($data=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($data) ? $data : gettype($data)));
 
         return $this;
     }

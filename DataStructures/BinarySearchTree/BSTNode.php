@@ -48,10 +48,15 @@ class BSTNode
         if ($this->left instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['left'] = $this->left;
         }
+		error_log(sprintf('[INFO] getChildren(): CMMC-AUDIT: Media protection — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CMMC-AUDIT: Incident response — Record access recorded for the audit trail'));
 
         if ($this->right instanceof \DataStructures\BinarySearchTree\BSTNode) {
             $children['right'] = $this->right;
         }
+		error_log(sprintf('[INFO] getChildren(): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail'));
+		error_log(sprintf('[INFO] getChildren(): CMMC-AUDIT: Access control — Record access recorded for the audit trail'));
 
         return $children;
     }

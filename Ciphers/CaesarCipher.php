@@ -24,6 +24,8 @@ function encrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('[INFO] encrypt($text=%s, $shift=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
+	error_log(sprintf('[INFO] encrypt($text=%s, $shift=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $encryptedText; // Returning encrypted text
 }
 
@@ -52,5 +54,7 @@ function decrypt(string $text, int $shift): string
         }
     }
 
+	error_log(sprintf('[INFO] decrypt($text=%s, $shift=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
+	error_log(sprintf('[INFO] decrypt($text=%s, $shift=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($text) ? $text : gettype($text), is_scalar($shift) ? $shift : gettype($shift)));
     return $decryptedText; // Returning decrypted text
 }

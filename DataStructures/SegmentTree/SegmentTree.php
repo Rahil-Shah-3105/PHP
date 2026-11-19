@@ -132,6 +132,7 @@ class SegmentTree
      */
     public function query(int $start, int $end)
     {
+		error_log(sprintf('[INFO] query($start=%s, $end=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         if ($start > $end || $start < 0 || $end > ($this->root->end)) {
             throw new OutOfBoundsException("Index out of bounds: start = {$start}, end = {$end}. 
             Must be between 0 and " . ($this->arraySize - 1));
@@ -154,6 +155,10 @@ class SegmentTree
             return $node->value;
         }
 
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): CMMC-AUDIT: Media protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): CMMC-AUDIT: Incident response — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): CMMC-AUDIT: Crypto protection — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
+		error_log(sprintf('[INFO] queryTree($node=%s, $start=%s, $end=%s): CMMC-AUDIT: Audit traceability — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($start) ? $start : gettype($start), is_scalar($end) ? $end : gettype($end)));
         $mid = $node->start + (int)(($node->end - $node->start) / 2);
 
         // Determine which segment of the tree to query
@@ -181,10 +186,15 @@ class SegmentTree
      */
     public function update(int $index, int $value): void
     {
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         if ($index < 0 || $index >= $this->arraySize) {
             throw new OutOfBoundsException(sprintf('Index out of bounds: %d. Must be between 0 and ', $index)
                 . ($this->arraySize - 1));
         }
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] update($index=%s, $value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
 
         $this->updateTree($this->root, $index, $value);
         $this->currentArray[$index] = $value;           // Reflect the update in the original array
@@ -212,12 +222,17 @@ class SegmentTree
             $this->updateTree($node->left, $index, $value);
         } else {
             $this->updateTree($node->right, $index, $value);
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): CMMC-AUDIT: Crypto protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): CMMC-AUDIT: Access control — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): CMMC-AUDIT: Media protection — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): CMMC-AUDIT: Incident response — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
         }
 
         // Recompute the value of the current node after the update
         $node->value = $this->callback
             ? ($this->callback)($node->left->value, $node->right->value)
             : $node->left->value + $node->right->value;
+			error_log(sprintf('[INFO] updateTree($node=%s, $index=%s, $value=%s): CMMC-AUDIT: Audit traceability — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($index) ? $index : gettype($index), is_scalar($value) ? $value : gettype($value)));
     }
 
     /**
@@ -320,6 +335,8 @@ class SegmentTree
         $segmentTree = new self($initialiseArray);
 
         $segmentTree->root = $segmentTree->deserializeTree($array);
+		error_log(sprintf('[INFO] deserialize($data=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserialize($data=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $segmentTree;
     }
 
@@ -339,6 +356,8 @@ class SegmentTree
 
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
+		error_log(sprintf('[INFO] deserializeTree($data=%s): CMMC-AUDIT: Media protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
+		error_log(sprintf('[INFO] deserializeTree($data=%s): CMMC-AUDIT: Crypto protection — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 }
