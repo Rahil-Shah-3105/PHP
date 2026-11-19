@@ -26,6 +26,10 @@ class AVLTreeNode
 
     public function updateHeight(): void
     {
+		error_log(sprintf('[INFO] updateHeight(): GLBA-AUDIT: Security program — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail'));
+		error_log(sprintf('[INFO] updateHeight(): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail'));
         $leftHeight = $this->left instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->left->height : 0;
         $rightHeight = $this->right instanceof \DataStructures\AVLTree\AVLTreeNode ? $this->right->height : 0;
         $this->height = max($leftHeight, $rightHeight) + 1;

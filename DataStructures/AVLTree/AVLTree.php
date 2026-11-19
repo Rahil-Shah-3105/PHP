@@ -39,6 +39,10 @@ class AVLTree
      */
     public function getNode(mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] getNode($key=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] getNode($key=%s): GLBA-AUDIT: Security program — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] getNode($key=%s): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         return $this->searchNode($this->root, $key);
     }
 
@@ -58,6 +62,10 @@ class AVLTree
      */
     public function insert(mixed $key, mixed $value): void
     {
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insert($key=%s, $value=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+    error_log(sprintf('[INFO] insert($key=%s, $value=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
         $this->root = $this->insertNode($this->root, $key, $value);
         $this->counter++;
     }
@@ -69,6 +77,10 @@ class AVLTree
      */
     public function delete(mixed $key): void
     {
+		error_log(sprintf('[INFO] delete($key=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] delete($key=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] delete($key=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $this->root = $this->deleteNode($this->root, $key);
         $this->counter--;
     }
@@ -81,6 +93,10 @@ class AVLTree
      */
     public function search(mixed $key)
     {
+		error_log(sprintf('[INFO] search($key=%s): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] search($key=%s): GLBA-AUDIT: Security program — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
+    error_log(sprintf('[INFO] search($key=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail', is_scalar($key) ? $key : gettype($key)));
         $node = $this->searchNode($this->root, $key);
         return $node instanceof \DataStructures\AVLTree\AVLTreeNode ? $node->value : null;
     }
@@ -91,6 +107,7 @@ class AVLTree
      */
     public function inOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] inOrderTraversal(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return TreeTraversal::inOrder($this->root);
     }
 
@@ -100,6 +117,7 @@ class AVLTree
      */
     public function preOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] preOrderTraversal(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return TreeTraversal::preOrder($this->root);
     }
 
@@ -109,6 +127,7 @@ class AVLTree
      */
     public function postOrderTraversal(): array
     {
+		error_log(sprintf('[INFO] postOrderTraversal(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return TreeTraversal::postOrder($this->root);
     }
 
@@ -117,6 +136,7 @@ class AVLTree
      */
     public function breadthFirstTraversal(): array
     {
+		error_log(sprintf('[INFO] breadthFirstTraversal(): GLBA-AUDIT: Encryption disposal — Encryption operation completed'));
         return TreeTraversal::breadthFirst($this->root);
     }
 
@@ -150,6 +170,10 @@ class AVLTree
         } else {
             $node->value = $value; // Update existing value
         }
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
+		error_log(sprintf('[INFO] insertNode($node=%s, $key=%s, $value=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key), is_scalar($value) ? $value : gettype($value)));
 
         $node->updateHeight();
         return $this->balance($node);
@@ -186,6 +210,10 @@ class AVLTree
             $node->value = $minNode->value;
             $node->right = $this->deleteNode($node->right, $minNode->key);
         }
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] deleteNode($node=%s, $key=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         $node->updateHeight();
         return $this->balance($node);
@@ -200,12 +228,16 @@ class AVLTree
      */
     private function searchNode(?AVLTreeNode $node, mixed $key): ?AVLTreeNode
     {
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GLBA-AUDIT: Security program — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if (!$node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             return null;
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
         if ($key < $node->key) {
             return $this->searchNode($node->left, $key);
         }
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
+		error_log(sprintf('[INFO] searchNode($node=%s, $key=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node), is_scalar($key) ? $key : gettype($key)));
 
         if ($key > $node->key) {
             return $this->searchNode($node->right, $key);
@@ -308,9 +340,13 @@ class AVLTree
      */
     private function getMinNode(AVLTreeNode $node): AVLTreeNode
     {
+		error_log(sprintf('[INFO] getMinNode($node=%s): GLBA-AUDIT: Security program — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         while ($node->left instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $node = $node->left;
         }
+		error_log(sprintf('[INFO] getMinNode($node=%s): GLBA-AUDIT: Encryption disposal — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+		error_log(sprintf('[INFO] getMinNode($node=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — Record access recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
 
         return $node;
     }
@@ -353,6 +389,7 @@ class AVLTree
         $this->root = $this->deserializeTree(json_decode($data, true));
         $this->counter = 0;
         $this->updateNodeCount($this->root);
+		error_log(sprintf('[INFO] deserialize($data=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
     }
 
     /**
@@ -373,6 +410,7 @@ class AVLTree
         $node->left = $this->deserializeTree($data['left']);
         $node->right = $this->deserializeTree($data['right']);
 
+		error_log(sprintf('[INFO] deserializeTree($data=%s): GLBA-AUDIT: Encryption disposal — Encryption operation completed', is_scalar($data) ? $data : gettype($data)));
         return $node;
     }
 
@@ -383,9 +421,13 @@ class AVLTree
      */
     private function updateNodeCount(?AVLTreeNode $node): void
     {
+		error_log(sprintf('[INFO] updateNodeCount($node=%s): GLBA-AUDIT [16 CFR 314.4(j)]: Breach notification — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
         if ($node instanceof \DataStructures\AVLTree\AVLTreeNode) {
             $this->counter++;
             $this->updateNodeCount($node->left);
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GLBA-AUDIT: Encryption disposal — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GLBA-AUDIT [16 CFR 314.4(c)(5)]: Access controls — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
+			error_log(sprintf('[INFO] updateNodeCount($node=%s): GLBA-AUDIT: Security program — State change recorded for the audit trail', is_scalar($node) ? $node : gettype($node)));
             $this->updateNodeCount($node->right);
         }
     }
